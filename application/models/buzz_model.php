@@ -20,14 +20,27 @@ class Buzz_model extends CI_Model
 	{
 		foreach($content as $c)
 		{
-			foreach($c as $q)
+			for($j = 0; $j < count($c); $j++)
 			{
+				$tweet			= $c[$j]->text;
+				$timestamp		= strtotime($c[$j]->created_at);
+				$keyword		= $keyword;
+				$profile_image	= $c[$j]->user->profile_image_url;
+				$tweeter_name	= $c[$j]->user->name;
+				$tweet_url		= 'http://twitter.com/'.$c[$j]->user->screen_name."/"."status/".$c[$j]->id;
+				$campaign_id	= 1;
+				
 				$data = array(
-					'tweet'		=> $q->text,
-					'timestamp'	=> strtotime($q->created_at),
-					'keyword'	=> $keyword,
-					'profile_image'	=> $q->					
+					'tweet'			=> $tweet,
+					'timestamp'		=> $timestamp,	
+					'keyword'		=> $keyword,
+					'profile_image'	=> $profile_image,	
+					'tweeter_name'	=> $tweeter_name,	
+					'tweet_url'		=> $tweet_url,		
+					'campaign_id'	=> $campaign_id,	
 				);
+				$this->db->set($data);
+				$this->db->insert('tweets', $data);
 			}
 		}
 	}

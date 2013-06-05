@@ -21,7 +21,7 @@ class Refresh_twitter extends CI_Controller
 			$keywords = $r->keywords;
 		}
 		$keywords = explode(", ", $keywords);
-		print_r($keywords);
+		
 		//Now we get the searches from twitter
 		
 		// We will now load the library and configs
@@ -30,13 +30,13 @@ class Refresh_twitter extends CI_Controller
 		$this->config->load('twitter');
 		
 		//First connect to twitter
-		$connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->config->item('twitter_access_token'), $this->config->item('twitter_access_secret'));
 		
-		foreach($keywords as $k)
+		
+		for($i = 0; $i<count($keywords); $i++)
 		{
-			echo "<pre>";
-			$this->buzz->parse_twitter($connection->get('search/tweets', array('q' => $k, 'result_type'	=> 'recent', 'count' => 10)), $k);
-			echo "</pre>";
+			$connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->config->item('twitter_access_token'), $this->config->item('twitter_access_secret'));
+			$this->buzz->parse_twitter($connection->get('search/tweets', array('q' => $keywords[$i], 'result_type'	=> 'recent', 'count' => 10)), $keywords[$i]);
+			
 		}
 	}
 }
