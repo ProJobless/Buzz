@@ -8,6 +8,7 @@
 	<meta name="keywords" content="<?php echo $meta_keywords; ?>" />
 	<link rel="stylesheet" href="<?php echo base_url(); ?>css/application.css" />
 	<script src="<?php echo base_url(); ?>js/application.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 <!--[if IE]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <!--[if lte IE 7]>
@@ -22,13 +23,13 @@
 	    	<div class="navbar-inner">
 				<div class="ls_container">
 		    		<a class="brand" href="#"><?php echo $title; ?></a>
-		   		 <ul class="nav pull-right">
-		    		 <li class="<?php if($active == 'dashboard') { echo 'active'; }?>"><?php echo anchor('dashboard', 'Dashboard', 'title="Dashboard"');?></li>	 
-		    		 <li class="<?php if($active == 'settings') { echo 'active'; }?>"><?php echo anchor('settings', 'Settings', 'title="Settings"');?></li>	 
-					 <li class="<?php if($active == 'faq') { echo 'active'; }?>"><a href="#">FAQ</a></li>
-					 <li class=""><?php echo anchor('login/logout', 'Logout', 'title="Logout"');?></li>
-		    	 </ul>
-			 </div>
+			   		 <ul class="nav pull-right">
+			    		 <li class="<?php if($active == 'dashboard') { echo 'active'; }?>"><?php echo anchor('dashboard', 'Dashboard', 'title="Dashboard"');?></li>	 
+			    		 <li class="<?php if($active == 'settings') { echo 'active'; }?>"><?php echo anchor('settings', 'Settings', 'title="Settings"');?></li>	 
+						 <li class="<?php if($active == 'faq') { echo 'active'; }?>"><a href="#">FAQ</a></li>
+						 <li class=""><?php echo anchor('login/logout', 'Logout', 'title="Logout"');?></li>
+			    	 </ul>
+			 	</div>
 	    	</div>
 	    </div>
 	</header>
