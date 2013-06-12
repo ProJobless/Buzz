@@ -115,7 +115,7 @@
 									
 									$.ajax({
 										type: "POST",
-										url: '<?php echo site_url('headquarters/process/twitter/reply'); ?>',
+										url: '<?php echo site_url('headquarters/process/twitter/reply')."/"; ?>'+t_id,
 										data: 't_id='+t_id+'&t_n_s='+t_n_s+'&reply_tweet='+tweet+'&t_u_i='+t_u_i,
 										success: function(msg)
 										{

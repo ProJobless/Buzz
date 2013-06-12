@@ -37,51 +37,50 @@ class Settings_Model extends CI_Model
 		$i_count = $query->num_rows();
 		if($i_count > 0)
 		{
-			//$this->db->delete('twitter_accounts', array('id' => $this->uri->segment(5), 'user_id' => $this->session->userdata('user_id')));
+			$this->db->delete('twitter_accounts', array('id' => $this->uri->segment(5), 'user_id' => $this->session->userdata('user_id')));
 			$query = $this->db->get_where('twitter_accounts', array('id' => $this->uri->segment(5), 'user_id' => $this->session->userdata('user_id')));
-			if($query->num_rows() <= $i_count)
+			if($query->num_rows() < $i_count)
 			{
 				//Now we need to remove that account from the campaign
 				$qu = $this->db->get_where('campaigns', array('user_id' => $this->session->userdata('user_id')));
 				foreach($qu->result() as $t)
-				{
-					if(strstr($t->twitter_id, ','.$this->uri->segment(5)))
+				{					
+					if(strpos($t->twitter_id, ',"'.$this->uri->segment(5).'"') !== false)
 					{
 						//Found match ,{$id}
-						echo "1";
+						
 						$new = str_replace(',"'.$this->uri->segment(5).'"', "", $t->twitter_id);
 						$data = array(
 							'twitter_id' => $new
 						);
-						echo $new;
+						
 						$this->db->where('id', $t->id);
 						$this->db->update('campaigns',$data);
 					}
-					else if(strstr($t->twitter_id, $this->uri->segment(5).'",'))
+					else if(strpos($t->twitter_id, '"'.$this->uri->segment(5).'",') !== false)
 					{
-						echo "2";
+						
 						//Found match {$id},
 						$new = str_replace('"'.$this->uri->segment(5).'",', "", $t->twitter_id);
 						$data = array(
 							'twitter_id' => $new
 						);
-						echo $new;
+						
 						$this->db->where('id', $t->id);
 						$this->db->update('campaigns',$data);
 					}
-					else if(strstr($t->twitter_id, '["'.$this->uri->segment(5).'"]'))
+					else if(strpos($t->twitter_id, '["'.$this->uri->segment(5).'"]') !== false)
 					{
-						echo "3";
+						
 						//Found match : [{$id}]
 						$new = str_replace('["'.$this->uri->segment(5).'"]', "", $t->twitter_id);
 						$data = array(
 							'twitter_id' => $new
 						);
-						echo $new;
+						
 						$this->db->where('id', $t->id);
 						$this->db->update('campaigns',$data);
 					}
-					echo "Yes";
 				}					
 				//Success
 				echo "deleted";

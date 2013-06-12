@@ -19,7 +19,7 @@ class Process extends CI_Controller
 		if($this->uri->segment(4) == "reply")
 		{
 			//Get the tweet id and tweeter _screen name
-			$tweet_id = $this->input->post('t_id');
+			$tweet_id = $this->uri->segment(5);
 			
 			$tweeter_screen_name = $this->input->post('t_n_s');
 			$tweet = $this->input->post('reply_tweet');
