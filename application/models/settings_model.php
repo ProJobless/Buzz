@@ -45,7 +45,7 @@ class Settings_Model extends CI_Model
 				$qu = $this->db->get_where('campaigns', array('user_id' => $this->session->userdata('user_id')));
 				foreach($qu->result() as $t)
 				{
-					if(strpos($t->twitter_id, ','.$this->uri->segment(5)) !== false)
+					if(strstr($t->twitter_id, ','.$this->uri->segment(5)))
 					{
 						//Found match ,{$id}
 						echo "1";
@@ -57,7 +57,7 @@ class Settings_Model extends CI_Model
 						$this->db->where('id', $t->id);
 						$this->db->update('campaigns',$data);
 					}
-					else if(strpos($t->twitter_id, $this->uri->segment(5).'",') !== false)
+					else if(strstr($t->twitter_id, $this->uri->segment(5).'",'))
 					{
 						echo "2";
 						//Found match {$id},
@@ -69,7 +69,7 @@ class Settings_Model extends CI_Model
 						$this->db->where('id', $t->id);
 						$this->db->update('campaigns',$data);
 					}
-					else if(strpos($t->twitter_id, '["'.$this->uri->segment(5).'"]') !== false)
+					else if(strstr($t->twitter_id, '["'.$this->uri->segment(5).'"]'))
 					{
 						echo "3";
 						//Found match : [{$id}]
