@@ -136,7 +136,6 @@ class Buzz_model extends CI_Model
 		{
 			$data[] = $r;
 		}
-		print_r($data);
 		return $data;
 	}
 	/*

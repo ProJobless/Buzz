@@ -13,7 +13,7 @@ class Buzz extends CI_Controller
 		
 		$tweets = $this->buzz->getTwitterPosts($campaign_data[0]->id);
 		$this->session->set_userdata(array('user_id'=> 1)); //Will be later put inside Login
-		$twitter_accounts = $this->buzz->just_twitter_account();
+		$twitter_accounts = $this->buzz->get_twitter_accounts($campaign_data[0]->id);
 		//Formatting data to be sent to the views
 		$data = array(
 			'title' 	=> 'Manage Campaign - Buzzzzzz',

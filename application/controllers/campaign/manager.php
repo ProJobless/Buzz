@@ -30,7 +30,7 @@ class Manager extends CI_Controller
 		//just gets and displays all the active campaigns out there
 		$this->load->model('buzz_model', 'buzz');
 		$campaign_settings = $this->buzz->get_campaign_settings();
-		$twitter_accounts = $this->buzz->get_twitter_accounts($this->uri->segment(4));
+		$twitter_accounts = $this->buzz->just_twitter_account();
 		$data = array(
 			'title' 	=> 'Edit Campaign - Hype Ninja',
 			'heading'	=> 'Edit Campaign',
