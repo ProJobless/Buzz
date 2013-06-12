@@ -111,12 +111,11 @@
 									var t_n_s = $(".tns_"+id).val();
 									var tweet = $(".reply_tweet_"+id).val();
 									var t_u_i = $("#twitter_"+id).val();
-									console.log('t_id='+t_id+'&t_n_s='+t_n_s+'&reply_tweet='+tweet+'&t_u_i='+t_u_i);
 									
 									$.ajax({
 										type: "POST",
 										url: '<?php echo site_url('headquarters/process/twitter/reply')."/"; ?>'+t_id,
-										data: 't_id='+t_id+'&t_n_s='+t_n_s+'&reply_tweet='+tweet+'&t_u_i='+t_u_i,
+										data: 't_n_s='+t_n_s+'&reply_tweet='+tweet+'&t_u_i='+t_u_i,
 										success: function(msg)
 										{
 											console.log(msg);
