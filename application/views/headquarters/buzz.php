@@ -19,7 +19,7 @@
 					{
 						$(".refresh_button").html('<i class="icon-refresh icon-spin"> </i> Synchronizing');
 						$.ajax({
-							url: '<?php echo site_url('campaign/refresh_twitter'); ?>',
+							url: '<?php echo site_url('campaign/refresh_twitter')."/index"."/".$this->uri->segment(4); ?>',
 							success: function(msg)
 							{
 								if(msg == "refreshed")
@@ -38,6 +38,7 @@
 										title: "Oops!",
 										text: "There was an error in refreshing the tweets"
 									});
+									$(".refresh_button").html('<i class="icon-repeat"> </i> Refresh Tweets');
 								}
 							}
 						});
@@ -82,7 +83,7 @@
 											</div>
 											<div class="modal-body">
 												<p><?php echo $t->tweet; ?></p>
-												<form class="form-horizontal fill-up separate-sections" name="form_<?php echo $t->id; ?>" onsubmit="post_tweet(<?php echo $t->tweet_id; ?>,<?php echo $t->id; ?>);return false;">
+												<form class="form-horizontal fill-up separate-sections" name="form_<?php echo $t->id; ?>" onsubmit="post_tweet('<?php echo $t->tweet_id; ?>',<?php echo $t->id; ?>);return false;">
 													<div>
 														<select id="twitter_<?php echo $t->id; ?>">
 															<?php foreach($twitter_accounts as $p) { ?>
@@ -111,14 +112,12 @@
 									var t_n_s = $(".tns_"+id).val();
 									var tweet = $(".reply_tweet_"+id).val();
 									var t_u_i = $("#twitter_"+id).val();
-									
 									$.ajax({
 										type: "POST",
 										url: '<?php echo site_url('headquarters/process/twitter/reply')."/"; ?>'+t_id,
 										data: 't_n_s='+t_n_s+'&reply_tweet='+tweet+'&t_u_i='+t_u_i,
 										success: function(msg)
 										{
-											console.log(msg);
 											if(msg == "success")
 											{
 												Growl.success({

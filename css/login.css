@@ -1,0 +1,86 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+body
+{
+	background:url('../images/back.png');
+	font-family:'Open Sans', Helvetica, Arial;
+}
+.ls_container
+{
+	width:200px;
+	margin:200px auto 0;
+}
+.ls_title
+{
+	color:#888;
+	
+	font-weight:100;
+	text-align:center;
+}
+.ls_title span
+{
+	font-size:38px;
+	display:block;
+	font-weight:400;
+	color:#999;
+	text-align:center;
+	
+}
+.ls_form
+{
+	padding:20px 0;
+	display:block;
+	width:100%;
+	text-align:center;
+}
+.ls_form input
+{
+	width:180px;
+	height:20px;
+	padding:5px 5px;
+	border:1px solid #999;
+	border-radius:4px;
+	color:#666;
+	font-size:12px;
+	background:#f1f1f1;
+}
+.ls_form input[name="username"]
+{
+	border-radius:4px 4px 0 0;
+	border-bottom:none;
+}
+.ls_form input[name="password"]
+{
+	border-radius:0 0 4px 4px;
+	border-bottom:none;
+	box-shadow:0 1px 0 #fff;
+}
+.ls_form button
+{
+	font-family:'Open Sans', Helvetica, Arial;
+	background:#419afe;
+	border:0;
+	margin-top:20px;
+	padding:5px 10px;
+	width:100%;
+	color:#fff;
+	font-weight:500;
+	font-size:15px;
+	border:1px solid #71aff4;
+	border-radius:3px;
+}
+.ls_form button:hover
+{
+	background:#1d83f6;
+	border:1px solid #55a2f7;
+}
+.ls_error
+{
+	background:#f36545;
+	border:1px solid #f8441a;
+	color:#fff;
+	font-size:13px;
+	padding:5px;
+	margin:15px auto 0;
+	box-shadow:0px 1px 0px #f57456 inset;
+	border-radius:2px;
+}

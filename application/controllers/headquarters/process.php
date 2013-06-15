@@ -3,17 +3,15 @@
 class Process extends CI_Controller
 {
 	//URL Would be something like this
-	//http://hypeninja.com/headquarters/process/twitter/reply/{$twitter_user_id}/
+	//http://hypeninja.com/headquarters/process/twitter/reply/{$twitter_tweet_id}/
 	function twitter()
 	{
 		//User already logged in check
-		
-		//First we check if the username is specified
-		// if(!$this->uri->segment(5))
-// 		{
-// 			//we don't have the user_id
-// 			echo "You don't have a twitter account linked.";
-// 		}
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
 		
 		//We will process the reply here
 		if($this->uri->segment(4) == "reply")
@@ -61,10 +59,23 @@ class Process extends CI_Controller
 			
 			$data = array(
 			    'status' => $tweet,
-			    'in_reply_to_status_id' => $tweet_id
+			    'in_reply_to_status_id' => $this->uri->segment(5),
 			);
 			$result = $connection->post('statuses/update', $data);
-			print_r($result);
+			
+			//Now we add a tweet count to the user_profile
+			
+			$qu = $this->db->get_where('users', array('id'=>$this->session->userdata('user_id')));
+			foreach($qu->result() as $q)
+			{
+				$count = $q->tweet_count + 1;
+				$data = array(
+					'tweet_count' => $count,
+				);
+				$this->db->where('id' , $q->id);
+				$this->db->update('users', $data);
+			}
+
 			echo "success";
 		} 
 	}
@@ -74,6 +85,11 @@ class Process extends CI_Controller
 	*/
 	function add_twitter()
 	{
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
 		$this->config->load('twitter');	
 		//First load the twitter lib
 		$params = array('key' => $this->config->item('twitter_consumer_token'), 'secret'=>$this->config->item('twitter_consumer_secret'));
@@ -90,8 +106,8 @@ class Process extends CI_Controller
 	*/
 	function twitter_auth()
 	{
-		// if(isset($this->session->userdata('logged_in') != 1))
-// 		{
+		if($this->session->userdata('l') == 1)
+		{
 			$this->config->load('twitter');	
 			//First load the twitter lib
 			$params = array('key' => $this->config->item('twitter_consumer_token'), 'secret'=>$this->config->item('twitter_consumer_secret'));
@@ -99,15 +115,15 @@ class Process extends CI_Controller
 		
 			$response = $this->twitter_oauth->get_access_token($this->input->get('oauth_token'), false, $this->input->get('oauth_verifier'));
 		
-			$this->load->model('process_model', 'process');
+			
 			//We will now call the model to insert the data into database
-			$this->process->add_twitter($response);
+			$this->process_model->add_twitter($response);
 			redirect('headquarters/settings/twitter_accounts');
-		// }
-// 		else
-// 		{
-// 			echo "Please login to continue";
-// 		}
+		}
+ 		else
+ 		{
+ 			echo "Please login to continue";
+ 		}
 		
 	}
 	/*

@@ -41,6 +41,9 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="pull-right">
+					<?php echo anchor('campaign/manager/add_campaign' ,'Add a Campaign', array('class'=>"btn btn-green")); ?>
+				</div>
 			</div>
 		</div>
 	</div>

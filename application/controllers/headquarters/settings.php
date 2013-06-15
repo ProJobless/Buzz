@@ -7,10 +7,16 @@ class Settings extends CI_Controller
 {
 	function index()
 	{
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
 		//Loading the model to get data and stuff
 		$this->load->model('settings_model', 'settings');
 		//Get the settings for a particular user
 		$settings = $this->settings->get_settings();
+		$tweets_count = $this->process_model->get_tweets_count();
 		//Formatting data to be sent to the views
 		$data = array(
 			'title' 	=> 'Settings',
@@ -18,7 +24,8 @@ class Settings extends CI_Controller
 			'meta_description'	=> 'Campaign for Buzzzzzz',
 			'meta_keywords'		=> 'SEO, Social, Blah blah',
 			'active'	=> 'settings',
-			's'			=> $settings
+			's'			=> $settings,
+			'tweets_count'	=> $tweets_count,			
 		);
 		$this->load->view('headquarters/header', $data);
 		$this->load->view('headquarters/sidebar');
@@ -29,6 +36,11 @@ class Settings extends CI_Controller
 	*/
 	function twitter_accounts()
 	{
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
 		//Loading the model to get data and stuff
 		$this->load->model('settings_model', 'settings');
 		if($this->uri->segment(4) == 'delete')
@@ -40,6 +52,7 @@ class Settings extends CI_Controller
 		{
 			//Get the twitter accounts authorized by the user
 			$t_accounts = $this->settings->get_twitter_accounts();
+			$tweets_count = $this->process_model->get_tweets_count();
 			//Formatting data to be sent to the views
 			$data = array(
 				'title' 	=> 'Settings - Hype Ninja',
@@ -47,7 +60,8 @@ class Settings extends CI_Controller
 				'meta_description'	=> 'Campaign for Buzzzzzz',
 				'meta_keywords'		=> 'SEO, Social, Blah blah',
 				'active'	=> 'settings',
-				't_accounts'=> $t_accounts
+				't_accounts'=> $t_accounts,
+				'tweets_count'	=> $tweets_count,
 			);
 			$this->load->view('headquarters/header', $data);
 			$this->load->view('headquarters/sidebar');

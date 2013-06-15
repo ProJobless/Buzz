@@ -51,4 +51,32 @@ class Process_model extends CI_Model
 			} // No need for else as we already updated the tokens
 		}
 	}
+	/*
+		fetches the latest new from the news table
+	*/
+	function get_news()
+	{
+		$this->db->order_by("timestamp", "desc");
+		$query = $this->db->get('news');
+		$data = array();
+		foreach($query->result() as $r)
+		{
+			$data[] = $r;
+		}
+		return $data;
+	}
+	/*
+		gets the tweets count for the user who has signed in
+	*/
+	function get_tweets_count()
+	{
+		$user_id = $this->session->userdata('u_i');
+		$query = $this->db->get_where('users', array('id' => $user_id));
+		$t;
+		foreach($query->result() as $q)
+		{
+			$t = $q->tweet_count;
+		}
+		return $t;
+	}
 }

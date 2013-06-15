@@ -31,8 +31,15 @@ class Buzz_model extends CI_Model
 		}
 		return $data;
 	}
+	/*
+		This deletes the campaign
+	*/
+	function delete_campaign()
+	{
+		
+	}
 	//This will put the tweets in database
-	function parse_twitter($content, $keyword)
+	function parse_twitter($content, $keyword, $campaign_id)
 	{
 		foreach($content->statuses as $c)
 		{
@@ -45,7 +52,7 @@ class Buzz_model extends CI_Model
 				'tweet_id'		=> $c->id,
 				'tweet_url'		=> 'http://twitter.com/'.$c->user->screen_name."/"."status/".$c->id,
 				'tweeter_screen_name'	=> $c->user->screen_name,
-				'campaign_id'	=> 1,
+				'campaign_id'	=> $campaign_id,
 			);
 			$this->db->set($data);
 			$this->db->insert('tweets', $data);
@@ -126,6 +133,34 @@ class Buzz_model extends CI_Model
 			}
 		}		
 		return $data;
+	}
+	/*
+		This creates a new camapign for the user
+	*/
+	function create_campaign()
+	{
+		$q = array();
+		//I'll format the checkboxes data first
+		foreach($this->input->post('twitter') as $r)
+		{
+			$q[] = $r;
+		}
+		$data = array(
+			'name' => $this->input->post('name'),
+			'user_id' => $this->session->userdata('user_id'),
+			'keywords' => $this->input->post('keywords'),
+			'twitter_id' => json_encode($q),
+		);
+		$this->db->set($data);
+		$this->db->insert('campaigns', $data);
+	}
+	/*
+		This function formats the keywords and prevents any incorrect data to be entered
+	*/
+	function fix_keywords($keywords)
+	{
+		//echo '/,\w/';
+		//return preg_replace("/,\w/", ", ", $keywords);
 	}
 	//Function just gets all the twitter accounts
 	function just_twitter_account()
