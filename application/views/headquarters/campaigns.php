@@ -35,7 +35,7 @@
 									<td><?php echo $c->keywords; ?></td>
 									<td><a href="<?php echo site_url('campaign/manager/edit')."/".$c->id;?>" class="btn btn-pink">Edit</a></td>
 									<td><a href="<?php echo site_url('campaign/buzz/index')."/".$c->id;?>" class="btn btn-blue">Manage</a></td>
-									<td><a href="<?php echo site_url('headquarters/campaign/delete')."/".$c->id;?>" class="btn btn-red">Delete</a></td>
+									<td><a href="<?php echo site_url('campaign/manager/delete')."/".$c->id;?>" class="btn btn-red">Delete</a></td>
 								</tr>
 							<?php $i++; } ?>
 						</tbody>

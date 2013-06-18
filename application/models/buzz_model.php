@@ -36,7 +36,7 @@ class Buzz_model extends CI_Model
 	*/
 	function delete_campaign()
 	{
-		
+		$this->db->delete('users', array('id' => $this->uri->segment(4), 'user_id' => $this->session->userdata('user_id')));
 	}
 	//This will put the tweets in database
 	function parse_twitter($content, $keyword, $campaign_id)

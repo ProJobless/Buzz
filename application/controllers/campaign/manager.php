@@ -20,6 +20,7 @@ class Manager extends CI_Controller
 			'heading'	=> 'Manage Campaigns',
 			'meta_description'	=> 'Campaign for Hype Ninja',
 			'meta_keywords'		=> 'SEO, Social, Blah blah',
+			'sidebar'	=> 'campaign',
 			'active'	=> 'campaign',
 			'campaign_data' => $campaign_data,
 			'tweets_count'	=> $tweets_count,
@@ -51,6 +52,7 @@ class Manager extends CI_Controller
 			'meta_description'	=> 'Campaign for Hype Ninja',
 			'meta_keywords'		=> 'SEO, Social, Blah blah',
 			'active'	=> 'campaign',
+			'sidebar'	=> 'campaign',
 			'campaign_settings' => $campaign_settings,
 			'twitter_accounts'	=> $twitter_accounts,
 			'tweets_count'	=> $tweets_count,
@@ -80,6 +82,7 @@ class Manager extends CI_Controller
 			'meta_description'	=> 'Campaign for Hype Ninja',
 			'meta_keywords'		=> 'SEO, Social, Blah blah',
 			'active'	=> 'campaign',
+			'sidebar'	=> 'campaign',
 			'twitter_accounts'	=> $twitter_accounts,
 			'tweets_count'	=> $tweets_count,
 		);

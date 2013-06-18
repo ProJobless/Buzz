@@ -19,6 +19,7 @@ class Dashboard extends CI_Controller
 			'meta_keywords'		=> 'SEO, Social, Blah blah',
 			'heading'			=> 'Dashboard',
 			'active'	=> 'dashboard',
+			'sidebar'	=> 'dashboard',
 			'news'		=> $news,
 			'tweets_count'	=> $tweets_count,
 		);

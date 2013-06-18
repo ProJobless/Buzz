@@ -15,8 +15,8 @@ class Dashboard extends CI_Controller
 		$this->load->model('admin_model', 'admin');
 		
 		$data = array(
-			'title' 	=> 'DashBoard - Hype Ninja',
-			'heading'	=> 'AdminCP - Hype Ninja',
+			'title' 	=> 'Dashboard - Hype Ninja',
+			'heading'	=> 'Dashboard',
 			'meta_description'	=> 'Campaign for Hype Ninja',
 			'meta_keywords'		=> 'SEO, Social, Blah blah',
 			'active'	=> 'dashboard',
@@ -26,6 +26,7 @@ class Dashboard extends CI_Controller
 		
 		$this->load->view('admincp/header', $data);
 		$this->load->view('admincp/sidebar');
+		$this->load->view('admincp/dashboard');
 		$this->load->view('admincp/footer');
 	}
 }

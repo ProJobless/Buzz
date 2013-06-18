@@ -20,9 +20,16 @@
 			</ul>
 		</li>
 		
+		<li class="<?php if($sidebar_active == 'packs') {echo "active";}?>">
+			<span class="glow"></span>
+			<a href="<?php echo site_url('admincp/packs/lists'); ?>">
+				<span>Packs</span>
+			</a>
+		</li>
+		
 		<li class="">
 			<span class="glow"></span>
-			<a href="<?php echo site_url('headquarters/settings'); ?>">
+			<a href="<?php echo site_url('admincp/'); ?>">
 				<span>Settings</span>
 			</a>
 		</li>

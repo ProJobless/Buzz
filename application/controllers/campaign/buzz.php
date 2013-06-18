@@ -31,6 +31,7 @@ class Buzz extends CI_Controller
 			'tweets'	=> $tweets,
 			'twitter_accounts'	=> $twitter_accounts,
 			'tweets_count'	=> $tweets_count,
+			'sidebar'	=> 'campaign',
 		);
 		$this->load->view('headquarters/header', $data);
 		$this->load->view('headquarters/sidebar');

@@ -112,6 +112,7 @@
 									var t_n_s = $(".tns_"+id).val();
 									var tweet = $(".reply_tweet_"+id).val();
 									var t_u_i = $("#twitter_"+id).val();
+									$('#tweet_'+id).modal('toggle');
 									$.ajax({
 										type: "POST",
 										url: '<?php echo site_url('headquarters/process/twitter/reply')."/"; ?>'+t_id,
@@ -124,7 +125,6 @@
 													title: "Success!",
 													text: "You tweet has been successfully posted."
 												});
-												
 											}
 											else
 											{

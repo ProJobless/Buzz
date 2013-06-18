@@ -70,7 +70,7 @@ class Process_model extends CI_Model
 	*/
 	function get_tweets_count()
 	{
-		$user_id = $this->session->userdata('u_i');
+		$user_id = $this->session->userdata('user_id');
 		$query = $this->db->get_where('users', array('id' => $user_id));
 		$t;
 		foreach($query->result() as $q)
@@ -78,5 +78,132 @@ class Process_model extends CI_Model
 			$t = $q->tweet_count;
 		}
 		return $t;
+	}
+	/*
+		Function to get the support tickets.
+	*/
+	function get_support_tickets()
+	{
+		$query = $this->db->get_where('tickets', array('user_id' => $this->session->userdata('user_id')));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data[] = $r;
+		}
+		return $data;	
+	}
+	/*
+		This deletes the tiket which is active and has a status of 0
+	*/
+	function close_ticket()
+	{
+		$data = array(
+			'status'	=> 0,
+		);
+		//Setting the where clause to match user_id, active ticket
+		$where = array(
+			'user_id'	=> $this->session->userdata('user_id'),
+			'status'	=> 1,
+			'id'		=> $this->uri->segment(4),
+		);
+		$this->db->where($where);
+		$this->db->update('tickets', $data);
+	}
+	/*
+		Gets the ticket by ID to get rendered on the twitter thing
+	*/
+	function get_ticket_by_id()
+	{
+		$query = $this->db->get_where('tickets', array('user_id' => $this->session->userdata('user_id'), 'id' => $this->uri->segment(4)));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data['ticket'] = $r; 
+		}
+		$data['chat'] = $this->get_ticket_replies_by_id($data['ticket']->id);
+		
+		//Sort and find the unique admin, so we are passing as less info as possible
+		$admins = array();
+		foreach($data['chat'] as $d)
+		{
+			if($d->admin_id != 0)
+			{
+				$admins[] = $d->admin_id;
+			}
+		}
+		
+		$data['admins'] = $this->get_admin_by_id(array_unique($admins));
+		
+		//Now finally get the user details before we dispatch
+		$data['user'] = $this->get_user_details_by_id($data['ticket']->user_id);
+
+		return $data;	
+	}
+	/*
+		Gets the details for a specified user
+	*/
+	function get_user_details_by_id($user_id)
+	{
+		$query = $this->db->get_where('users', array('id' => $user_id));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data[] = $r; 
+		}
+		return $data;
+	}
+	/*
+		Gets all the replies to a ticket 
+	*/
+	function get_ticket_replies_by_id($id)
+	{
+		$query = $this->db->get_where('ticket_replies', array('ticket_id' => $id));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data[] = $r; 
+		}
+		return $data;
+	}
+	/*
+		This function gets the admin data for a particular admin
+	*/
+	function get_admin_by_id($i)
+	{
+		$data = array();
+		foreach($i as $id)
+		{
+			$query = $this->db->get_where('administrators', array('id' => $id));
+		
+			foreach($query->result() as $r)
+			{
+				$data[$r->id] = $r; 
+			}
+		}
+		return $data;
+	}
+	
+	/*
+		This function ads the reply to the ticket
+	*/
+	function add_reply_to_ticket()
+	{
+		$data = array(
+			'body'		=> $this->input->post('ticket_reply'),
+			'timestamp'	=> date('Y-m-d H:i:s', time()),
+			'ticket_id'	=> $this->uri->segment(4),
+			'user_id'	=> $this->session->userdata('user_id'),
+			'admin_id'	=> 0
+		);
+		$this->db->set($data)
+		$query = $this->db->insert('ticket_replies', $data);	
 	}
 }

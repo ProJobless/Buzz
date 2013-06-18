@@ -70,4 +70,18 @@ class Admin_model extends CI_Model
 		$this->db->update('users', $data);
 		return 1;
 	}
+	
+	/*
+		This function gets all the packs
+	*/
+	function get_all_packs()
+	{
+		$query = $this->db->get('packs');
+		$data = array();
+		foreach($query->result() as $r)
+		{
+			$data[] = $r;
+		}
+		return $data;
+	}
 }

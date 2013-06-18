@@ -1,0 +1,53 @@
+<div class="ls_hero">
+	<div class="ls_container">
+		<div class="ls_video pull-left">
+			<iframe width="520" height="315" src="http://www.youtube.com/embed/_k6j9gK8bmk" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<div class="ls_text pull-right">
+			<h1>You've never seen something this simple....</h1>
+			<p>Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversation?'</p>
+		</div>
+	</div>
+</div>
+<div class="ls_container">
+	<section class="ls_descriptions">
+		<img class="pull-left" src="<?php echo base_url()."images/icon-1.png" ?>">
+		<article class="pull-right">
+			<h1>So Intuitive! You would hate everything else!</h1>
+			<p class="ls_text">
+				Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversation?'
+			</p>
+		</article>
+		<div class="clearfix"></div>
+	</section>
+	
+	<section class="ls_descriptions">
+		<article class="pull-left">
+			<h1>So Intuitive! You would hate everything else!</h1>
+			<p class="ls_text">
+				Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversation?'
+			</p>
+		</article>
+		<img class="pull-right" src="<?php echo base_url()."images/icon-1.png" ?>">
+		<div class="clearfix"></div>
+	</section>
+	
+	<section class="ls_descriptions border-none">
+		<img class="pull-left" src="<?php echo base_url()."images/icon-1.png" ?>">
+		<article class="pull-right">
+			<h1>So Intuitive! You would hate everything else!</h1>
+			<p class="ls_text">
+				Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversation?'
+			</p>
+		</article>
+		<div class="clearfix"></div>
+	</section>
+	</p>
+</div>
+<div class="ls_features">
+	<div class="ls_container">
+		<h1 class="text-center">Super Awesome <span>Features!</span></h1>
+		<section class="ls_features">
+		</section>
+	</div>
+</div>

@@ -24,6 +24,7 @@ class Settings extends CI_Controller
 			'meta_description'	=> 'Campaign for Buzzzzzz',
 			'meta_keywords'		=> 'SEO, Social, Blah blah',
 			'active'	=> 'settings',
+			'sidebar'	=> 'settings',
 			's'			=> $settings,
 			'tweets_count'	=> $tweets_count,			
 		);
@@ -60,6 +61,7 @@ class Settings extends CI_Controller
 				'meta_description'	=> 'Campaign for Buzzzzzz',
 				'meta_keywords'		=> 'SEO, Social, Blah blah',
 				'active'	=> 'settings',
+				'sidebar'	=> 'settings',
 				't_accounts'=> $t_accounts,
 				'tweets_count'	=> $tweets_count,
 			);
