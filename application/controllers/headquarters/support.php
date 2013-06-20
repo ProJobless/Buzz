@@ -78,8 +78,47 @@ class Support extends CI_Controller
 	*/
 	function add_reply()
 	{
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
 		$this->process_model->add_reply_to_ticket();
 		
-		redirect('headquarters/support/view'.$this->uri->segment(4));
+		redirect('headquarters/support/view/'.$this->uri->segment(4));
+	}
+	/*
+		Submit a new ticket
+	*/
+	function add_ticket()
+	{
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
+		
+		$tweets_count = $this->process_model->get_tweets_count();
+		
+		//Formatting data to be sent to the views
+		$data = array(
+			'title' 	=> 'Support',
+			'heading'	=> 'Support',
+			'meta_description'	=> 'Support Settings for Hype Ninja',
+			'meta_keywords'		=> 'SEO, Social, Blah blah',
+			'active'	=> 'support',
+			'sidebar'	=> 'support',
+			'tweets_count'	=> $tweets_count,			
+		);
+		
+		$this->load->view('headquarters/header', $data);
+		$this->load->view('headquarters/sidebar');
+		$this->load->view('headquarters/new_ticket');
+	}
+	function submit_ticket()
+	{
+		$this->process_model->create_ticket();
+		
+		redirect('headquarters/support');
 	}
 }

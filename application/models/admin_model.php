@@ -84,4 +84,144 @@ class Admin_model extends CI_Model
 		}
 		return $data;
 	}
+	
+	/*
+		Counts all the active support ticket
+	*/
+	function count_active_tickets()
+	{
+		return $this->db->get_where('tickets', array('status' => 1))->num_rows();
+	}
+	/*
+		Gets all the active tickets
+	*/
+	function get_active_tickets()
+	{
+		$this->db->order_by('last_update_time', 'desc');
+		$query = $this->db->get_where('tickets', array('status' => 1));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data[] = $r;
+		}
+		return $data;
+	}
+	/*
+		Gets the username for a particular ID
+	*/
+	function get_username_by_id($id)
+	{
+		$query = $this->db->get_where('users', array('id' => $id));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data[] = $r;
+		}
+		return $data[0]->username;
+	}
+	function get_ticket_by_id()
+	{
+		$query = $this->db->get_where('tickets', array('id' => $this->uri->segment(4)));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data['ticket'] = $r; 
+		}
+		$data['chat'] = $this->get_ticket_replies_by_id($data['ticket']->id);
+		
+		//Sort and find the unique admin, so we are passing as less info as possible
+		$admins = array();
+		foreach($data['chat'] as $d)
+		{
+			if($d->admin_id != 0)
+			{
+				$admins[] = $d->admin_id;
+			}
+		}
+		
+		$data['admins'] = $this->get_admin_by_id(array_unique($admins));
+		
+		//Now finally get the user details before we dispatch
+		$data['user'] = $this->get_user_details_by_id($data['ticket']->user_id);
+
+		return $data;
+	}
+	/*
+		Gets the details for a specified user
+	*/
+	function get_user_details_by_id($user_id)
+	{
+		$query = $this->db->get_where('users', array('id' => $user_id));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data[] = $r; 
+		}
+		return $data;
+	}
+	/*
+		Gets all the replies to a ticket 
+	*/
+	function get_ticket_replies_by_id($id)
+	{
+		$this->db->order_by('timestamp', 'asc');
+		$query = $this->db->get_where('ticket_replies', array('ticket_id' => $id));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data[] = $r; 
+		}
+		return $data;
+	}
+	/*
+		This function gets the admin data for a particular admin
+	*/
+	function get_admin_by_id($i)
+	{
+		$data = array();
+		foreach($i as $id)
+		{
+			$query = $this->db->get_where('administrators', array('id' => $id));
+		
+			foreach($query->result() as $r)
+			{
+				$data[$r->id] = $r; 
+			}
+		}
+		return $data;
+	}
+	/*
+		Adds reply to the ticket from admin area
+	*/
+	function add_reply_to_ticket()
+	{
+		//Set the data for the replying to the ticket
+		$data = array(
+			'body'		=> $this->input->post('ticket_reply'),
+			'timestamp'	=> date('Y-m-d H:i:s', time()),
+			'ticket_id'	=> $this->uri->segment(4),
+			'user_id'	=> 0,
+			'admin_id'	=> $this->session->userdata('id'),
+		);
+		$this->db->set($data);
+		$this->db->insert('ticket_replies', $data);	
+		
+		//Now update the time in the other table
+		$data = array(
+			'last_update_time' => date('Y-m-d H:i:s', time()),
+			'status'		=> 1,
+		);
+		
+		$this->db->update('tickets', $data);
+	}
 }

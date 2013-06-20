@@ -163,6 +163,7 @@ class Process_model extends CI_Model
 	*/
 	function get_ticket_replies_by_id($id)
 	{
+		$this->db->order_by('timestamp', 'asc');
 		$query = $this->db->get_where('ticket_replies', array('ticket_id' => $id));
 		
 		$data = array();
@@ -196,14 +197,74 @@ class Process_model extends CI_Model
 	*/
 	function add_reply_to_ticket()
 	{
+		//First the most IMPORTANT STEP to check the ticket id and user_id match
+		$query = $this->db->get_where('tickets', array('id' => $this->uri->segment(4), 'user_id' => $this->session->userdata('user_id')));
+		
+		if($query->num_rows() == 1)
+		{
+			$data = array(
+				'body'		=> $this->input->post('ticket_reply'),
+				'timestamp'	=> date('Y-m-d H:i:s', time()),
+				'ticket_id'	=> $this->uri->segment(4),
+				'user_id'	=> $this->session->userdata('user_id'),
+				'admin_id'	=> 0,
+			);
+			$this->db->set($data);
+			$this->db->insert('ticket_replies', $data);	
+			
+			//Now update the time in the other table
+			$data = array(
+				'last_update_time' => date('Y-m-d H:i:s', time()),
+				'status'		=> 1,
+			);
+			$this->db->where('id', $this->uri->segment(4));
+			$this->db->update('tickets', $data);
+		}		
+	}
+	/*
+		Creates a new ticket
+	*/
+	function create_ticket()
+	{
 		$data = array(
-			'body'		=> $this->input->post('ticket_reply'),
-			'timestamp'	=> date('Y-m-d H:i:s', time()),
-			'ticket_id'	=> $this->uri->segment(4),
-			'user_id'	=> $this->session->userdata('user_id'),
-			'admin_id'	=> 0
+			'subject'		=> $this->input->post('subject'),
+			'body'			=> $this->input->post('ticket_message'),
+			'create_time'	=> date('Y-m-d H:i:s', time()),
+			'last_update_time' => date('Y-m-d H:i:s', time()),
+			'status'		=> 1,
+			'user_id'		=> $this->session->userdata('user_id'),
 		);
-		$this->db->set($data)
-		$query = $this->db->insert('ticket_replies', $data);	
+		$this->db->set($data);
+		$this->db->insert('tickets', $data);
+	}
+	/*
+		Fixes the time for support tickets
+	*/
+	function fix_time($timestamp)
+	{
+		$time_now = time();
+		$time_diff = $time_now - $timestamp;
+		
+		//Check if the time is just in seconds
+		if($time_diff < 60)
+		{
+			return $time_diff.' seconds ago';
+		}
+		else if($time_diff < 3600)
+		{
+			return ceil($time_diff/60)." minutes ago";
+		}
+		else if($time_diff < 86400)
+		{
+			return ceil($time_diff/3600)." hours ago";
+		}
+		else if($time_diff < 432000)
+		{
+			return ceil($time_diff/86400)." days ago";
+		}
+		else
+		{
+			return date('M j, Y H:i:s', $timestamp);
+		}
 	}
 }

@@ -16,68 +16,116 @@ class Process extends CI_Controller
 		//We will process the reply here
 		if($this->uri->segment(4) == "reply")
 		{
-			//Get the tweet id and tweeter _screen name
 			$tweet_id = $this->uri->segment(5);
-			
+		
 			$tweeter_screen_name = $this->input->post('t_n_s');
 			$tweet = $this->input->post('reply_tweet');
-			
-			//Checking if the reply has the username otherwise it won't be a genuine reply
-			if (stripos($tweet, $tweeter_screen_name) !== false) {
-				//True, so do nothing and continue
-			}
-			else
+					
+			if($this->input->post('s_t') == "")
 			{
-				$tweet = $tweeter_screen_name." ".$tweet;
-			}
-							
-			$this->config->load('twitter');	
-			//First load the twitter lib
-			$this->load->library('twitteroauth');
+				//Get the tweet id and tweeter _screen name
+				
 			
-			//Now we get the user details from the database
-			$query = $this->db->get_where('twitter_accounts', array('id' => $this->input->post('t_u_i'), 'user_id' => $this->session->userdata('user_id')));
-			$r = array();
-			if($query->num_rows() > 0)
-			{
-				//We found a match and we do yay!
-				foreach($query->result() as $c)
-				{
-					$r['oauth_secret'] = $c->oauth_secret;
-					$r['oauth_token'] = $c->oauth_token;
+				//Checking if the reply has the username otherwise it won't be a genuine reply
+				if (stripos($tweet, $tweeter_screen_name) !== false) {
+					//True, so do nothing and continue
 				}
+				else
+				{
+					$tweet = $tweeter_screen_name." ".$tweet;
+				}
+							
+				$this->config->load('twitter');	
+				//First load the twitter lib
+				$this->load->library('twitteroauth');
+			
+				//Now we get the user details from the database
+				$query = $this->db->get_where('twitter_accounts', array('id' => $this->input->post('t_u_i'), 'user_id' => $this->session->userdata('user_id')));
+				$r = array();
+				if($query->num_rows() > 0)
+				{
+					//We found a match and we do yay!
+					foreach($query->result() as $c)
+					{
+						$r['oauth_secret'] = $c->oauth_secret;
+						$r['oauth_token'] = $c->oauth_token;
+					}
+				}
+				else
+				{
+					echo "Please add twitter to your profile!";
+				}
+				//We now have the oauth tokens and oauth secret
+				//Now we connect
+				$connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $r['oauth_token'], $r['oauth_secret']);
+			
+				$content = $connection->get('account/verify_credentials');
+			
+				$data = array(
+				    'status' => $tweet,
+				    'in_reply_to_status_id' => $this->uri->segment(5),
+				);
+				$result = $connection->post('statuses/update', $data);
+			
+				//Now we add a tweet count to the user_profile
+			
+				$qu = $this->db->get_where('users', array('id'=>$this->session->userdata('user_id')));
+				foreach($qu->result() as $q)
+				{
+					$count = $q->tweet_count + 1;
+					$data = array(
+						'tweet_count' => $count,
+					);
+					$this->db->where('id' , $q->id);
+					$this->db->update('users', $data);
+				}
+			
+				//Now add the tweet to the twitter_replies so that we can keep a history!
+				$data = array(
+					'tweet'		=> $tweet,
+					'reply_id'	=> $this->uri->segment(5),
+					'scheduled'	=> 0,
+					'user_id'	=> $this->session->userdata('user_id'),
+					'twitter_account' 	=> $this->input->post('t_u_i'),
+				);
+			
+				$this->db->set($data);
+				$this->db->insert('twitter_replies');
+
+				echo "success";
 			}
 			else
 			{
-				echo "Please add twitter to your profile!";
-			}
-			//We now have the oauth tokens and oauth secret
-			//Now we connect
-			$connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $r['oauth_token'], $r['oauth_secret']);
-			
-			$content = $connection->get('account/verify_credentials');
-			
-			$data = array(
-			    'status' => $tweet,
-			    'in_reply_to_status_id' => $this->uri->segment(5),
-			);
-			$result = $connection->post('statuses/update', $data);
-			
-			//Now we add a tweet count to the user_profile
-			
-			$qu = $this->db->get_where('users', array('id'=>$this->session->userdata('user_id')));
-			foreach($qu->result() as $q)
-			{
-				$count = $q->tweet_count + 1;
+				//The tweet is to be scheduled
+				// First insert it into the twitter_replies table so that 
+				// we have a history of tweets
+				
 				$data = array(
-					'tweet_count' => $count,
+					'tweet'		=> $tweet,
+					'reply_id'	=> $this->uri->segment(5),
+					'scheduled'	=> 1,
+					'user_id'	=> $this->session->userdata('user_id'),
+					'twitter_account' 	=> $this->input->post('t_u_i'),
 				);
-				$this->db->where('id' , $q->id);
-				$this->db->update('users', $data);
+			
+				$this->db->set($data);
+				$this->db->insert('twitter_replies');
+				
+				//Insert it in the scheduled table and tweet later
+				$data = array(
+					'tweet'		=> $tweet,
+					'reply_id'	=> $this->uri->segment(5),
+					'scheduled_time' => strtotime($this->input->post('s_t')),
+					'user_id'	=> $this->session->userdata('user_id'),
+					'twitter_account' 	=> $this->input->post('t_u_i'),
+				);
+			
+				$this->db->set($data);
+				$this->db->insert('scheduled_twitter');
+				echo "scheduled";
 			}
-
-			echo "success";
-		} 
+			
+		}
 	}
 	/*
 		Add twitter to users account

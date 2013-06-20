@@ -7,7 +7,9 @@
 	<meta name="robots" content="noindex, nofollow"/>
 	<meta name="keywords" content="<?php echo $meta_keywords; ?>" />
 	<link rel="stylesheet" href="<?php echo base_url(); ?>css/application.css" />
+	<link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap-datetimepicker.min.css" />
 	<script src="<?php echo base_url(); ?>js/application.js"></script>
+	<script src="<?php echo base_url(); ?>js/bootstrap-datetimepicker.min.js"></script>
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 <!--[if IE]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->

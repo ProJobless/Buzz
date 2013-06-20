@@ -85,17 +85,39 @@
 												<p><?php echo $t->tweet; ?></p>
 												<form class="form-horizontal fill-up separate-sections" name="form_<?php echo $t->id; ?>" onsubmit="post_tweet('<?php echo $t->tweet_id; ?>',<?php echo $t->id; ?>);return false;">
 													<div>
-														<select id="twitter_<?php echo $t->id; ?>">
+														<label class="span3">Select Twitter Account</label>
+														<select id="twitter_<?php echo $t->id; ?>" class="span8 pull-right">
 															<?php foreach($twitter_accounts as $p) { ?>
 															<option value="<?php echo $p->id; ?>"><?php echo $p->twitter_screen_name; ?></option>
 															<?php } ?>
 														</select>
 													</div>
+													<div class="clearfix"></div>
+													<div>
+														<label class="span3 pull-left">Schedule Tweet</label>
+														<div id="schedule_<?php echo $t->id; ?>" class="span8 input-append pull-right">
+															<input data-format="MM/dd/yyyy HH:mm PP" type="text" disabled placeholder="Click on calender icon to schedule the tweet!" id="s_<?php echo $t->id; ?>" />
+															<span class="add-on">
+																<i data-time-icon="icon-time" data-date-icon="icon-calendar">
+																</i>
+															</span>
+														</div>
+														<script type="text/javascript">
+														$(function() {
+															$('#schedule_<?php echo $t->id; ?>').datetimepicker({
+																language: 'en',
+																pick12HourFormat: true,
+																pickSeconds: true,
+															});
+														});
+														</script>
+													</div>
+													<div class="clearfix"></div>
 													<div>
 														<textarea placeholder="Reply to the tweet" class="reply_tweet_<?php echo $t->id; ?>" rows="4">@<?php echo $t->tweeter_screen_name; ?> </textarea>
 														<input type="hidden" class="tns_<?php echo $t->id; ?>" value="<?php echo $t->tweeter_screen_name; ?>">
 													</div>
-													
+														
 													<div class="modal-footer">
 														<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 														<button class="btn btn-blue">Reply</button>
@@ -112,18 +134,27 @@
 									var t_n_s = $(".tns_"+id).val();
 									var tweet = $(".reply_tweet_"+id).val();
 									var t_u_i = $("#twitter_"+id).val();
+									var s_t = $("#s_"+id).val();
 									$('#tweet_'+id).modal('toggle');
 									$.ajax({
 										type: "POST",
 										url: '<?php echo site_url('headquarters/process/twitter/reply')."/"; ?>'+t_id,
-										data: 't_n_s='+t_n_s+'&reply_tweet='+tweet+'&t_u_i='+t_u_i,
+										data: 't_n_s='+t_n_s+'&reply_tweet='+tweet+'&t_u_i='+t_u_i+"&s_t="+s_t,
 										success: function(msg)
 										{
+											console.log(msg);
 											if(msg == "success")
 											{
 												Growl.success({
 													title: "Success!",
 													text: "You tweet has been successfully posted."
+												});
+											}
+											else if(msg == "scheduled")
+											{
+												Growl.success({
+													title: "Success!",
+													text: "You tweet has been successfully scheduled to be posted on twitter!"
 												});
 											}
 											else

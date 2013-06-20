@@ -32,8 +32,8 @@
 								<tr class="">
 									<td class="icon">#<?php echo $t->id; ?></td>
 									<td><?php echo $t->subject; ?></td>
-									<td><?php echo date('M j, Y', strtotime($t->create_time)); ?></td>
-									<td><?php echo date('M j, Y', strtotime($t->last_update_time)); ?></td>
+									<td><?php echo date('M j, Y, h:i A', strtotime($t->create_time)); ?></td>
+									<td><?php echo date('M j, Y, h:i A', strtotime($t->last_update_time)); ?></td>
 									<td><a href="<?php echo site_url('headquarters/support/view')."/".$t->id;?>" class="btn btn-green">View Ticket</a></td>
 									<td><a href="<?php echo site_url('headquarters/support/close')."/".$t->id;?>" class="btn btn-red">Close</a></td>
 								</tr>
