@@ -137,4 +137,43 @@ class Manager extends CI_Controller
 		$this->buzz->save_data();
 		redirect('campaign/manager');
 	}
+	/*
+		This function reveals the history for a particular campaign
+	*/
+	function history()
+	{
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
+		
+		
+		$this->load->library('pagination');
+
+		$config['base_url'] = site_url('campaign/manager/history')."/";
+		$config['total_rows'] = $this->db->get('users')->num_rows();
+		$config['per_page'] = 20;
+		$config['num_links'] = 10;
+
+		$this->pagination->initialize($config);
+		//Get the users depending on the page
+		$history = $this->process_model->get_twitter_history($config['per_page']);
+
+		$tweets_count = $this->process_model->get_tweets_count();
+		
+		$data = array(
+			'title' 	=> 'History - Hype Ninja',
+			'heading'	=> 'History',
+			'meta_description'	=> 'Campaign for Hype Ninja',
+			'meta_keywords'		=> 'SEO, Social, Blah blah',
+			'active'	=> 'campaign',
+			'sidebar'	=> 'campaign',
+			'history'	=> $history,
+			'tweets_count'	=> $tweets_count,
+		);
+		$this->load->view('headquarters/header', $data);
+		$this->load->view('headquarters/sidebar');
+		$this->load->view('headquarters/view_history');
+	}
 }

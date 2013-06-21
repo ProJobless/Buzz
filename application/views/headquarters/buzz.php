@@ -139,7 +139,7 @@
 									$.ajax({
 										type: "POST",
 										url: '<?php echo site_url('headquarters/process/twitter/reply')."/"; ?>'+t_id,
-										data: 't_n_s='+t_n_s+'&reply_tweet='+tweet+'&t_u_i='+t_u_i+"&s_t="+s_t,
+										data: 't_n_s='+t_n_s+'&reply_tweet='+tweet+'&t_u_i='+t_u_i+"&s_t="+s_t+"&c_id=<?php echo $this->uri->segment(4); ?>",
 										success: function(msg)
 										{
 											console.log(msg);
@@ -157,11 +157,43 @@
 													text: "You tweet has been successfully scheduled to be posted on twitter!"
 												});
 											}
+											else if(msg == "retweet")
+											{
+												Growl.success({
+													title: "Success!",
+													text: "You have successfully retweeted!"
+												});
+											}
 											else
 											{
 												Growl.error({
 													title: "Oops!",
 													text: "There was an error in posting your tweet. Please contact support."
+												});
+											}
+										}
+									});
+								}
+								function retweet(t_id, t_u_i)
+								{
+									$.ajax({
+										type: "POST",
+										url: '<?php echo site_url('headquarters/process/twitter/retweet')."/"; ?>'+t_id,
+										data: 't_u_i'+t_u_i,
+										success: function(msg)
+										{
+											if(msg == "retweet")
+											{
+												Growl.success({
+													title: "Success!",
+													text: "You have successfully retweeted!"
+												});
+											}
+											else
+											{
+												Growl.error({
+													title: "Oops!",
+													text: "There was an error in retweeting your tweet. Please contact support."
 												});
 											}
 										}

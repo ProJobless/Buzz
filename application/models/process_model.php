@@ -238,6 +238,22 @@ class Process_model extends CI_Model
 		$this->db->insert('tickets', $data);
 	}
 	/*
+		Gets the history for a particular user
+	*/
+	function get_twitter_history($per_page)
+	{
+		$this->db->where(array('user_id' => $this->session->userdata('user_id'), 'campaign_id' => $this->uri->segment(4)));
+		$this->db->order_by('id', 'desc');
+		$query = $this->db->get('twitter_replies', $per_page , $this->uri->segment(5));
+		$data = array();
+		
+		foreach($query->result() as $q)
+		{
+			$data[] = $q;
+		}
+		return $data;
+	}
+	/*
 		Fixes the time for support tickets
 	*/
 	function fix_time($timestamp)

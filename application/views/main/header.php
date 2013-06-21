@@ -13,7 +13,7 @@
 					<li><a href="">Features</a></li>
 					<li><a href="">Forum</a></li>
 					<li><a href="">Blog</a></li>
-					<li><a href="">Login</a></li>
+					<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</nav>

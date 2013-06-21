@@ -86,6 +86,7 @@ class Process extends CI_Controller
 					'reply_id'	=> $this->uri->segment(5),
 					'scheduled'	=> 0,
 					'user_id'	=> $this->session->userdata('user_id'),
+					'campaign_id'	=> $this->input->post('c_id'),
 					'twitter_account' 	=> $this->input->post('t_u_i'),
 				);
 			
@@ -105,6 +106,7 @@ class Process extends CI_Controller
 					'reply_id'	=> $this->uri->segment(5),
 					'scheduled'	=> 1,
 					'user_id'	=> $this->session->userdata('user_id'),
+					'campaign_id'	=> $this->input->post('c_id'),
 					'twitter_account' 	=> $this->input->post('t_u_i'),
 				);
 			
@@ -125,6 +127,41 @@ class Process extends CI_Controller
 				echo "scheduled";
 			}
 			
+		}
+		else if($this->uri->segment(4) == "retweet")
+		{
+			//We will be retweeting for the user here!
+			$tweet_id = $this->uri->segment(5);
+			
+			$this->config->load('twitter');	
+			//First load the twitter lib
+			$this->load->library('twitteroauth');
+		
+			//Now we get the user details from the database
+			$query = $this->db->get_where('twitter_accounts', array('id' => $this->input->post('t_u_i'), 'user_id' => $this->session->userdata('user_id')));
+			$r = array();
+			if($query->num_rows() > 0)
+			{
+				//We found a match and we do yay!
+				foreach($query->result() as $c)
+				{
+					$r['oauth_secret'] = $c->oauth_secret;
+					$r['oauth_token'] = $c->oauth_token;
+				}
+			}
+			else
+			{
+				echo "Please add twitter to your profile!";
+			}
+			//We now have the oauth tokens and oauth secret
+			//Now we connect
+			$connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $r['oauth_token'], $r['oauth_secret']);
+		
+			$content = $connection->get('account/verify_credentials');
+			
+			$result = $connection->post('statuses/retweet/'.$tweet_id);
+			
+			echo "retweeted";
 		}
 	}
 	/*
