@@ -23,6 +23,7 @@
 							<thead>
 								<tr>
 									<td>Tweet</td>
+									<td>Time</td>
 									<td>Submitted</td>
 								</tr>
 							</thead>
@@ -31,6 +32,7 @@
 								<?php foreach($history as $h){ ?>
 									<tr>
 										<td><?php echo $h->tweet; ?></td>
+										<td><?php echo date('h:i , M d, Y',$h->timestamp); ?></td>
 										<td><?php if($h->scheduled == 0)
 											{
 												echo '<i class="icon-check"></i>';
@@ -45,8 +47,8 @@
 						</table>
 					</div>
 				</div>
+				<?php echo $this->pagination->create_links(); ?>
 			</div>
 		</div>
 	</div>
 </div>
-<?php echo $this->pagination->create_links(); ?>

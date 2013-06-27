@@ -243,7 +243,7 @@ class Process_model extends CI_Model
 	function get_twitter_history($per_page)
 	{
 		$this->db->where(array('user_id' => $this->session->userdata('user_id'), 'campaign_id' => $this->uri->segment(4)));
-		$this->db->order_by('id', 'desc');
+		$this->db->order_by('timestamp', 'desc');
 		$query = $this->db->get('twitter_replies', $per_page , $this->uri->segment(5));
 		$data = array();
 		

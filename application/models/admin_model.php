@@ -44,7 +44,22 @@ class Admin_model extends CI_Model
 			$data[] = $q;
 		}
 		return $data;
-	}	
+	}
+	/*
+	get the satst sfor the person 
+	*/	
+	function get_stats()
+	{
+		$this->db->order_by('id', 'desc');
+		$query = $this->db->get('admin_stats', 5);
+		$data = array();
+		
+		foreach($query->result() as $q)
+		{
+			$data[] = $q;
+		}
+		return $data;
+	}
 	/*
 		Bans the users
 	*/

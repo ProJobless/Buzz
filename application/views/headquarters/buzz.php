@@ -19,7 +19,7 @@
 					{
 						$(".refresh_button").html('<i class="icon-refresh icon-spin"> </i> Synchronizing');
 						$.ajax({
-							url: '<?php echo site_url('campaign/refresh_twitter')."/index"."/".$this->uri->segment(4); ?>',
+							url: '<?php echo site_url('campaign/refresh')."/twitter"."/".$this->uri->segment(4); ?>',
 							success: function(msg)
 							{
 								if(msg == "refreshed")
@@ -50,8 +50,9 @@
 					<div class="box-header">
 						<div class="title"><?php echo $campaign_data[0]->name; ?></div>
 						<ul class="nav nav-tabs nav-tabs-right">
-							<li class="active"><a data-toggle="tab" href="#twitter">Twitter</a></li>
-							<li><a data-toggle="tab" href="#facebook">Facebook</a></li>
+							<li class="active"><a data-toggle="tab" href="#twitter">Twitter Ninja</a></li>
+							<li><a data-toggle="tab" href="#facebook">Facebook Ninja</a></li>
+							<li><a href="<?php echo base_url('campaign/buzz/blog')."/".$this->uri->segment(4); ?>">Blog Ninja</a></li>
 						</ul>
 					</div>
 
@@ -59,6 +60,10 @@
 						<div class="tab-content">
 							<div id="twitter" class="tab-pane active">
 								<?php $this->load->model('buzz_model', 'buzz'); 
+								if(empty($tweets))
+								{
+									echo 'Sorry, no tweets weere found! Please hit the refresh button on the right! <a href="#" class="btn btn-black refresh_button" onclick="refresh_twitter();return false;"><i class="icon-repeat"></i> Refresh Tweets</a>';
+								}
 								foreach($tweets as $t) { ?>
 								<ul class="chat-box timeline">
 									<li class="arrow-box-left gray">

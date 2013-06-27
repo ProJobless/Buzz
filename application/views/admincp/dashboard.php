@@ -15,13 +15,13 @@
 
 				<div class="box">
 					<div class="box-header">
-						<div class="title">Trends</div>
+						<div class="title">Tweets</div>
 					</div>
 
 					<div class="box-content padded">
 						<div class="row-fluid">
-							<div class="span4">
-								
+							<div class="span12">
+								 <div class="trends" style="height: 300px" id="trends"></div>
 							</div>
 						</div>
 					</div>
@@ -67,7 +67,7 @@
 				        {
 				          "x": "2012-11-11",
 				          "y": 6
-				        }
+				        },
 				      ]
 				    }
 				  ]
@@ -85,7 +85,7 @@
 				    $(tt).hide();
 				  }
 				};
-				var myChart = new xChart('line-dotted', data, '#example4', opts);
+				var myChart = new xChart('line-dotted', data, '#trends', opts);
 				</script>
 			</div>
 		</div>

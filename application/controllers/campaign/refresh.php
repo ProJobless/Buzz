@@ -1,8 +1,11 @@
 <?php
 
-class Refresh_twitter extends CI_Controller
+class Refresh extends CI_Controller
 {
-	function index()
+	/*
+		Refreshes the list of keyword from twitter
+	*/
+	function twitter()
 	{
 		//First check if the user has logged in
 		if($this->session->userdata('l') != 1)
@@ -61,5 +64,15 @@ class Refresh_twitter extends CI_Controller
 			
 		}
 		echo "refreshed";
+	}
+	
+	function blog()
+	{
+		//First check if the user has logged in
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
 	}
 }

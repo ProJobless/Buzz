@@ -88,6 +88,7 @@ class Process extends CI_Controller
 					'user_id'	=> $this->session->userdata('user_id'),
 					'campaign_id'	=> $this->input->post('c_id'),
 					'twitter_account' 	=> $this->input->post('t_u_i'),
+					'timestamp'	=> time()
 				);
 			
 				$this->db->set($data);
@@ -108,6 +109,7 @@ class Process extends CI_Controller
 					'user_id'	=> $this->session->userdata('user_id'),
 					'campaign_id'	=> $this->input->post('c_id'),
 					'twitter_account' 	=> $this->input->post('t_u_i'),
+					'timestamp'	=> time()
 				);
 			
 				$this->db->set($data);

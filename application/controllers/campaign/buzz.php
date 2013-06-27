@@ -4,7 +4,7 @@
 */
 class Buzz extends CI_Controller
 {
-	function index()
+	function twitter()
 	{
 		if($this->session->userdata('l') != 1)
 		{
@@ -22,9 +22,9 @@ class Buzz extends CI_Controller
 		$tweets_count = $this->process_model->get_tweets_count();
 		//Formatting data to be sent to the views
 		$data = array(
-			'title' 	=> 'Manage Campaign - Buzzzzzz',
+			'title' 	=> 'Manage Campaign',
 			'heading'	=> $campaign_data[0]->name,
-			'meta_description'	=> 'Campaign for Buzzzzzz',
+			'meta_description'	=> 'Campaign for Hype Ninja',
 			'meta_keywords'		=> 'SEO, Social, Blah blah',
 			'active'	=> 'dashboard',
 			'campaign_data'	=> $campaign_data,
@@ -37,5 +37,41 @@ class Buzz extends CI_Controller
 		$this->load->view('headquarters/sidebar');
 		$this->load->view('headquarters/buzz');
 		
+	}
+	/*
+		function lists the blogs from google search also known as Blog Ninja
+	*/
+	function blog()
+	{
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
+		//Loading the model to get data and stuff
+		$this->load->model('buzz_model', 'buzz');
+		//Get the data for the current campaign selected in URL
+		$campaign_data = $this->buzz->getCampaignData();
+		
+		$blog_posts = $this->buzz->getBlogPosts($campaign_data[0]->id);
+		$this->session->set_userdata(array('user_id' => 1)); //Will be later put inside Login
+		$twitter_accounts = $this->buzz->get_twitter_accounts($campaign_data[0]->id);
+		$tweets_count = $this->process_model->get_tweets_count();
+		//Formatting data to be sent to the views
+		$data = array(
+			'title' 	=> 'Manage Campaign',
+			'heading'	=> $campaign_data[0]->name,
+			'meta_description'	=> 'Campaign for Hype Ninja',
+			'meta_keywords'		=> 'SEO, Social, Blah blah',
+			'active'	=> 'dashboard',
+			'campaign_data'	=> $campaign_data,
+			'blog_posts'	=> $blog_posts,
+			'twitter_accounts'	=> $twitter_accounts,
+			'tweets_count'	=> $tweets_count,
+			'sidebar'	=> 'campaign',
+		);
+		$this->load->view('headquarters/header', $data);
+		$this->load->view('headquarters/sidebar');
+		$this->load->view('headquarters/blog_ninja');
 	}
 }

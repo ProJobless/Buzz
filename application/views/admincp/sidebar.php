@@ -34,6 +34,12 @@
 			</a>
 		</li>
 		
+		<li class="<?php if($sidebar_active == 'analytics') {echo "active";}?>">
+			<span class="glow"></span>
+			<a href="<?php echo site_url('admincp/analytics'); ?>">
+				<span>Analytics</span>
+			</a>
+		</li>
 		<li class="">
 			<span class="glow"></span>
 			<a href="<?php echo site_url('admincp/'); ?>">

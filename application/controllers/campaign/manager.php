@@ -151,9 +151,9 @@ class Manager extends CI_Controller
 		
 		$this->load->library('pagination');
 
-		$config['base_url'] = site_url('campaign/manager/history')."/";
-		$config['total_rows'] = $this->db->get('users')->num_rows();
-		$config['per_page'] = 20;
+		$config['base_url'] = site_url('campaign/manager/history')."/".$this->uri->segment(4)."/";
+		$config['total_rows'] = $this->db->get('twitter_replies')->num_rows();
+		$config['per_page'] = 5;
 		$config['num_links'] = 10;
 
 		$this->pagination->initialize($config);

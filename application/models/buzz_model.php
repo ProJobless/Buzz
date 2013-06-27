@@ -44,7 +44,7 @@ class Buzz_model extends CI_Model
 		foreach($content->statuses as $c)
 		{
 			$data = array(
-				'tweet'			=> $c->text,
+				'tweet'			=> $this->parse_links($c->text),
 				'timestamp'		=> strtotime($c->created_at),
 				'keyword'		=> $keyword,
 				'profile_image'	=> $c->user->profile_image_url,	
@@ -57,6 +57,13 @@ class Buzz_model extends CI_Model
 			$this->db->set($data);
 			$this->db->insert('tweets', $data);
 		}
+	}
+	/*
+		This function parses the links
+	*/
+	function parse_links($text)
+	{
+		return preg_replace('#(http://\S+)#i', '<a href="${1}" target="_blank">${1}</a>', $text);
 	}
 	/*
 		This will get the dafault twitter account for a particular campaign
@@ -108,6 +115,22 @@ class Buzz_model extends CI_Model
 		{
 			return 0;
 		}
+	}
+	/*
+		This function fetches the blog posts scrapped from google earlier
+	*/
+	function getBlogPosts($id)
+	{
+		$this->db->select('*')->from('blog_search')->where('campaign_id',$id)->limit(100,0)->order_by('timestamp', 'desc');
+		$query = $this->db->get();
+		
+		
+		$data = array();
+		foreach($query->result() as $r)
+		{
+			$data[] = $r;
+		}
+		return $data;
 	}
 	/*
 		fetches all the twitter account for a user

@@ -6,6 +6,9 @@
 	<meta name="description" content="<?php echo $meta_description; ?>" />
 	<meta name="robots" content="noindex, nofollow"/>
 	<meta name="keywords" content="<?php echo $meta_keywords; ?>" />
+	<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>css/application.css" />
 	<script src="<?php echo base_url(); ?>js/application.js"></script>
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
