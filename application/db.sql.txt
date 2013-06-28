@@ -1,0 +1,554 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.4
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jun 28, 2013 at 10:02 PM
+-- Server version: 5.5.25
+-- PHP Version: 5.3.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `buzz`
+--
+CREATE DATABASE IF NOT EXISTS `buzz` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `buzz`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `administrators`
+--
+
+CREATE TABLE `administrators` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(40) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `rank` varchar(50) NOT NULL,
+  `profile_pic` text NOT NULL,
+  `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ip` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `administrators`
+--
+
+INSERT INTO `administrators` (`id`, `name`, `username`, `password`, `rank`, `profile_pic`, `last_login`, `ip`) VALUES
+(1, 'Aayush Ranaut', 'admin', '1a1dc91c907325c69271ddf0c944bc72', 'Administrator', '', '2013-06-18 14:06:15', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_stats`
+--
+
+CREATE TABLE `admin_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tweets_count` int(11) NOT NULL,
+  `tweets_fetched` int(11) NOT NULL,
+  `registrations` int(11) NOT NULL,
+  `user_logins` int(11) NOT NULL,
+  `timestamp` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `admin_stats`
+--
+
+INSERT INTO `admin_stats` (`id`, `tweets_count`, `tweets_fetched`, `registrations`, `user_logins`, `timestamp`) VALUES
+(1, 2, 32, 13, 134, '1382178955'),
+(2, 34, 324, 32, 52, '1392178978'),
+(3, 32, 123, 412, 42, '1372936861'),
+(4, 32, 123, 412, 42, '1372236875');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_search`
+--
+
+CREATE TABLE `blog_search` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(225) NOT NULL,
+  `text` text NOT NULL,
+  `link` text NOT NULL,
+  `alexa_rank` int(11) NOT NULL,
+  `google_pr` int(1) NOT NULL,
+  `keyword` varchar(100) NOT NULL,
+  `campaign_id` int(11) NOT NULL,
+  `timestamp` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86 ;
+
+--
+-- Dumping data for table `blog_search`
+--
+
+INSERT INTO `blog_search` (`id`, `title`, `text`, `link`, `alexa_rank`, `google_pr`, `keyword`, `campaign_id`, `timestamp`) VALUES
+(1, 'T-Mobile <b>Hosting</b> Event July 10 in NYC - Bonnie Cha - News <b>...</b>', '......', 'http://allthingsd.com/20130627/t-mobile-hosting-event-july-10-in-nyc/', 5256, 0, 'hosting', 1, '1372419372'),
+(2, 'WordPress <b>Hosting</b> Provider Page.ly Buys BlogDroid For Its <b>...</b>', 'Page.Ly turned our hosting experience with them into a nightmare, due to their placing importance on Grey Goose and poor attempts at silly helpdesk nicknames as opposed to actually running a reliable service. We left and have never looked back &#8211; much, much happier with our new provider!......', 'http://thenextweb.com/insider/2013/06/26/wordpress-hosting-provider-page-ly-acquires-blogdroids-customers-and-domain-shuts-down-company/', 2530, 0, 'hosting', 1, '1372419378'),
+(3, '<b>Hosting</b> Database Login | drupal.org', '......', 'http://drupal.org/project/hosting_dblogin', 1004, 0, 'hosting', 1, '1372419381'),
+(4, 'Ciaohost Responsive <b>Hosting</b> HTML Template - ThemeForest', 'Ciaohost is a responsive Hosting HTML5/CSS3 Template.......', 'http://themeforest.net/item/ciaohost-responsive-hosting-html-template/5062293', 227, 0, 'hosting', 1, '1372419386'),
+(5, 'Waterford company <b>Hosting</b> Ireland launches cloud-enabled <b>...</b>', 'Waterford company Hosting Ireland launches cloud-enabled website builder......Jonathan Bate and Will Harrison of Hosting Ireland...\r\n  Waterford-based Hosting Ireland has launched a cloud-based website builder targeted at helping businesses that want to develop an online presence for e-commerce or to market their products and services.\r\n  ...\r\n   Hosting Ireland is one of Ireland&#8217;s leading domain name registration...\r\n  ...\r\n   OVH is Europes leading webhosting company. It controls the entire production...\r\n  ...', 'http://siliconrepublic.com/cloud/item/33195-waterford-company-hosting-i', 37510, 0, 'hosting', 1, '1372419393'),
+(6, 'Game Publisher BulkyPix <b>Hosting</b> 50% Off Summer Sale on Top <b>...</b>', '......', 'http://www.droid-life.com/2013/06/27/game-publisher-bulkypix-hosting-50-off-summer-sale-on-top-selling-apps/', 11464, 0, 'hosting', 1, '1372419397'),
+(7, 'BLOOD DRIVE Record <b>hosting</b> blood drive July 15 - troyrecord.com', '......', 'http://www.troyrecord.com/articles/2013/06/27/news/doc51cc2ffb050e4838859614.txt', 206335, 0, 'hosting', 1, '1372419403'),
+(8, 'Bangladesh <b>hosting</b> of World T20 in doubt - ESPN Cricinfo', '\nWhile Sri Lanka cricket chief executive Ashley de Silva indicated that there had been no contact as yet between his board and the ICC, he did suggest that the country would be ready to host the tournament if required, even though it would mean that Sri Lanka could end up hosting World Twenty20 twice in 18 months. The most recent edition of the World Twenty20, which ended last October, was also held in Sri Lanka.\n......\nWhen they officially launched the tournament in April this year, it was at the end of month-long unrest in many parts of the country and immediately after a day-long general strike in Dhaka.\nThe tournament is slated to be Bangladesh''s fourth ICC event after hosting the 1998 ICC Knockout, the 2004 Under-19s World Cup and co-hosting the 2011 World Cup.\n...', 'http://www.espncricinfo.com/icc-world-twenty20-2014/content/story/644629.html', 177, 0, 'hosting', 1, '1372419408'),
+(9, 'Brazil protesters, police clash near stadium <b>hosting</b> Confederations <b>...</b>', 'BELO HORIZONTE, Brazil &#8211; Brazilian protesters and police clashed Wednesday near a stadium hosting&#8230;......BELO HORIZONTE, Brazil &#8211; Brazilian protesters and police clashed Wednesday near a stadium hosting a Confederations Cup soccer match, as thousands of demonstrators trying to march on the site were met by tear gas and rubber bullets....', 'http://www2.macleans.ca/2013/06/27/brazil-protesters-police-clash-near-stadium-hosting-confederations-cup-match/', 27955, 0, 'hosting', 1, '1372419414'),
+(10, 'CPLC is <b>hosting</b> a job fair today | Business | South Tucson News', '......', 'http://cityofsouthtucson.tucsonnewsnow.com/news/business/168113-cplc-hosting-job-fair-today', 105761, 0, 'hosting', 1, '1372419432'),
+(11, 'Verizon, Savvis lead Europe&#39;s managed <b>hosting</b> market, says <b>...</b>', 'Leveraging its global network and the assets it purchased from Terremark in 2011, a move that created its colocation and cloud business, the service provider immediately established itself as a global managed hosting player.......Out of the 25 data centers it operates in North America, Europe, Asia and Latin America, Verizon Terremark offers colocation and managed hosting on dedicated servers and private or public cloud Infrastructure as a Service (IaaS). ?..."While Verizon Terremark is rewriting its SLA for high-availability managed hosting solutions, its current SLA for 99.5% availability places it below those of its market peers," wrote Gartner. "Verizon Terremark&#39;s sales focus is mainly on multinational enterprises with a European presence. Verizon Terremark does not market widely to domestic organizations in Europe."...Like Verizon, CenturyLink immediately enhanced its presence in the managed services market when it purchased Savvis in 2011. The service provider offers a line of managed hosting services?and a suite of?cloud services?via a number of data centers located in key domestic U.S. markets, Asia-Pacific and Europe...."Through its acquisition of the IT outsourcing business Ciber in July 2012, Savvis gained a broader set of enterprise application support skills, and could start bringing new application-centric services to customers," wrote Gartner. "Savvis has consistently had one of the best end-user portals, which generally covers every product that Savvis offers to customers, including hosting, network, cloud and colocation."...', 'http://www.fiercetelecom.com/story/verizon-savvis-lead-europes-managed-hosting-market-says-gartner/2013-06-26', 222306, 0, 'hosting', 1, '1372419437'),
+(12, '<b>Hosting</b> service deletes all MegaUpload users&#39; data | Internet <b>...</b>', 'The file-sharing service''s founder Kim Dotcom takes to Twitter to bash web-hosting company LeaseWeb for deleting millions of users'' files.......', 'http://news.cnet.com/8301-1023_3-57590117-93/hosting-service-deletes-all-megaupload-users-data/', 109, 0, 'hosting', 1, '1372419442'),
+(13, 'Forest Hills Tennis Stadium <b>hosting</b> shows again, Mumford included <b>...</b>', 'How can such a positive thing create such negative remarks? The stadium can use a life infusion and concerts are the way to do it. Being that the neighborhood association has strong reservations about hosting concerts again, Mumford is an excellent choice and Goblin will never see the inside of the stadium.......', 'http://www.brooklynvegan.com/archives/2013/06/forest_hills_te.html', 27442, 0, 'hosting', 1, '1372419449'),
+(14, 'Kaepernick all smiles while <b>hosting</b> golf tournament to benefit kids <b>...</b>', '......', 'http://blogs.mercurynews.com/49ers/2013/06/24/kaepernick-all-smiles-while-hosting-golf-tournament-to-benefit-kids-with-heart-disease/', 4797, 0, 'hosting', 1, '1372419453'),
+(15, 'What type of <b>hosting</b> is right for your business? | Netregistry Blog', 'Cloud, CPanel, VPS &ndash; navigating the wide world of potential hosting options can feel like a minefield. However, understanding the attributes of various types of hosting is critical for managing your web performance and successfully addressing customer demands. Here&rsquo;s our no-fail guide to banishing hosting woes for good.......The cloud refers to a web-based hosting option where data is hosted on off-site rather than on in-house servers. This form of hosting is quickly gaining popularity thanks to its easy accessibility, storage capacities and virtual infrastructure that easily scales....cPanel is a feature-rich hosting option that allows you a high level of control over your online enterprise. cPanel providers incorporate a graphical interface as well as automation tools tailored to administer everything from blogs, shopping carts and website content to server attributes such as bandwidth....VPS (virtual private server) is a hosting option where your physical server hardware is shared with other websites while maintaining dedicated access to system resources. This type of hosting combines the cost-effectiveness of shared hosting with the reliability of a dedicated server....Ultimately, it&rsquo;s important that you carefully consider your business goals before investing in a hosting solution. What type of hosting best reflects your needs?...Netregistry offers different packages for Cloud, cPanel and VPS hosting. If you would like to speak to someone about the best option for you give us a call....Our Australian hosting is perfect for businesses &mdash; fast, secure & reliable....A popular budget web hosting platform, ideal for small websites....Easy-to-use DIY website builder, free with all web hosting plans....', 'http://www.netregistry.com.au/blog/hosting/what-type-of-hosting-is-right-for-your-business/', 13452, 0, 'hosting', 1, '1372419458'),
+(16, 'Contest: Win Premium <b>Hosting</b> from Zyma for 3 Years - Daily Blog Tips', 'The contest will be open for ten days (so it ends on July 5), and after that period we&#8217;ll pick three winners. I&#8217;ll pick one (based on the quality/creativity of the website idea), the Zyma guys will pick another one, and the third one will be picked at random. Each winner will win a domain name and a paid-up hosting plan for 3 years with Zyma to develop the website idea.......I want to create a Free/Premium SMS Site, will be glad if the Hosting can be compatible with all required apps...I hope this comment to Daniel Scocco and my entry to the contest with Zyma will find it&#8217;s merit for your consideration. I have researced and compared with other popular Web Hosting companies and I found Zyma with premium services. Thank you....Great contest. You make it really simple Daniel. I am not participating here, as I have already own 3 years hosting package from Zyma....', 'http://www.dailyblogtips.com/contest-win-premium-hosting-from-zyma-for-3-years/', 10896, 0, 'hosting', 1, '1372419463'),
+(17, 'Russell Wilson <b>hosting</b> Passing Academy while Seahawks are off <b>...</b>', '......', 'http://www.fieldgulls.com/2013/6/26/4465458/russell-wilson-hosting-passing-academy-while-seahawks-are-off', 163452, 0, 'hosting', 1, '1372419467'),
+(18, 'Rooney: Steelers interested in <b>hosting</b> NFL Draft | TribLIVE', '......', 'http://triblive.com/sports/steelers/4231479-74/draft-nfl-pittsburgh', 16176, 0, 'hosting', 1, '1372419475'),
+(19, 'HostingCon Insights: <b>Hosting</b> Industry Growing &amp; Evolving » Data <b>...</b>', 'Hosting providers, gathered this week in Austin for HostingCon 2013, expressed apprehensive optimism about the current state of the hosting and cloud industry. The conference covered a range of topics, such as Internet freedom, how hosting providers can differentiate, and how and where to expand in Europe and AsiaPac.......The industry is still abuzz from IBM&#8217;s acquisiton of SoftLayer, a pillar of the hosting industry. IBM essentially consumed a private provider that was holding its own against increasing threats coming from outside of the traditional hosting industry, like Amazon Web Services. I learned that DH Capital took part in the transaction, and that it received a very attractive multiple. Also, it appears that IBM will let SoftLayer operate autonomously under its own brand name, and that this was a major factor in SoftLayer&rsquo;s choosing its suitor....Other hosting providers like SingleHop saw the acquisition as potential opportunity to step up. SingleHop has a lot of the same DNA as SoftLayer &#8212; it&rsquo;s also a very automated, dedicated and cloud hosting provider that offers everything through a single panel. Further, SingleHop has seen triple digit revenue growth for several years. The company recently expanded to Amsterdam and has been looking heavily into AsiaPac and South America....On a panel about international expansion to Europe and Asia that was moderated by 451 Research&rsquo;s Kelly Morgan, the consensus seemed to be that Amsterdam was most attractive for hosting providers looking to establish a primary footprint in Europe, while Singapore was recognized as key to AsiaPac operations. Amsterdam&rsquo;s rich connectivity and great tax structure means that hosting providers are most aggressively looking at it for its initial base of European operations.?London, a perennial favorite locale or data centers and commerce, was described as somewhat insular and falling a bit out of favor. However, Europe is not one market rather it can be seen as multiple country-specific markets because IT managers from different companies often want to keep data within borders....How do hosting providers choose their data center provider when expanding to Europe? Perhaps the most important consideration, as Martijn Kooiman from TeleCity Group put it, &ldquo;You need to choose a partner with the ability to scale, but one that can also start with you.&rdquo;?The panel also included wisdom from other major data center providers in Europe, through Interxion&rsquo;s Jelle Frank van der Zwet; SoftLayer&rsquo;s Todd Mitchell; and Readyspace&rsquo;s David Loke. Loke provided insights into expanding into AsiaPac in particular....&ldquo;The big trends I&rsquo;ve noticed is time to market has matured, and companies are having success growing customers,&rdquo; said Shih. Another trend discussed was the uptick in folks leaving Amazon&#8217;s public cloud (AWS) for operator clouds. When examining two industry successes, such as Rackspace and SoftLayer, one point that Shih made that bodes well for the data center industry is that neither company got into the data center building business. Hosting providers in general aren&rsquo;t about to get into the physical infrastructure game, which means they&rsquo;ll continue to be growing and lucrative customers for the data center industry....These points make a lot of sense in an industry that seems to be converging into one, with colo providers offering cloud, IBM getting deeper into hosting, and the multi-service provider on the rise....The Tuesday session was titled &ldquo;The Fight For Our Future,&rdquo; and included Reddit&rsquo;s Erik Martin and Fark&rsquo;s Drew Curtis as well as Michael McGeary from Engine Advocacy, Michael Petricone from CEA and Julie Samuels from Electronic Frontier Foundation. The panel discussed why an unregulated Internet was so important as well as why patent trolls are so corrosive to the economy. Panelists said hosting providers have a responsibility to fight for our rights because of the position they hold. Government will listen to hosting providers because they are job creators. Should it have passed, SOPA (Stop Online Privacy Act) would have been disastrous to the new Internet-based economy....Jason Verge is an Editor/Industry Analyst on the Data Center Knowledge team with a strong background in the data center and Web hosting industries. In the past he&rsquo;s covered all things Internet Infrastructure, including cloud (IaaS, PaaS and SaaS), mass market hosting, managed hosting, enterprise IT spending trends and M&A. He writes about a range of topics at DCK, with an emphasis on cloud hosting....', 'http://www.datacenterknowledge.com/archives/2013/06/20/the-big-hostingcon-roundup-hosting-industry-growing-evolving/', 41928, 0, 'hosting', 1, '1372419479'),
+(20, 'Comparing Node.js Support on PaaS <b>Hosting</b> Providers | StrongLoop', 'Node.js may still be young relative to its other?language?counterparts, but when it comes to hosting, there are a lot of options. In this post we&#8217;ll take a look at several &#8220;Platform as a Service&#8221; providers.......Like Heroku, Engine Yard is known primary for it&#8217;s Ruby on Rails hosting. Unlike Heroku, you have more control over the setup and environment. It&#8217;s still a PaaS, but people with some direct server experience will appreciate being a little &#8220;closer to the metal.&#8221;...', 'http://blog.strongloop.com/a-comparison-of-node-js-paas-hosting-providers/', 762867, 0, 'hosting', 1, '1372419483'),
+(21, 'The Hollow <b>hosting</b> Gandolfini tribute dinner on Sunday - Table <b>...</b>', '......', 'http://blog.timesunion.com/tablehopping/38588/the-hollow-hosting-gandolfini-tribute-dinner-on-sunday/', 11227, 0, 'hosting', 1, '1372419489'),
+(22, 'Nokia <b>hosting</b> &#39;Zoom Reinvented&#39; event July 11th in NYC - Engadget', '......', 'http://www.engadget.com/2013/06/13/nokia-sends-invites-to-zoom-reinvented-event-on-july-11st-in-n/', 621, 0, 'hosting', 1, '1372419494'),
+(23, 'Giga Host - Responsive <b>Hosting</b> Template - ThemeForest', '......', 'http://themeforest.net/item/giga-host-responsive-hosting-template/5026835', 227, 0, 'hosting', 1, '1372419500'),
+(24, 'virtualization.info | Paper: Desktop <b>Hosting</b> Reference Architecture <b>...</b>', 'Microsoft has released a paper titled:"Desktop Hosting Reference Architecture Guide". The paper which contains 19 pages defines a set of architectural blocks for creating a multitenant, hosted Windows desktop and&#8230;......', 'http://virtualization.info/en/news/2013/06/paper-desktop-hosting-reference-architecture-guide.html', 902745, 0, 'hosting', 1, '1372419505'),
+(25, 'Dedicated Servers from Rackspace <b>Hosting</b>', 'Managed dedicated servers can help you meet the compliance, security, and reliability needs of your website or high-performance application. At Rackspace, your bare metal servers include a hardware firewall, monitoring, backup, and a Managed Service Level. And you can deploy Rackspace dedicated servers in a hybrid hosting environment with public cloud, private cloud, or managed virtualization, to create the ideal infrastructure for your sites or applications.......Rackspace is a leader in the 2013 Gartner Magic Quadrant for Managed Hosting, North America....', 'http://www.rackspace.com/managed-hosting/dedicated-servers/', 2778, 0, 'hosting', 1, '1372419512'),
+(26, 'The Seasoned Gourmet <b>hosting</b> &#39;Grapes &amp; Grub&#39; to benefit - WWAY <b>...</b>', '......', 'http://www.wwaytv3.com/2013/06/24/the-seasoned-gourmet-hosting-%E2%80%98grapes-grub%E2%80%99-to-benefit-the-ability-garden', 192206, 0, 'hosting', 1, '1372419518'),
+(27, 'The Mighty Quest for Epic Loot <b>hosting</b> Open House events | VG247', '......', 'http://www.vg247.com/2013/06/25/the-mighty-quest-for-epic-loot-hosting-open-house-events/', 9724, 0, 'hosting', 1, '1372419522'),
+(28, 'Cleveland Cavaliers <b>hosting</b> free NBA Draft Party at the Q - Fear The <b>...</b>', '......', 'http://www.fearthesword.com/2013/6/25/4462910/cleveland-cavaliers-hosting-free-nba-draft-party-at-the-quicken-loans-arena', 317406, 0, 'hosting', 1, '1372419529'),
+(29, 'Tiny Green Elephants: Yay for <b>hosting</b>!!', '......', 'http://www.tinygreenelephants.com/2013/06/yay-for-hosting.html', 1788333, 0, 'hosting', 1, '1372419539'),
+(30, 'Government orders ISPs to block 39 websites <b>hosting</b> pornographic <b>...</b>', '......', 'http://www.niticentral.com/2013/06/26/government-orders-isps-to-block-39-websites-hosting-pornographic-content-95741.html', 19472, 0, 'hosting', 1, '1372419547'),
+(31, 'GOODS: Gastown&#39;s Pidgin <b>Hosting</b> ?Negroni Night? On Every <b>...</b>', '......', 'http://scoutmagazine.ca/2013/06/27/goods-gastowns-pidgin-hosting-negroni-night-on-every-sunday-monday-evening/', 528340, 0, 'hosting', 1, '1372419557'),
+(32, 'South Dakota <b>hosting</b> Kazakh delegation looking for biofuel <b>...</b>', '......', 'http://www.biofuelsdigest.com/bdigest/2013/06/24/south-dakota-hosting-kazakh-delegation-looking-for-biofuel-inspiration/', 266356, 0, 'hosting', 1, '1372419569'),
+(33, 'Self <b>Hosting</b> a WordPress Website - Beginning WordPress Series', 'Well, there are any number of places you can get hold of those things. ?I&#8217;m afraid I&#8217;m not going to give you a list &#8211; I suggest you talk to other people around you about who they use, and I also suggest that you google &#8216;domain name registrar reviews&#8217; and see what other people are saying about where to get your domain name and the pros and cons of the registrar you&#8217;re looking at. ?I&#8217;d also do the same for &#8216;WordPress web hosting reviews&#8217; and then choosing a host that fits your budget and has good reputation in the market place. ?You don&#8217;t have to buy your domain name and web hosting in the same place, actually I always buy them separately &#8211; mostly I register all my domains in one place, as the best hosting varies as to the best fit for needs of the client.......Your hosting on a shared server is like locker space &#8211; lots of boxes in one appliance, all with their own access....When your host offers &#8216;web hosting&#8217; what you&#8217;re buying is space on a shared?server. You and a number of other people will be sharing the space, the processing power and the bandwidth available to that server&#8230; It should be noted that the cheaper the hosting the more likely it is that there are a greater number of people sharing that space&#8230; ?and that can introduce problems, because the more people sharing the space the less available the shared resources are &#8211; let&#8217;s just say, you get what you pay for....When you&#8217;ve settled on your domain registrar and/or web host, then go through their process of buying your domain and/or hosting. ?You will have to purchase your domain name first, because when you buy hosting it will be relative to your domain name, (if you&#8217;re buying them both at the same time from the same place this will be pretty straightforward). ?Once you&#8217;ve followed that through, your registrar and/or host will email you with the &#8216;keys to your kingdom&#8217; by way of logins to their?respective?control panels....The way you tell your domain name where to find that zone file is through a Name Server record&#8230; ?Your domain registrar will have default name servers applied to your domain name when you buy it and if you&#8217;re buying your domain name and hosting in the same place your domain name ?you should now be good to go to go onto the next step of installing WordPress (if this is you, then skip the next paragraph&#8230; if you have your domain already and/or you&#8217;ve got hosting separate from your domain&#8230; read on)....If you bought your Domain Name separate from your hosting, you need to decide if your domain registrar is going to host your zone file or if your web host is. ?If your domain registrar charges you for DNS hosting then I think you should let your web host take care of it&#8230; ?in this case you&#8217;ll need to update the Name Servers. ?The email your new host sent you when you signed up with all your important information should tell you the name servers you need use and your domain registrar should instruct you on how to change their default name servers to your host&#8217;s ones (basically, log into your domain name control panel and add the name servers given you by your web host)....Congratulations!! You now have the tools to start self hosting a WordPress website!!...', 'http://thewebprincess.com/self-hosting-a-wordpress-website/', 1120654, 0, 'hosting', 1, '1372419578'),
+(34, 'Imgur photo-<b>hosting</b> app for Android leaves beta, hits Google Play <b>...</b>', '......', 'http://androidcommunity.com/imgur-photo-hosting-app-for-android-leaves-beta-hits-google-play-20130624/', 15234, 0, 'hosting', 1, '1372419589'),
+(35, 'Fincastle Winery <b>hosting</b> Acoustic Endeavors June 29 - Blogs - The <b>...</b>', '......', 'http://blogs.roanoke.com/botetourtview/2013/06/fincastle-winery-hosting-acoustic-endeavors-june-29/', 35240, 0, 'hosting', 1, '1372419599'),
+(36, 'Image-<b>hosting</b> platform Imgur releases official Android app - Pocket <b>...</b>', 'Imgur, the self-dubbed fastest-growing platform for image sharing on the web, originally became popular for its image-hosting capabilities on communities like Reddit. The platform had?not been available through a dedicate mobile site or app aside from third-party clients using the Imgur API, until today.?......', 'http://www.pocket-lint.com/news/121968-image-hosting-platform-imgur-releases-official-android-app', 11895, 0, 'hosting', 1, '1372419604'),
+(37, '<b>Hosting</b> the All Blacks high stakes for New Plymouth - Business <b>...</b>', 'New Plymouth hosting the All Blacks is exciting - but not\nfree.......', 'http://tvnz.co.nz/business-news/hosting-all-blacks-high-stakes-new-plymouth-5473090', 11680, 0, 'hosting', 1, '1372419610'),
+(38, '<b>Hosting</b> a U.S. Open: It takes a village - Golf Week', 'Davis noted that such an assessment wasn&rsquo;t a reflection of the golf course, a 1912 Hugh Wilson design that is No. 7 on Golfweek&rsquo;s Best Classic Courses list. The logistical demands of hosting a major in the modern era are many. &ldquo;It had everything to do with, how do you fit a modern Open on this 111 acres?&rdquo; Davis said.......So when might the Open return? There already is talk that the club has identified hosting the 2030 U.S. Amateur to celebrate the 100th anniversary of Bobby Jones&rsquo; wrapping up the Grand Slam here. That leaves a 17-year window to schedule another Open. Will the Rubensteins&rsquo; front yard be available for another block party?...', 'http://golfweek.com/news/2013/jun/18/hosting-us-open-it-takes-village/', 64301, 0, 'hosting', 1, '1372419616'),
+(39, 'What are the Main Types of Web Site <b>Hosting</b>? | ITX Design', 'Shared and Dedicated Web Hosting......Shared hosting is the cheapest of the packages and you will be on the same server as many other hosting accounts. This can cause issues if one of the accounts is using up a large amount of the resources. This is also not the most secure type of hosting, but if you are on a budget getting your site or blog up with shared hosting is possible....VPS hosting will also put you on a server with others, but you actually purchase a partition of this server. This means you get more security and you get to use the resources all for yourself....Dedicated hosting is the most expensive and basically you will be renting the entire server for yourself. This is the best type of web site hosting, but it does not fit every budget....Why Free Website Hosting is a Waste of Your Time...Free website hosting gives you the ability to put up a website or blog, but you won&rsquo;t own it. Since you will be forced to use a sub domain name from the main hosting site, you will not own the site itself. Sure, you can still profit from it, but you won&rsquo;t see nearly as much profit as if you own your own domain name....Not only to mention that, you will struggle with control. If the free hosting company decides to shut down, you lose everything. This will cause you to start over from scratch and that isn&rsquo;t fun. Imagine building an income of a thousand dollars or more, then you wake up one morning and it&rsquo;s all gone because of the hosting you chose....More Issues from Free Website Hosting...Now, not all free hosting companies will display ads on your website, but many will. If they do, they are literally reaching into your pockets and stealing your profits. This can cost you hundreds or more every single month and you could have just used that money to get real hosting and make more money from your website....If you want to really become successful online, you need full control and ownership of your websites and blogs. This means owning the domain name and buying real hosting. The funny thing is many beginners to internet marketing and website building will choose free website hosting to save a few bucks a month knowing it&rsquo;s a horrible choice....Shared hosting is much better than free hosting and you can get it for under $10 a month. If you can afford to pay for more than one year up front, you can actually get your hosting for under $5 a month. The bottom line is if you are not willing to invest $30 into your business, then $10 or less a month from there on out, then you should reconsider even starting a website or blog....You need a domain name, which you can get for $20 a year or less and you need hosting, which you can get for $10 or less on a monthly plan. However, if you can invest more in your hosting up front, you can get it for much cheaper per month. Just remember, this is a business and if you choose free hosting, you are setting yourself up for failure....Instead, start with shared hosting and spend the few dollars to ensure you get exactly what you need. This will help you in many ways by providing better options and a full foundation for your website or blog. Just make sure you avoid the blunders of free website hosting and you will be well on your way to an online income....', 'http://itxdesign.com/what-are-the-main-types-of-web-site-hosting/', 532799, 0, 'hosting', 1, '1372419621'),
+(40, 'Kickstarter on <b>Hosting</b> Offensive Guide: &quot;We Were Wrong&quot; | KQED <b>...</b>', '......', 'http://blogs.kqed.org/newsfix/2013/06/21/100813/', 28047, 0, 'hosting', 1, '1372419629'),
+(41, 'T-Mobile <b>Hosting</b> Event July 10 in NYC - Bonnie Cha - News <b>...</b>', '......', 'http://allthingsd.com/20130627/t-mobile-hosting-event-july-10-in-nyc/', 5329, 0, 'hosting', 1, '1372434187'),
+(42, 'WordPress <b>Hosting</b> Provider Page.ly Buys BlogDroid For Its <b>...</b>', 'Page.Ly turned our hosting experience with them into a nightmare, due to their placing importance on Grey Goose and poor attempts at silly helpdesk nicknames as opposed to actually running a reliable service. We left and have never looked back &#8211; much, much happier with our new provider!......', 'http://thenextweb.com/insider/2013/06/26/wordpress-hosting-provider-page-ly-acquires-blogdroids-customers-and-domain-shuts-down-company/', 2530, 0, 'hosting', 1, '1372434194'),
+(43, '<b>Hosting</b> Database Login | drupal.org', '......', 'http://drupal.org/project/hosting_dblogin', 1020, 0, 'hosting', 1, '1372434198'),
+(44, 'Waterford company <b>Hosting</b> Ireland launches cloud-enabled <b>...</b>', 'Waterford company Hosting Ireland launches cloud-enabled website builder......Jonathan Bate and Will Harrison of Hosting Ireland...\r\n  Waterford-based Hosting Ireland has launched a cloud-based website builder targeted at helping businesses that want to develop an online presence for e-commerce or to market their products and services.\r\n  ...\r\n   Hosting Ireland is one of Ireland&#8217;s leading domain name registration...\r\n  ...\r\n   OVH is Europes leading webhosting company. It controls the entire production...\r\n  ...', 'http://siliconrepublic.com/cloud/item/33195-waterford-company-hosting-i', 37360, 0, 'hosting', 1, '1372434205'),
+(45, 'Ciaohost Responsive <b>Hosting</b> HTML Template - ThemeForest', 'Ciaohost is a responsive Hosting HTML5/CSS3 Template.......', 'http://themeforest.net/item/ciaohost-responsive-hosting-html-template/5062293', 227, 0, 'hosting', 1, '1372434210'),
+(46, 'BLOOD DRIVE Record <b>hosting</b> blood drive July 15 - troyrecord.com', '......', 'http://www.troyrecord.com/articles/2013/06/27/news/doc51cc2ffb050e4838859614.txt', 209115, 0, 'hosting', 1, '1372434219'),
+(47, 'Game Publisher BulkyPix <b>Hosting</b> 50% Off Summer Sale on Top <b>...</b>', '......', 'http://www.droid-life.com/2013/06/27/game-publisher-bulkypix-hosting-50-off-summer-sale-on-top-selling-apps/', 11462, 0, 'hosting', 1, '1372434223'),
+(48, '<b>Hosting</b> service deletes all MegaUpload users&#39; data | Internet <b>...</b>', 'The file-sharing service''s founder Kim Dotcom takes to Twitter to bash web-hosting company LeaseWeb for deleting millions of users'' files.......', 'http://news.cnet.com/8301-1023_3-57590117-93/hosting-service-deletes-all-megaupload-users-data/', 109, 0, 'hosting', 1, '1372434230'),
+(49, 'Bangladesh <b>hosting</b> of World T20 in doubt - ESPN Cricinfo', '\nWhile Sri Lanka cricket chief executive Ashley de Silva indicated that there had been no contact as yet between his board and the ICC, he did suggest that the country would be ready to host the tournament if required, even though it would mean that Sri Lanka could end up hosting World Twenty20 twice in 18 months. The most recent edition of the World Twenty20, which ended last October, was also held in Sri Lanka.\n......\nWhen they officially launched the tournament in April this year, it was at the end of month-long unrest in many parts of the country and immediately after a day-long general strike in Dhaka.\nThe tournament is slated to be Bangladesh''s fourth ICC event after hosting the 1998 ICC Knockout, the 2004 Under-19s World Cup and co-hosting the 2011 World Cup.\n...', 'http://www.espncricinfo.com/icc-world-twenty20-2014/content/story/644629.html', 176, 0, 'hosting', 1, '1372434236'),
+(50, 'Brazil protesters, police clash near stadium <b>hosting</b> Confederations <b>...</b>', 'BELO HORIZONTE, Brazil &#8211; Brazilian protesters and police clashed Wednesday near a stadium hosting&#8230;......BELO HORIZONTE, Brazil &#8211; Brazilian protesters and police clashed Wednesday near a stadium hosting a Confederations Cup soccer match, as thousands of demonstrators trying to march on the site were met by tear gas and rubber bullets....', 'http://www2.macleans.ca/2013/06/27/brazil-protesters-police-clash-near-stadium-hosting-confederations-cup-match/', 27870, 0, 'hosting', 1, '1372434242'),
+(51, 'CPLC is <b>hosting</b> a job fair today | Business | South Tucson News', '......', 'http://cityofsouthtucson.tucsonnewsnow.com/news/business/168113-cplc-hosting-job-fair-today', 105765, 0, 'hosting', 1, '1372434248'),
+(52, 'Verizon, Savvis lead Europe&#39;s managed <b>hosting</b> market, says <b>...</b>', 'Leveraging its global network and the assets it purchased from Terremark in 2011, a move that created its colocation and cloud business, the service provider immediately established itself as a global managed hosting player.......Out of the 25 data centers it operates in North America, Europe, Asia and Latin America, Verizon Terremark offers colocation and managed hosting on dedicated servers and private or public cloud Infrastructure as a Service (IaaS). ?..."While Verizon Terremark is rewriting its SLA for high-availability managed hosting solutions, its current SLA for 99.5% availability places it below those of its market peers," wrote Gartner. "Verizon Terremark&#39;s sales focus is mainly on multinational enterprises with a European presence. Verizon Terremark does not market widely to domestic organizations in Europe."...Like Verizon, CenturyLink immediately enhanced its presence in the managed services market when it purchased Savvis in 2011. The service provider offers a line of managed hosting services?and a suite of?cloud services?via a number of data centers located in key domestic U.S. markets, Asia-Pacific and Europe...."Through its acquisition of the IT outsourcing business Ciber in July 2012, Savvis gained a broader set of enterprise application support skills, and could start bringing new application-centric services to customers," wrote Gartner. "Savvis has consistently had one of the best end-user portals, which generally covers every product that Savvis offers to customers, including hosting, network, cloud and colocation."...', 'http://www.fiercetelecom.com/story/verizon-savvis-lead-europes-managed-hosting-market-says-gartner/2013-06-26', 222306, 0, 'hosting', 1, '1372434253'),
+(53, 'Forest Hills Tennis Stadium <b>hosting</b> shows again, Mumford included <b>...</b>', 'How can such a positive thing create such negative remarks? The stadium can use a life infusion and concerts are the way to do it. Being that the neighborhood association has strong reservations about hosting concerts again, Mumford is an excellent choice and Goblin will never see the inside of the stadium.......', 'http://www.brooklynvegan.com/archives/2013/06/forest_hills_te.html', 27436, 0, 'hosting', 1, '1372434259'),
+(54, 'Contest: Win Premium <b>Hosting</b> from Zyma for 3 Years - Daily Blog Tips', 'The contest will be open for ten days (so it ends on July 5), and after that period we&#8217;ll pick three winners. I&#8217;ll pick one (based on the quality/creativity of the website idea), the Zyma guys will pick another one, and the third one will be picked at random. Each winner will win a domain name and a paid-up hosting plan for 3 years with Zyma to develop the website idea.......I want to create a Free/Premium SMS Site, will be glad if the Hosting can be compatible with all required apps...I hope this comment to Daniel Scocco and my entry to the contest with Zyma will find it&#8217;s merit for your consideration. I have researced and compared with other popular Web Hosting companies and I found Zyma with premium services. Thank you....Great contest. You make it really simple Daniel. I am not participating here, as I have already own 3 years hosting package from Zyma....', 'http://www.dailyblogtips.com/contest-win-premium-hosting-from-zyma-for-3-years/', 10976, 0, 'hosting', 1, '1372434265'),
+(55, 'Kaepernick all smiles while <b>hosting</b> golf tournament to benefit kids <b>...</b>', '......', 'http://blogs.mercurynews.com/49ers/2013/06/24/kaepernick-all-smiles-while-hosting-golf-tournament-to-benefit-kids-with-heart-disease/', 4816, 0, 'hosting', 1, '1372434270'),
+(56, 'What type of <b>hosting</b> is right for your business? | Netregistry Blog', 'Cloud, CPanel, VPS &ndash; navigating the wide world of potential hosting options can feel like a minefield. However, understanding the attributes of various types of hosting is critical for managing your web performance and successfully addressing customer demands. Here&rsquo;s our no-fail guide to banishing hosting woes for good.......The cloud refers to a web-based hosting option where data is hosted on off-site rather than on in-house servers. This form of hosting is quickly gaining popularity thanks to its easy accessibility, storage capacities and virtual infrastructure that easily scales....cPanel is a feature-rich hosting option that allows you a high level of control over your online enterprise. cPanel providers incorporate a graphical interface as well as automation tools tailored to administer everything from blogs, shopping carts and website content to server attributes such as bandwidth....VPS (virtual private server) is a hosting option where your physical server hardware is shared with other websites while maintaining dedicated access to system resources. This type of hosting combines the cost-effectiveness of shared hosting with the reliability of a dedicated server....Ultimately, it&rsquo;s important that you carefully consider your business goals before investing in a hosting solution. What type of hosting best reflects your needs?...Netregistry offers different packages for Cloud, cPanel and VPS hosting. If you would like to speak to someone about the best option for you give us a call....Our Australian hosting is perfect for businesses &mdash; fast, secure & reliable....A popular budget web hosting platform, ideal for small websites....Easy-to-use DIY website builder, free with all web hosting plans....', 'http://www.netregistry.com.au/blog/hosting/what-type-of-hosting-is-right-for-your-business/', 13452, 0, 'hosting', 1, '1372434275'),
+(57, 'Google Dominates SMB Cloud Usage: Spiceworks Report', 'The Web Hosting Industry News......Web hosting news sent to your inbox...Web hosting news sent to your inbox...', 'http://www.thewhir.com/web-hosting-news/google-dominates-smb-cloud-usage-spiceworks-report', 20933, 0, 'hosting', 1, '1372434282'),
+(58, 'Russell Wilson <b>hosting</b> Passing Academy while Seahawks are off <b>...</b>', '......', 'http://www.fieldgulls.com/2013/6/26/4465458/russell-wilson-hosting-passing-academy-while-seahawks-are-off', 164357, 0, 'hosting', 1, '1372434287'),
+(59, 'Comparing Node.js Support on PaaS <b>Hosting</b> Providers | StrongLoop', 'Node.js may still be young relative to its other?language?counterparts, but when it comes to hosting, there are a lot of options. In this post we&#8217;ll take a look at several &#8220;Platform as a Service&#8221; providers.......Like Heroku, Engine Yard is known primary for it&#8217;s Ruby on Rails hosting. Unlike Heroku, you have more control over the setup and environment. It&#8217;s still a PaaS, but people with some direct server experience will appreciate being a little &#8220;closer to the metal.&#8221;...', 'http://blog.strongloop.com/a-comparison-of-node-js-paas-hosting-providers/', 777408, 0, 'hosting', 1, '1372434294'),
+(60, 'Rooney: Steelers interested in <b>hosting</b> NFL Draft | TribLIVE', '......', 'http://triblive.com/sports/steelers/4231479-74/draft-nfl-pittsburgh', 16214, 0, 'hosting', 1, '1372434301'),
+(61, 'HostingCon Insights: <b>Hosting</b> Industry Growing &amp; Evolving » Data <b>...</b>', 'Hosting providers, gathered this week in Austin for HostingCon 2013, expressed apprehensive optimism about the current state of the hosting and cloud industry. The conference covered a range of topics, such as Internet freedom, how hosting providers can differentiate, and how and where to expand in Europe and AsiaPac.......The industry is still abuzz from IBM&#8217;s acquisiton of SoftLayer, a pillar of the hosting industry. IBM essentially consumed a private provider that was holding its own against increasing threats coming from outside of the traditional hosting industry, like Amazon Web Services. I learned that DH Capital took part in the transaction, and that it received a very attractive multiple. Also, it appears that IBM will let SoftLayer operate autonomously under its own brand name, and that this was a major factor in SoftLayer&rsquo;s choosing its suitor....Other hosting providers like SingleHop saw the acquisition as potential opportunity to step up. SingleHop has a lot of the same DNA as SoftLayer &#8212; it&rsquo;s also a very automated, dedicated and cloud hosting provider that offers everything through a single panel. Further, SingleHop has seen triple digit revenue growth for several years. The company recently expanded to Amsterdam and has been looking heavily into AsiaPac and South America....On a panel about international expansion to Europe and Asia that was moderated by 451 Research&rsquo;s Kelly Morgan, the consensus seemed to be that Amsterdam was most attractive for hosting providers looking to establish a primary footprint in Europe, while Singapore was recognized as key to AsiaPac operations. Amsterdam&rsquo;s rich connectivity and great tax structure means that hosting providers are most aggressively looking at it for its initial base of European operations.?London, a perennial favorite locale or data centers and commerce, was described as somewhat insular and falling a bit out of favor. However, Europe is not one market rather it can be seen as multiple country-specific markets because IT managers from different companies often want to keep data within borders....How do hosting providers choose their data center provider when expanding to Europe? Perhaps the most important consideration, as Martijn Kooiman from TeleCity Group put it, &ldquo;You need to choose a partner with the ability to scale, but one that can also start with you.&rdquo;?The panel also included wisdom from other major data center providers in Europe, through Interxion&rsquo;s Jelle Frank van der Zwet; SoftLayer&rsquo;s Todd Mitchell; and Readyspace&rsquo;s David Loke. Loke provided insights into expanding into AsiaPac in particular....&ldquo;The big trends I&rsquo;ve noticed is time to market has matured, and companies are having success growing customers,&rdquo; said Shih. Another trend discussed was the uptick in folks leaving Amazon&#8217;s public cloud (AWS) for operator clouds. When examining two industry successes, such as Rackspace and SoftLayer, one point that Shih made that bodes well for the data center industry is that neither company got into the data center building business. Hosting providers in general aren&rsquo;t about to get into the physical infrastructure game, which means they&rsquo;ll continue to be growing and lucrative customers for the data center industry....These points make a lot of sense in an industry that seems to be converging into one, with colo providers offering cloud, IBM getting deeper into hosting, and the multi-service provider on the rise....The Tuesday session was titled &ldquo;The Fight For Our Future,&rdquo; and included Reddit&rsquo;s Erik Martin and Fark&rsquo;s Drew Curtis as well as Michael McGeary from Engine Advocacy, Michael Petricone from CEA and Julie Samuels from Electronic Frontier Foundation. The panel discussed why an unregulated Internet was so important as well as why patent trolls are so corrosive to the economy. Panelists said hosting providers have a responsibility to fight for our rights because of the position they hold. Government will listen to hosting providers because they are job creators. Should it have passed, SOPA (Stop Online Privacy Act) would have been disastrous to the new Internet-based economy....Jason Verge is an Editor/Industry Analyst on the Data Center Knowledge team with a strong background in the data center and Web hosting industries. In the past he&rsquo;s covered all things Internet Infrastructure, including cloud (IaaS, PaaS and SaaS), mass market hosting, managed hosting, enterprise IT spending trends and M&A. He writes about a range of topics at DCK, with an emphasis on cloud hosting....', 'http://www.datacenterknowledge.com/archives/2013/06/20/the-big-hostingcon-roundup-hosting-industry-growing-evolving/', 41928, 0, 'hosting', 1, '1372434305'),
+(62, 'Nokia <b>hosting</b> &#39;Zoom Reinvented&#39; event July 11th in NYC - Engadget', '......', 'http://www.engadget.com/2013/06/13/nokia-sends-invites-to-zoom-reinvented-event-on-july-11st-in-n/', 621, 0, 'hosting', 1, '1372434311'),
+(63, 'Giga Host - Responsive <b>Hosting</b> Template - ThemeForest', '......', 'http://themeforest.net/item/giga-host-responsive-hosting-template/5026835', 226, 0, 'hosting', 1, '1372434324'),
+(64, 'virtualization.info | Paper: Desktop <b>Hosting</b> Reference Architecture <b>...</b>', 'Microsoft has released a paper titled:"Desktop Hosting Reference Architecture Guide". The paper which contains 19 pages defines a set of architectural blocks for creating a multitenant, hosted Windows desktop and&#8230;......', 'http://virtualization.info/en/news/2013/06/paper-desktop-hosting-reference-architecture-guide.html', 896181, 0, 'hosting', 1, '1372434337'),
+(65, 'The Hollow <b>hosting</b> Gandolfini tribute dinner on Sunday - Table <b>...</b>', '......', 'http://blog.timesunion.com/tablehopping/38588/the-hollow-hosting-gandolfini-tribute-dinner-on-sunday/', 11304, 0, 'hosting', 1, '1372434356'),
+(66, 'University <b>hosting</b> English program for international students <b>...</b>', '......', 'http://today.salve.edu/university-hosting-english-program-for-international-students/', 413236, 0, 'hosting', 1, '1372434369'),
+(67, 'Dedicated Servers from Rackspace <b>Hosting</b>', 'Managed dedicated servers can help you meet the compliance, security, and reliability needs of your website or high-performance application. At Rackspace, your bare metal servers include a hardware firewall, monitoring, backup, and a Managed Service Level. And you can deploy Rackspace dedicated servers in a hybrid hosting environment with public cloud, private cloud, or managed virtualization, to create the ideal infrastructure for your sites or applications.......Rackspace is a leader in the 2013 Gartner Magic Quadrant for Managed Hosting, North America....', 'http://www.rackspace.com/managed-hosting/dedicated-servers/', 2785, 0, 'hosting', 1, '1372434380'),
+(68, 'The Seasoned Gourmet <b>hosting</b> &#39;Grapes &amp; Grub&#39; to benefit - WWAY <b>...</b>', '......', 'http://www.wwaytv3.com/2013/06/24/the-seasoned-gourmet-hosting-%E2%80%98grapes-grub%E2%80%99-to-benefit-the-ability-garden', 191819, 0, 'hosting', 1, '1372434389'),
+(69, 'The Mighty Quest for Epic Loot <b>hosting</b> Open House events | VG247', '......', 'http://www.vg247.com/2013/06/25/the-mighty-quest-for-epic-loot-hosting-open-house-events/', 9724, 0, 'hosting', 1, '1372434396'),
+(70, 'Cleveland Cavaliers <b>hosting</b> free NBA Draft Party at the Q - Fear The <b>...</b>', '......', 'http://www.fearthesword.com/2013/6/25/4462910/cleveland-cavaliers-hosting-free-nba-draft-party-at-the-quicken-loans-arena', 308371, 0, 'hosting', 1, '1372434406'),
+(71, 'The Business Owner&#39;s Guide to <b>Hosting</b> | WalkerTek', 'Let&rsquo;s explore the factors that comprise web hosting, what your particular website requires to run optimally and what services are available to help you make the most prudent choice for your customers and for your bottom line.......The first question is, &ldquo;What does your site need?&rdquo; There&rsquo;s a continuum of what websites &lsquo;do&rsquo; &mdash; from being a static, informational page to providing a full-blown e-commerce experience. Here are some terms with which you should be familiar when assessing your specific hosting needs:...Other website hosting considerations include:...Choose a host and plan based upon your business&rsquo; needs today and into the foreseeable future; it can be changed as your company&rsquo;s needs change. Finding the appropriate hosting is particularly important because your website&rsquo;s reliability reflects upon your business as a whole....', 'http://www.walkertek.com/2013/06/25/the-business-owners-guide-to-hosting/', 6457481, 0, 'hosting', 1, '1372434413');
+INSERT INTO `blog_search` (`id`, `title`, `text`, `link`, `alexa_rank`, `google_pr`, `keyword`, `campaign_id`, `timestamp`) VALUES
+(72, 'How does your web <b>hosting</b> affect your Search Engine Ranking <b>...</b>', 'A genuine Hosting Provider honestly advises a client on their necessity and ease of use and ensures that the benefits of the service do not outweigh its cost.......Here are a few key points to identify the contribution of your web hosting provider towards the popularity of your website online:...', 'http://news.hostingxtreme.com/how-does-your-web-hosting-affect-your-search-engine-ranking/', 3233493, 0, 'hosting', 1, '1372434419'),
+(73, '<b>Hosting</b> the All Blacks high stakes for New Plymouth - Business <b>...</b>', '......', 'http://tvnz.co.nz/business-news/hosting-all-blacks-high-stakes-new-plymouth-5473090', 11668, 0, 'hosting', 1, '1372434425'),
+(74, 'South Dakota <b>hosting</b> Kazakh delegation looking for biofuel <b>...</b>', '......', 'http://www.biofuelsdigest.com/bdigest/2013/06/24/south-dakota-hosting-kazakh-delegation-looking-for-biofuel-inspiration/', 270295, 0, 'hosting', 1, '1372434437'),
+(75, 'Tiny Green Elephants: Yay for <b>hosting</b>!!', '......', 'http://www.tinygreenelephants.com/2013/06/yay-for-hosting.html', 1784935, 0, 'hosting', 1, '1372434446'),
+(76, 'Green Car Congress: Western Washington CCC <b>hosting</b> workshop <b>...</b>', '......', 'http://www.greencarcongress.com/2013/06/wwccc-20130624.html', 185595, 0, 'hosting', 1, '1372434454'),
+(77, '<b>Hosting</b> a U.S. Open: It takes a village - Golf Week', 'Davis noted that such an assessment wasn&rsquo;t a reflection of the golf course, a 1912 Hugh Wilson design that is No. 7 on Golfweek&rsquo;s Best Classic Courses list. The logistical demands of hosting a major in the modern era are many. &ldquo;It had everything to do with, how do you fit a modern Open on this 111 acres?&rdquo; Davis said.......So when might the Open return? There already is talk that the club has identified hosting the 2030 U.S. Amateur to celebrate the 100th anniversary of Bobby Jones&rsquo; wrapping up the Grand Slam here. That leaves a 17-year window to schedule another Open. Will the Rubensteins&rsquo; front yard be available for another block party?...', 'http://golfweek.com/news/2013/jun/18/hosting-us-open-it-takes-village/', 64301, 0, 'hosting', 1, '1372434463'),
+(78, 'Self <b>Hosting</b> a WordPress Website - Beginning WordPress Series', 'Well, there are any number of places you can get hold of those things. ?I&#8217;m afraid I&#8217;m not going to give you a list &#8211; I suggest you talk to other people around you about who they use, and I also suggest that you google &#8216;domain name registrar reviews&#8217; and see what other people are saying about where to get your domain name and the pros and cons of the registrar you&#8217;re looking at. ?I&#8217;d also do the same for &#8216;WordPress web hosting reviews&#8217; and then choosing a host that fits your budget and has good reputation in the market place. ?You don&#8217;t have to buy your domain name and web hosting in the same place, actually I always buy them separately &#8211; mostly I register all my domains in one place, as the best hosting varies as to the best fit for needs of the client.......Your hosting on a shared server is like locker space &#8211; lots of boxes in one appliance, all with their own access....When your host offers &#8216;web hosting&#8217; what you&#8217;re buying is space on a shared?server. You and a number of other people will be sharing the space, the processing power and the bandwidth available to that server&#8230; It should be noted that the cheaper the hosting the more likely it is that there are a greater number of people sharing that space&#8230; ?and that can introduce problems, because the more people sharing the space the less available the shared resources are &#8211; let&#8217;s just say, you get what you pay for....When you&#8217;ve settled on your domain registrar and/or web host, then go through their process of buying your domain and/or hosting. ?You will have to purchase your domain name first, because when you buy hosting it will be relative to your domain name, (if you&#8217;re buying them both at the same time from the same place this will be pretty straightforward). ?Once you&#8217;ve followed that through, your registrar and/or host will email you with the &#8216;keys to your kingdom&#8217; by way of logins to their?respective?control panels....The way you tell your domain name where to find that zone file is through a Name Server record&#8230; ?Your domain registrar will have default name servers applied to your domain name when you buy it and if you&#8217;re buying your domain name and hosting in the same place your domain name ?you should now be good to go to go onto the next step of installing WordPress (if this is you, then skip the next paragraph&#8230; if you have your domain already and/or you&#8217;ve got hosting separate from your domain&#8230; read on)....If you bought your Domain Name separate from your hosting, you need to decide if your domain registrar is going to host your zone file or if your web host is. ?If your domain registrar charges you for DNS hosting then I think you should let your web host take care of it&#8230; ?in this case you&#8217;ll need to update the Name Servers. ?The email your new host sent you when you signed up with all your important information should tell you the name servers you need use and your domain registrar should instruct you on how to change their default name servers to your host&#8217;s ones (basically, log into your domain name control panel and add the name servers given you by your web host)....Congratulations!! You now have the tools to start self hosting a WordPress website!!...', 'http://thewebprincess.com/self-hosting-a-wordpress-website/', 1129392, 0, 'hosting', 1, '1372434476'),
+(79, 'Imgur photo-<b>hosting</b> app for Android leaves beta, hits Google Play <b>...</b>', '......', 'http://androidcommunity.com/imgur-photo-hosting-app-for-android-leaves-beta-hits-google-play-20130624/', 15230, 0, 'hosting', 1, '1372434484'),
+(80, 'GOODS: Gastown&#39;s Pidgin <b>Hosting</b> ?Negroni Night? On Every <b>...</b>', '......', 'http://scoutmagazine.ca/2013/06/27/goods-gastowns-pidgin-hosting-negroni-night-on-every-sunday-monday-evening/', 528947, 0, 'hosting', 1, '1372434496'),
+(81, 'T-Mobile <b>Hosting</b> Event July 10 in NYC - Bonnie Cha - News <b>...</b>', '......', 'http://allthingsd.com/20130627/t-mobile-hosting-event-july-10-in-nyc/', 5329, 0, 'hosting', 1, '1372436833'),
+(82, 'WordPress <b>Hosting</b> Provider Page.ly Buys BlogDroid For Its <b>...</b>', 'Page.Ly turned our hosting experience with them into a nightmare, due to their placing importance on Grey Goose and poor attempts at silly helpdesk nicknames as opposed to actually running a reliable service. We left and have never looked back &#8211; much, much happier with our new provider!......', 'http://thenextweb.com/insider/2013/06/26/wordpress-hosting-provider-page-ly-acquires-blogdroids-customers-and-domain-shuts-down-company/', 2544, 0, 'hosting', 1, '1372436840'),
+(83, '<b>Hosting</b> Database Login | drupal.org', '......', 'http://drupal.org/project/hosting_dblogin', 1020, 0, 'hosting', 1, '1372436843'),
+(84, 'Waterford company <b>Hosting</b> Ireland launches cloud-enabled <b>...</b>', 'Waterford company Hosting Ireland launches cloud-enabled website builder......Jonathan Bate and Will Harrison of Hosting Ireland...\r\n  Waterford-based Hosting Ireland has launched a cloud-based website builder targeted at helping businesses that want to develop an online presence for e-commerce or to market their products and services.\r\n  ...\r\n   Hosting Ireland is one of Ireland&#8217;s leading domain name registration...\r\n  ...\r\n   OVH is Europes leading webhosting company. It controls the entire production...\r\n  ...', 'http://siliconrepublic.com/cloud/item/33195-waterford-company-hosting-i', 37360, 0, 'hosting', 1, '1372436850'),
+(85, 'Ciaohost Responsive <b>Hosting</b> HTML Template - ThemeForest', 'Ciaohost is a responsive Hosting HTML5/CSS3 Template.......', 'http://themeforest.net/item/ciaohost-responsive-hosting-html-template/5062293', 226, 0, 'hosting', 1, '1372436855');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `campaigns`
+--
+
+CREATE TABLE `campaigns` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `keywords` text NOT NULL,
+  `twitter_id` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `campaigns`
+--
+
+INSERT INTO `campaigns` (`id`, `name`, `user_id`, `keywords`, `twitter_id`) VALUES
+(1, 'Campaign 2', 1, 'hosting, seo, reseller', '["1","13"]'),
+(4, 'SEOClerks', 1, 'seoclerks, socialclerks', '["1","13"]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `text` text NOT NULL,
+  `link` varchar(500) NOT NULL,
+  `timestamp` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `text`, `link`, `timestamp`) VALUES
+(1, 'Random ', 'afkdfbdsbfkj', 'http://liquidserve.com/', 1371300684),
+(2, 'adasdfbkj', 'jdsklfskdbfk', 'http://iamprogrammer.net/', 1371300685);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `packs`
+--
+
+CREATE TABLE `packs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `twitter_accounts` int(11) NOT NULL,
+  `num_users` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `packs`
+--
+
+INSERT INTO `packs` (`id`, `name`, `twitter_accounts`, `num_users`) VALUES
+(1, 'Newbie', 2, 0),
+(2, 'Pro', 20, 10),
+(3, 'Ninja', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `scheduled_twitter`
+--
+
+CREATE TABLE `scheduled_twitter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tweet` varchar(141) NOT NULL,
+  `reply_id` bigint(20) NOT NULL,
+  `scheduled_time` varchar(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `twitter_account` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `scheduled_twitter`
+--
+
+INSERT INTO `scheduled_twitter` (`id`, `tweet`, `reply_id`, `scheduled_time`, `user_id`, `twitter_account`) VALUES
+(1, '@wvjoe911 sadasd', 347600841215197187, '1371827820', 1, 1),
+(2, '@wvjoe911 asdas fdfds', 347600841215197187, '1371828000', 1, 1),
+(3, '@BacklinkReport Looks cool!', 347935874517970944, '1371805860', 1, 1),
+(4, '@BacklinkReport asdasd as', 347935874517970944, '1372437840', 1, 1),
+(5, '@BacklinkReport  asdasdadasd', 347935874517970944, '1370882640', 1, 1),
+(6, '@seobees  fdsafdsfds', 347935865651216384, '1371487500', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `plan` int(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `email`, `plan`) VALUES
+(1, 'aayush.ranaut@gmail.com', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `priority` int(1) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `last_update_time` datetime NOT NULL,
+  `status` int(1) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `subject`, `body`, `priority`, `create_time`, `last_update_time`, `status`, `user_id`) VALUES
+(1, 'Issue', 'I am facing an issue that this app is so cool!', 1, '2013-06-19 11:39:11', '2013-06-20 11:42:17', 1, 1),
+(2, 'Issue 2', 'Wow, this is so amazing!', 2, '2013-06-21 00:00:00', '2013-06-20 11:42:17', 0, 1),
+(3, 'Helo', 'ALSJDKN ', 0, '2013-06-19 14:19:33', '2013-06-20 11:44:57', 1, 1),
+(4, 'Helosa', 'Just dropped in to say that this new support system, is awesome as hell!', 0, '2013-06-19 14:20:16', '2013-06-20 11:42:17', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket_replies`
+--
+
+CREATE TABLE `ticket_replies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `body` text NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `ticket_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `admin_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `ticket_replies`
+--
+
+INSERT INTO `ticket_replies` (`id`, `body`, `timestamp`, `ticket_id`, `user_id`, `admin_id`) VALUES
+(1, 'This is awesome!', '2013-06-18 00:00:00', 1, 1, 0),
+(2, 'Yeah it s cool!', '2013-06-20 00:00:00', 1, 0, 1),
+(3, 'Really this is cool!', '2013-06-18 22:05:34', 2, 1, 0),
+(4, 'Blah Blah', '2013-06-18 22:08:01', 1, 1, 0),
+(5, 'Yo', '2013-06-19 21:42:32', 1, 1, 0),
+(6, 'Yo', '2013-06-20 11:42:17', 1, 1, 0),
+(7, 'fasfasd', '2013-06-20 11:44:57', 3, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket_status`
+--
+
+CREATE TABLE `ticket_status` (
+  `id` varchar(1) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ticket_status`
+--
+
+INSERT INTO `ticket_status` (`id`, `type`) VALUES
+('0', 'Closed'),
+('1', 'Open'),
+('2', 'Hold');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tweets`
+--
+
+CREATE TABLE `tweets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campaign_id` int(11) NOT NULL,
+  `keyword` varchar(100) NOT NULL,
+  `tweet_id` bigint(27) NOT NULL,
+  `tweet` varchar(150) NOT NULL,
+  `profile_image` text NOT NULL,
+  `tweeter_screen_name` varchar(50) NOT NULL,
+  `tweeter_name` varchar(40) NOT NULL,
+  `tweet_url` varchar(200) NOT NULL,
+  `timestamp` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
+
+--
+-- Dumping data for table `tweets`
+--
+
+INSERT INTO `tweets` (`id`, `campaign_id`, `keyword`, `tweet_id`, `tweet`, `profile_image`, `tweeter_screen_name`, `tweeter_name`, `tweet_url`, `timestamp`) VALUES
+(1, 4, 'seoclerks', 349930607062683648, 'Earn money selling software at <a href="http://t.co/bejtAL8a5o" target="_blank">http://t.co/bejtAL8a5o</a> #seoclerks', 'http://a0.twimg.com/profile_images/3750661833/494e48c09a8bbff8ae40e0d4790ae821_normal.jpeg', 'EileneeF', 'anonymous', 'http://twitter.com/EileneeF/status/349930607062683648', '1372264932'),
+(2, 4, 'seoclerks', 349930530550202368, 'The cheapest gig on SEOclerks and the fastest. I have the best deals on all social networking… <a href="http://t.co/Oz0L5K4vRS" target="_blank">http:/', 'http://a0.twimg.com/profile_images/3704432672/cfd01fa48d75e0dc1514d8352bc8a059_normal.jpeg', 'vive_viie', 'vivi', 'http://twitter.com/vive_viie/status/349930530550202368', '1372264914'),
+(3, 4, 'seoclerks', 349930528746651648, 'Panda and Penguin Safe! Most powerful link pyramid ?Pyramid Wheel? 20 Web2.0 properties High… <a href="http://t.co/GZ5zHvVQon" target="_blank">http://', 'http://a0.twimg.com/profile_images/3704432672/cfd01fa48d75e0dc1514d8352bc8a059_normal.jpeg', 'vive_viie', 'vivi', 'http://twitter.com/vive_viie/status/349930528746651648', '1372264914'),
+(4, 4, 'seoclerks', 349930526871785472, 'you can''t make money with adsense??I can give you a real method to make real money with… <a href="http://t.co/Ex1VIDba3d" target="_blank">http://t.co/', 'http://a0.twimg.com/profile_images/3704432672/cfd01fa48d75e0dc1514d8352bc8a059_normal.jpeg', 'vive_viie', 'vivi', 'http://twitter.com/vive_viie/status/349930526871785472', '1372264913'),
+(5, 4, 'seoclerks', 349930349402398721, '<a href="http://t.co/o73cZJX656" target="_blank">http://t.co/o73cZJX656</a> I will Give you 800+ Pinterest Followers,100% real &amp; active only for $', 'http://a0.twimg.com/profile_images/3590083105/08a789d485f2afd6ee5ce6a9a5261dfc_normal.gif', 'SEOClerksGigs', 'SEO Clerks', 'http://twitter.com/SEOClerksGigs/status/349930349402398721', '1372264871'),
+(6, 4, 'seoclerks', 349930258708955137, 'Check out <a href="http://t.co/YEcds24e9R" target="_blank">http://t.co/YEcds24e9R</a> for your SEO outsourcing needs. #seoclerks', 'http://a0.twimg.com/profile_images/3753035627/7e1e888868a6e3143da50be8e2851c0a_normal.jpeg', 'SamathaBoykins', 'SexxxyTrashTalker', 'http://twitter.com/SamathaBoykins/status/349930258708955137', '1372264849'),
+(7, 4, 'seoclerks', 349929710127546368, 'The cheapest gig on SEOclerks and the fastest. I have the best deals on all social networking… <a href="http://t.co/Q0vRJyzXqx" target="_blank">http:/', 'http://a0.twimg.com/profile_images/3533532212/128cbace979527436ff50eb76f88edbd_normal.jpeg', 'SeoPopular', 'SEO POPULAR', 'http://twitter.com/SeoPopular/status/349929710127546368', '1372264718'),
+(8, 4, 'seoclerks', 349929708504367104, 'Beat PANDAs &amp;amp; PENGUINs with this LINK PYRAMID! ??Over 6000 gigs SOLD ??Pyramid with 50… <a href="http://t.co/AlJGQy228p" target="_blank">http:', 'http://a0.twimg.com/profile_images/3533532212/128cbace979527436ff50eb76f88edbd_normal.jpeg', 'SeoPopular', 'SEO POPULAR', 'http://twitter.com/SeoPopular/status/349929708504367104', '1372264718'),
+(9, 4, 'seoclerks', 349929570490781696, '#seoclerks This helped my SEO:  <a href="http://t.co/WkTbRIRcGm" target="_blank">http://t.co/WkTbRIRcGm</a>', 'http://a0.twimg.com/profile_images/2192629227/avatar_normal.jpg', 'gigsterrbux', 'IMStrand', 'http://twitter.com/gigsterrbux/status/349929570490781696', '1372264685'),
+(10, 4, 'seoclerks', 349928860302852098, '#RT:  I will build MULTI tier link pyramid with over 50 web 2 properties and over 10000 wiki… <a href="http://t.co/DsX9Zy50df" target="_blank">http://', 'http://a0.twimg.com/profile_images/2809677017/2cd73fcf682fe5f87a0981eb5728516e_normal.jpeg', 'Ebooken', 'Ebooken', 'http://twitter.com/Ebooken/status/349928860302852098', '1372264516'),
+(11, 4, 'seoclerks', 349928850211348481, '#RT:  I will give you (25,000+ Real, Permanent Twitter Followers) OR (5,000+ Permanent… <a href="http://t.co/Xq2mek2Y40" target="_blank">http://t.co/X', 'http://a0.twimg.com/profile_images/2809677017/2cd73fcf682fe5f87a0981eb5728516e_normal.jpeg', 'Ebooken', 'Ebooken', 'http://twitter.com/Ebooken/status/349928850211348481', '1372264513'),
+(12, 4, 'seoclerks', 349928848915304451, '#RT:  I will provide 1000+ twitter followers without any password within 24hrs for $4: ? i… <a href="http://t.co/VsipiYxNwI" target="_blank">http://t.', 'http://a0.twimg.com/profile_images/2809677017/2cd73fcf682fe5f87a0981eb5728516e_normal.jpeg', 'Ebooken', 'Ebooken', 'http://twitter.com/Ebooken/status/349928848915304451', '1372264513'),
+(13, 4, 'seoclerks', 349928847082393602, '#RT:  I will create 2 unique and creative LOGO Design for your website for $5: I will create… <a href="http://t.co/yAdWk3SR8D" target="_blank">http://', 'http://a0.twimg.com/profile_images/2809677017/2cd73fcf682fe5f87a0981eb5728516e_normal.jpeg', 'Ebooken', 'Ebooken', 'http://twitter.com/Ebooken/status/349928847082393602', '1372264513'),
+(14, 4, 'seoclerks', 349928845215932416, '#RT:  I will create Panda and Penguin SAFE link pyramid with over 20000 backlinks for $28: We… <a href="http://t.co/CvXFyq4ATq" target="_blank">http:/', 'http://a0.twimg.com/profile_images/2809677017/2cd73fcf682fe5f87a0981eb5728516e_normal.jpeg', 'Ebooken', 'Ebooken', 'http://twitter.com/Ebooken/status/349928845215932416', '1372264512'),
+(15, 4, 'seoclerks', 349928796599750656, 'Check out this awesome #seoclerks service:', 'http://a0.twimg.com/sticky/default_profile_images/default_profile_1_normal.png', 'sukkur9020', 'robi', 'http://twitter.com/sukkur9020/status/349928796599750656', '1372264501'),
+(16, 4, 'seoclerks', 349928269916803072, 'I will give you 780++ Facebook Fans/Likes,100% Real &amp;amp; Active on your account for $8 <a href="http://t.co/TKCwcQISr2" target="_blank">http://t.', 'http://a0.twimg.com/profile_images/3504757777/a49d01faae07f64e049e71b46084a0a8_normal.png', 'gigspublisher', 'Gigs Publisher', 'http://twitter.com/gigspublisher/status/349928269916803072', '1372264375'),
+(17, 4, 'seoclerks', 349928268566245376, 'I will give you a homepage PR3 guest post link on my high authority and quality blog for $5 <a href="http://t.co/YFLLYpcJhW" target="_blank">http://t.', 'http://a0.twimg.com/profile_images/3504757777/a49d01faae07f64e049e71b46084a0a8_normal.png', 'gigspublisher', 'Gigs Publisher', 'http://twitter.com/gigspublisher/status/349928268566245376', '1372264375'),
+(18, 4, 'seoclerks', 349928267135983617, 'I will give you 2000 Facebook Likes for $15 <a href="http://t.co/1diVGA2qCj" target="_blank">http://t.co/1diVGA2qCj</a> #jobs #SEO #traffic', 'http://a0.twimg.com/profile_images/3504757777/a49d01faae07f64e049e71b46084a0a8_normal.png', 'gigspublisher', 'Gigs Publisher', 'http://twitter.com/gigspublisher/status/349928267135983617', '1372264374'),
+(19, 4, 'seoclerks', 349928265823174657, 'I will provide 1000+ twitter followers without any password within 24hrs for $4 <a href="http://t.co/vhCbexKtcC" target="_blank">http://t.co/vhCbexKtc', 'http://a0.twimg.com/profile_images/3504757777/a49d01faae07f64e049e71b46084a0a8_normal.png', 'gigspublisher', 'Gigs Publisher', 'http://twitter.com/gigspublisher/status/349928265823174657', '1372264374'),
+(20, 4, 'seoclerks', 349928193995706368, '<a href="http://t.co/wdhOonsAhW" target="_blank">http://t.co/wdhOonsAhW</a> I will ? ROCKET YOU TO THE TOP WITHIN 10-20 DAYS ? (PENGUIN 2.0 UPDATE) fo', 'http://a0.twimg.com/profile_images/3597040384/ec1f76e2e4504eebec3d186b94f348d6_normal.jpeg', 'EnviroSEO', 'Ellen | EnviroSEO', 'http://twitter.com/EnviroSEO/status/349928193995706368', '1372264357'),
+(21, 4, 'seoclerks', 349928191462346754, '<a href="http://t.co/lQ5pD5bPxr" target="_blank">http://t.co/lQ5pD5bPxr</a> I will BOOST You To The Top Of Google With My MONSTER Link Wheel Package f', 'http://a0.twimg.com/profile_images/3597040384/ec1f76e2e4504eebec3d186b94f348d6_normal.jpeg', 'EnviroSEO', 'Ellen | EnviroSEO', 'http://twitter.com/EnviroSEO/status/349928191462346754', '1372264356'),
+(22, 4, 'seoclerks', 349928188685729792, '<a href="http://t.co/XpHgypKC67" target="_blank">http://t.co/XpHgypKC67</a> I will give you 780++ Facebook Fans/Likes,100% Real &amp;amp; Active on yo', 'http://a0.twimg.com/profile_images/3597040384/ec1f76e2e4504eebec3d186b94f348d6_normal.jpeg', 'EnviroSEO', 'Ellen | EnviroSEO', 'http://twitter.com/EnviroSEO/status/349928188685729792', '1372264356'),
+(23, 4, 'seoclerks', 349928185821007872, '<a href="http://t.co/gSVd5UxuId" target="_blank">http://t.co/gSVd5UxuId</a> I will give you a homepage PR3 guest post link on my high authority and qu', 'http://a0.twimg.com/profile_images/3597040384/ec1f76e2e4504eebec3d186b94f348d6_normal.jpeg', 'EnviroSEO', 'Ellen | EnviroSEO', 'http://twitter.com/EnviroSEO/status/349928185821007872', '1372264355'),
+(24, 4, 'seoclerks', 349928181215670274, '<a href="http://t.co/uApTrpeCgu" target="_blank">http://t.co/uApTrpeCgu</a> I will give you 2000 Facebook Likes for $15 #Affordable #SEO #Services', 'http://a0.twimg.com/profile_images/3597040384/ec1f76e2e4504eebec3d186b94f348d6_normal.jpeg', 'EnviroSEO', 'Ellen | EnviroSEO', 'http://twitter.com/EnviroSEO/status/349928181215670274', '1372264354'),
+(25, 4, 'seoclerks', 349928176715186177, '<a href="http://t.co/ZUsCBWYKBL" target="_blank">http://t.co/ZUsCBWYKBL</a> I will provide 1000+ twitter followers without any password within 24hrs f', 'http://a0.twimg.com/profile_images/3597040384/ec1f76e2e4504eebec3d186b94f348d6_normal.jpeg', 'EnviroSEO', 'Ellen | EnviroSEO', 'http://twitter.com/EnviroSEO/status/349928176715186177', '1372264353'),
+(26, 4, 'seoclerks', 349927687160217601, '#RT:  I will give you (25,000+ Real, Permanent Twitter Followers) OR (5,000+ Permanent… <a href="http://t.co/WLHWp469TK" target="_blank">http://t.co/W', 'http://a0.twimg.com/profile_images/2964929865/ab4a8f77b89c2b2e60283690098db292_normal.jpeg', 'SeoDealer', 'Seo Dealer', 'http://twitter.com/SeoDealer/status/349927687160217601', '1372264236'),
+(27, 4, 'seoclerks', 349927685553782784, '#RT:  I will provide 1000+ twitter followers without any password within 24hrs for $4: ? i… <a href="http://t.co/gup4X9FHe5" target="_blank">http://t.', 'http://a0.twimg.com/profile_images/2964929865/ab4a8f77b89c2b2e60283690098db292_normal.jpeg', 'SeoDealer', 'Seo Dealer', 'http://twitter.com/SeoDealer/status/349927685553782784', '1372264236'),
+(28, 4, 'seoclerks', 349927683767021568, '#RT:  I will create 2 unique and creative LOGO Design for your website for $5: I will create… <a href="http://t.co/pnCzscUinw" target="_blank">http://', 'http://a0.twimg.com/profile_images/2964929865/ab4a8f77b89c2b2e60283690098db292_normal.jpeg', 'SeoDealer', 'Seo Dealer', 'http://twitter.com/SeoDealer/status/349927683767021568', '1372264235'),
+(29, 4, 'seoclerks', 349927681984430080, '#RT:  I will create Panda and Penguin SAFE link pyramid with over 20000 backlinks for $28: We… <a href="http://t.co/EtuAlEHlOj" target="_blank">http:/', 'http://a0.twimg.com/profile_images/2964929865/ab4a8f77b89c2b2e60283690098db292_normal.jpeg', 'SeoDealer', 'Seo Dealer', 'http://twitter.com/SeoDealer/status/349927681984430080', '1372264235'),
+(30, 4, 'seoclerks', 349927680717758465, '#RT:  I will build MULTI tier link pyramid with over 50 web 2 properties and over 10000 wiki… <a href="http://t.co/nxOUOi3X6G" target="_blank">http://', 'http://a0.twimg.com/profile_images/2964929865/ab4a8f77b89c2b2e60283690098db292_normal.jpeg', 'SeoDealer', 'Seo Dealer', 'http://twitter.com/SeoDealer/status/349927680717758465', '1372264235'),
+(31, 4, 'seoclerks', 349926929798938627, 'RT @selfimprovemen0: My Secret Method To Move your website into Page 1 or 2 on google for $50 - <a href="http://t.co/FTo1tHdIJs" target="_blank">http:', 'http://a0.twimg.com/profile_images/2142373500/551953_3708779716677_1191091487_33609331_1987671860_n_normal.jpg', 'getall1', 'getall', 'http://twitter.com/getall1/status/349926929798938627', '1372264056'),
+(32, 4, 'seoclerks', 349926791630159873, 'Need SMO? #seoclerks Check out:  <a href="http://t.co/Og6ipzwLDn" target="_blank">http://t.co/Og6ipzwLDn</a>', 'http://a0.twimg.com/profile_images/1736232519/izumi_normal.jpg', 'belajar_imers', 'Berita Terkini', 'http://twitter.com/belajar_imers/status/349926791630159873', '1372264023'),
+(33, 4, 'seoclerks', 349926441430941697, '<a href="http://t.co/odc2Vb2uUu" target="_blank">http://t.co/odc2Vb2uUu</a> I will 40 Posts on your Forum for $10 #Affordable #SEO #Services', 'http://a0.twimg.com/profile_images/3590083105/08a789d485f2afd6ee5ce6a9a5261dfc_normal.gif', 'SEOClerksGigs', 'SEO Clerks', 'http://twitter.com/SEOClerksGigs/status/349926441430941697', '1372263939'),
+(34, 4, 'seoclerks', 349925787597668352, 'RT @Diianamoetz: The cheapest gig on SEOclerks and the fastest. I have the best deals on all social networking… <a href="http://t.co/gymbkuWoiC" targe', 'http://a0.twimg.com/profile_images/378800000018151958/387b0f09eaac4ffe1ff2a720a1473cf6_normal.jpeg', 'winipher_mith', 'Winipher;*', 'http://twitter.com/winipher_mith/status/349925787597668352', '1372263783'),
+(35, 4, 'seoclerks', 349925681662144513, 'The cheapest gig on SEOclerks and the fastest. I have the best deals on all social networking… <a href="http://t.co/gymbkuWoiC" target="_blank">http:/', 'http://a0.twimg.com/profile_images/2604582360/72sw4da6p14jaz7q3i9r_normal.jpeg', 'Diianamoetz', 'Diana_moetz', 'http://twitter.com/Diianamoetz/status/349925681662144513', '1372263758'),
+(36, 4, 'seoclerks', 349925680336736256, 'Panda and Penguin Safe! Most powerful link pyramid ?Pyramid Wheel? 20 Web2.0 properties High… <a href="http://t.co/vRirvryoqw" target="_blank">http://', 'http://a0.twimg.com/profile_images/2604582360/72sw4da6p14jaz7q3i9r_normal.jpeg', 'Diianamoetz', 'Diana_moetz', 'http://twitter.com/Diianamoetz/status/349925680336736256', '1372263758'),
+(37, 4, 'seoclerks', 349925678898098177, 'you can''t make money with adsense??I can give you a real method to make real money with… <a href="http://t.co/zHGHy4IWbp" target="_blank">http://t.co/', 'http://a0.twimg.com/profile_images/2604582360/72sw4da6p14jaz7q3i9r_normal.jpeg', 'Diianamoetz', 'Diana_moetz', 'http://twitter.com/Diianamoetz/status/349925678898098177', '1372263757'),
+(38, 4, 'seoclerks', 349925657188380672, 'Beat PANDAs &amp;amp; PENGUINs with this LINK PYRAMID! ??Over 6000 gigs SOLD ??Pyramid with 50… <a href="http://t.co/XF0me3Mpp4" target="_blank">http:', 'http://a0.twimg.com/profile_images/2604582360/72sw4da6p14jaz7q3i9r_normal.jpeg', 'Diianamoetz', 'Diana_moetz', 'http://twitter.com/Diianamoetz/status/349925657188380672', '1372263752'),
+(39, 4, 'seoclerks', 349925655380639745, 'Google Panda safe Link PUSH- Which contains link Pyramid of 10 web 2.0 accounts &amp;amp; link… <a href="http://t.co/Ufbv5GumwL" target="_blank">http:', 'http://a0.twimg.com/profile_images/2604582360/72sw4da6p14jaz7q3i9r_normal.jpeg', 'Diianamoetz', 'Diana_moetz', 'http://twitter.com/Diianamoetz/status/349925655380639745', '1372263752'),
+(40, 4, 'seoclerks', 349925227209302016, 'RT @selfimprovemen0: add 100 real hight quality forum posts  <a href="http://t.co/1MUwCLi6Oi" target="_blank">http://t.co/1MUwCLi6Oi</a>  #quality_for', 'http://a0.twimg.com/profile_images/2142373500/551953_3708779716677_1191091487_33609331_1987671860_n_normal.jpg', 'getall1', 'getall', 'http://twitter.com/getall1/status/349925227209302016', '1372263650'),
+(41, 4, 'seoclerks', 349925224407506944, 'I just made 2 dollars for posting this tweet. More details: <a href="http://t.co/RUCalyyHrM" target="_blank">http://t.co/RUCalyyHrM</a> #seoclerks', 'http://a0.twimg.com/profile_images/378800000018100148/b2e966fde441b4f9bb158296401ec6b3_normal.jpeg', 'dizmorgan', 'DeolarLVODM', 'http://twitter.com/dizmorgan/status/349925224407506944', '1372263649'),
+(42, 4, 'seoclerks', 349925113736605697, 'I will will create 50 Edu backlinks and 200 PR1 to PR6 from High Authority Wiki Sites for $10 <a href="http://t.co/AOBbOyEPAr" target="_blank">http://', 'http://a0.twimg.com/profile_images/3597143122/03bddaf79409592c76521d380400e637_normal.jpeg', 'TransSEO', 'James Foster SEO', 'http://twitter.com/TransSEO/status/349925113736605697', '1372263623'),
+(43, 4, 'seoclerks', 349924892818423809, 'The cheapest gig on SEOclerks and the fastest. I have the best deals on all social networking… <a href="http://t.co/sfq0bwI3g7" target="_blank">http:/', 'http://a0.twimg.com/profile_images/2462808236/diob8t69npfj2jb1teiv_normal.jpeg', 'BigboyDedi', 'Dedi', 'http://twitter.com/BigboyDedi/status/349924892818423809', '1372263570'),
+(44, 4, 'seoclerks', 349924891195211782, 'Panda and Penguin Safe! Most powerful link pyramid ?Pyramid Wheel? 20 Web2.0 properties High… <a href="http://t.co/ppnCVqdiGY" target="_blank">http://', 'http://a0.twimg.com/profile_images/2462808236/diob8t69npfj2jb1teiv_normal.jpeg', 'BigboyDedi', 'Dedi', 'http://twitter.com/BigboyDedi/status/349924891195211782', '1372263570'),
+(45, 4, 'seoclerks', 349924889425215488, 'you can''t make money with adsense??I can give you a real method to make real money with… <a href="http://t.co/xCp3Tdum3s" target="_blank">http://t.co/', 'http://a0.twimg.com/profile_images/2462808236/diob8t69npfj2jb1teiv_normal.jpeg', 'BigboyDedi', 'Dedi', 'http://twitter.com/BigboyDedi/status/349924889425215488', '1372263569'),
+(46, 4, 'seoclerks', 349924887994961920, '~Link Pyramid''s~ are fastest and safest ways to get good search engine Ranking. I Build 9 +15… <a href="http://t.co/uqeMJVWbiB" target="_blank">http:/', 'http://a0.twimg.com/profile_images/2462808236/diob8t69npfj2jb1teiv_normal.jpeg', 'BigboyDedi', 'Dedi', 'http://twitter.com/BigboyDedi/status/349924887994961920', '1372263569'),
+(47, 4, 'seoclerks', 349924871167426560, 'LINK PYRAMID + LinkWheel = Link Push. I Build Panda &amp;amp; Penguins safe ?Pyramid Wheel? with… <a href="http://t.co/OrsVQgBdw2" target="_blank">htt', 'http://a0.twimg.com/profile_images/2462808236/diob8t69npfj2jb1teiv_normal.jpeg', 'BigboyDedi', 'Dedi', 'http://twitter.com/BigboyDedi/status/349924871167426560', '1372263565'),
+(48, 4, 'seoclerks', 349923937628602368, 'I will 10 REAL human youtube likes for $5 <a href="http://t.co/MmaRhPWUJJ" target="_blank">http://t.co/MmaRhPWUJJ</a>', 'http://a0.twimg.com/profile_images/3597189928/e8cea5e5cf3447691c096af1afda528c_normal.jpeg', 'SeoEquipment', 'Sharon Thompson', 'http://twitter.com/SeoEquipment/status/349923937628602368', '1372263342'),
+(49, 4, 'seoclerks', 349923915780460545, 'I will will explain what a good BACKLINK is before you waste money for $10 <a href="http://t.co/lPk1xPdbnL" target="_blank">http://t.co/lPk1xPdbnL</a>', 'http://a0.twimg.com/profile_images/3597189928/e8cea5e5cf3447691c096af1afda528c_normal.jpeg', 'SeoEquipment', 'Sharon Thompson', 'http://twitter.com/SeoEquipment/status/349923915780460545', '1372263337'),
+(50, 4, 'seoclerks', 349922919520022528, 'The cheapest gig on SEOclerks and the fastest. I have the best deals on all social networking… <a href="http://t.co/w6qdktrcfW" target="_blank">http:/', 'http://a0.twimg.com/profile_images/3247548684/9c2dc2717993da4196dc36609f8d09b6_normal.jpeg', 'Allyssa_Foster', 'Alyssa Foster', 'http://twitter.com/Allyssa_Foster/status/349922919520022528', '1372263099'),
+(51, 4, 'socialclerks', 349840128216285184, 'Program Review: Social Clerks (A Social Media Exchange Website) @SocialClerks - (Post by... <a href="http://t.co/XDJ8wO0Wxw" target="_blank">http://t.', 'http://a0.twimg.com/profile_images/3148526509/9737f498966fea662cdf6464eddc056c_normal.jpeg', 'SuccessSince', 'SuccessSince1987.com', 'http://twitter.com/SuccessSince/status/349840128216285184', '1372243360'),
+(52, 4, 'socialclerks', 349734559321034752, '100% Free Twitter retweets from <a href="http://t.co/lnPPOvAwhV" target="_blank">http://t.co/lnPPOvAwhV</a>', 'http://a0.twimg.com/profile_images/378800000045825142/aec55238dbadd9b16b79271a13dac664_normal.png', 'SutiHadi', 'Suti Hadi', 'http://twitter.com/SutiHadi/status/349734559321034752', '1372218191'),
+(53, 4, 'socialclerks', 349439969389056000, '100% Free Twitter retweets from #SocialClerks', 'http://a0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png', 'anghel_gabriel', 'Anghel Gabriel', 'http://twitter.com/anghel_gabriel/status/349439969389056000', '1372147955'),
+(54, 4, 'socialclerks', 349403555431583746, 'Program Review: Social Clerks (A Social Media Exchange Website) @SocialClerks - (Post by... <a href="http://t.co/XDJ8wO0Wxw" target="_blank">http://t.', 'http://a0.twimg.com/profile_images/3148526509/9737f498966fea662cdf6464eddc056c_normal.jpeg', 'SuccessSince', 'SuccessSince1987.com', 'http://twitter.com/SuccessSince/status/349403555431583746', '1372139273'),
+(55, 4, 'socialclerks', 349204277731921920, 'More followers on twitter and facebook <a href="http://t.co/eTzv8iGVSE" target="_blank">http://t.co/eTzv8iGVSE</a>', 'http://a0.twimg.com/profile_images/2602016948/0qijn02hw9o398tvxc63_normal.jpeg', 'gerritdijkstra2', 'Uw Marketier', 'http://twitter.com/gerritdijkstra2/status/349204277731921920', '1372091762'),
+(56, 4, 'socialclerks', 349092544359059456, '100% Free Twitter retweets from #SocialClerks', 'http://a0.twimg.com/profile_images/378800000030550844/9e0f3b18ebe91fa1a3f438c342a56679_normal.jpeg', 'affiliatecrazy', 'Affiliate Crazy', 'http://twitter.com/affiliatecrazy/status/349092544359059456', '1372065123'),
+(57, 4, 'socialclerks', 349092379602599939, 'Completely Free Twitter followers from #SocialClerks', 'http://a0.twimg.com/profile_images/378800000030550844/9e0f3b18ebe91fa1a3f438c342a56679_normal.jpeg', 'affiliatecrazy', 'Affiliate Crazy', 'http://twitter.com/affiliatecrazy/status/349092379602599939', '1372065083'),
+(58, 4, 'socialclerks', 349044974878330880, 'Completely Free Twitter retweets from <a href="http://t.co/jMfkWmfQvQ" target="_blank">http://t.co/jMfkWmfQvQ</a>', 'http://a0.twimg.com/profile_images/1705419836/aaa_normal.jpg', 'miftanurdin', 'Mifta Nurdin', 'http://twitter.com/miftanurdin/status/349044974878330880', '1372053781'),
+(59, 4, 'socialclerks', 348647574607122433, '#RT #SpreadTheSmile Want To Expand Your #Twitter Community? Check This Out ---&gt; <a href="http://t.co/nyPOYEMXlQ" target="_blank">http://t.co/nyPOYE', 'http://a0.twimg.com/profile_images/378800000016733542/8875d218f51a18f50bcc1ab477ceaaeb_normal.jpeg', 'NYCElectricians', 'NYC Electrician ', 'http://twitter.com/NYCElectricians/status/348647574607122433', '1371959034'),
+(60, 4, 'socialclerks', 348571377445523456, '100% Free Twitter followers from <a href="http://t.co/iHwFaAie1Z" target="_blank">http://t.co/iHwFaAie1Z</a>', 'http://a0.twimg.com/profile_images/1334852338/I_normal.jpg', 'renato_it', 'Renato Oliveira', 'http://twitter.com/renato_it/status/348571377445523456', '1371940867'),
+(61, 4, 'socialclerks', 348426247266775041, 'Free Twitter followers from #SocialClerks', 'http://a0.twimg.com/profile_images/2652498726/3802fe6f54bdcde22f332a021c36202d_normal.jpeg', 'JanHenkie', 'Henk Jan', 'http://twitter.com/JanHenkie/status/348426247266775041', '1371906265'),
+(62, 4, 'socialclerks', 348145985324732416, 'Completely Free Twitter tweets from #SocialClerks', 'http://a0.twimg.com/profile_images/378800000025928531/1ed184b6d14ed0db41584c598aad048b_normal.png', 'sandrine4u', 'Sandrine Faliotit', 'http://twitter.com/sandrine4u/status/348145985324732416', '1371839445'),
+(63, 4, 'socialclerks', 347708388488142848, 'Completely Free Twitter followers from #SocialClerks', 'http://a0.twimg.com/profile_images/1411096633/Final_M_Logo_normal.gif', 'machkonti', 'machkonti', 'http://twitter.com/machkonti/status/347708388488142848', '1371735114'),
+(64, 4, 'socialclerks', 347707840972083202, 'Free Twitter tweets from #SocialClerks', 'http://a0.twimg.com/profile_images/1411096633/Final_M_Logo_normal.gif', 'machkonti', 'machkonti', 'http://twitter.com/machkonti/status/347707840972083202', '1371734984'),
+(65, 4, 'socialclerks', 347616641133182976, '100% Free Twitter tweets from #SocialClerks', 'http://a0.twimg.com/profile_images/2612319462/wn8zraikalusz155jgz6_normal.jpeg', 'RobertW78358038', 'Robert Wagner', 'http://twitter.com/RobertW78358038/status/347616641133182976', '1371713240'),
+(66, 4, 'socialclerks', 347532969545699328, 'Completely Free Twitter retweets from <a href="http://t.co/kv623EB2LT" target="_blank">http://t.co/kv623EB2LT</a>', 'http://a0.twimg.com/profile_images/378800000016733542/8875d218f51a18f50bcc1ab477ceaaeb_normal.jpeg', 'NYCElectricians', 'NYC Electrician ', 'http://twitter.com/NYCElectricians/status/347532969545699328', '1371693291'),
+(67, 4, 'socialclerks', 347532830714236928, 'Completely Free Twitter retweets from <a href="http://t.co/r9Q7tXuxfq" target="_blank">http://t.co/r9Q7tXuxfq</a>', 'http://a0.twimg.com/profile_images/3112839613/8be465811df9c38c6d924c989bdad335_normal.jpeg', 'spectralchat', 'SpectralChat.com', 'http://twitter.com/spectralchat/status/347532830714236928', '1371693258');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `twitter_accounts`
+--
+
+CREATE TABLE `twitter_accounts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `twitter_u_id` bigint(20) NOT NULL,
+  `twitter_screen_name` varchar(255) NOT NULL,
+  `oauth_token` text NOT NULL,
+  `oauth_secret` text NOT NULL,
+  `enabled` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `twitter_accounts`
+--
+
+INSERT INTO `twitter_accounts` (`id`, `user_id`, `twitter_u_id`, `twitter_screen_name`, `oauth_token`, `oauth_secret`, `enabled`) VALUES
+(1, 1, 589347997, 'LiquidServe', '589347997-0pl1TdjwchAxRXVxSri0vM6h14898sRebubo03Hs', 'gBqAH1YTQH9zIdbCQ1kKpq9D1dEa6OSRwIXbERnyjA', 1),
+(13, 1, 1207647103, 'amprogrammer', '1207647103-wbvtza47g9pwzySVm5oGgTXs7feLQRlZmYaY1ip', 'Kv7VbDTY8qo2jyET0nTWwuPW4DH5mrgGdwEU8RstH8', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `twitter_replies`
+--
+
+CREATE TABLE `twitter_replies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tweet` varchar(141) NOT NULL,
+  `reply_id` bigint(20) NOT NULL,
+  `scheduled` int(1) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `campaign_id` int(11) NOT NULL,
+  `twitter_account` int(11) NOT NULL,
+  `timestamp` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `twitter_replies`
+--
+
+INSERT INTO `twitter_replies` (`id`, `tweet`, `reply_id`, `scheduled`, `user_id`, `campaign_id`, `twitter_account`, `timestamp`) VALUES
+(4, '@wvjoe911 asdasd', 347600841215197187, 1, 1, 1, 1, '1371832695'),
+(5, '@wvjoe911 sadasd', 347600841215197187, 1, 1, 1, 1, '1371832695'),
+(6, '@wvjoe911 asdas fdfds', 347600841215197187, 1, 1, 1, 1, '1371832995'),
+(7, '@wvjoe911 asd asaf', 347600841215197187, 0, 1, 1, 1, '1371832695'),
+(8, '@BacklinkReport Looks cool!', 347935874517970944, 1, 1, 1, 1, '1371832695'),
+(9, '@BacklinkReport Looks cool!', 347935874517970944, 1, 1, 1, 1, '1371832695'),
+(10, '@BacklinkReport Looks cool!', 347935874517970944, 1, 1, 1, 1, '1371832695'),
+(11, '@BacklinkReport Looks cool! Really awesome!', 347935874517970944, 0, 1, 1, 1, '1371832695'),
+(12, '@BacklinkReport asdasd as', 347935874517970944, 1, 1, 1, 1, '1371833089'),
+(13, '@BacklinkReport  asdasdadasd', 347935874517970944, 1, 1, 1, 1, '1371833103'),
+(14, '@seobees  fdsafdsfds', 347935865651216384, 1, 1, 1, 1, '1371833114');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `num_campaigns` text NOT NULL,
+  `tweet_count` int(11) NOT NULL,
+  `banned` int(1) NOT NULL DEFAULT '0',
+  `signup_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`,`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `num_campaigns`, `tweet_count`, `banned`, `signup_time`) VALUES
+(1, 'aayush', 'aayushranaut@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', '1', 18, 0, '2013-06-15 00:00:00');

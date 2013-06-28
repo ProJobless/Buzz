@@ -22,7 +22,7 @@ class Scrapper extends CI_Controller
 	{
 		$metadata = array();
 		//Now dispatch to search google first and insert it into database from there.
-		$google_url	= 'http://www.google.com/search?lr=&hl=en&tbm=blg&output=rss&num=70&q=' . $keyword;
+		$google_url	= 'http://www.google.com/search?lr=&hl=en&tbm=blg&output=rss&num=40&q=' . $keyword;
 		$google_url .= '';
 		
 		echo $google_url;
@@ -31,11 +31,11 @@ class Scrapper extends CI_Controller
 		$content = file_get_contents($google_url);
 		$c = new SimpleXmlElement(utf8_encode($content));
 		echo "<pre>";
-		print_r($c);
 		foreach($c->channel->item as $co)
 		{
+			//Set the metadata of the post
 			$metadata = $co;
-			print_r($metadata);
+			
 			//Get the URL Atribute
 			
 			//URL
@@ -136,23 +136,40 @@ class Scrapper extends CI_Controller
 
 	}
 	
+	/*
+		Inserts the data into the database
+	*/
 	function insert_blog($text, $keyword,  $campaign_id, $metadata)
 	{
 		$data = array(
 			'text'		=> html_entity_decode($text),
 			'keyword'	=> $keyword,
 			'campaign_id'	=> $campaign_id,
-			'timestamp'	=> time()
+			'timestamp'	=> time(),
+			'title'		=> (string)$metadata->title,
+			'link'		=> (string)$metadata->link,
+			'alexa_rank' => $this->get_alexa((string)$metadata->link),
 		);
 		$this->db->set($data);
 		$this->db->insert('blog_search');
 	}
-	
-	function get_alexa()
+	/*
+		Function gets the google PR
+	*/
+	function get_pr($url)
 	{
-		$cont = mb_convert_encoding($this->curl_fetch('http://alexa.com/siteinfo/liquidserve.com/'), "HTML-ENTITIES", "UTF-8");
-		//Matches the paragraph tags & stores them in an array so that we can easily later parse the page for keywords
-		// My First EVER REGEX[Fail] : /<p[^>]*>[^]+?<\/[p]>/
+		
+	}
+	
+	/*
+		Function gets the alexa rank from by curl and returns it!
+	*/
+	function get_alexa($url)
+	{
+		//Fix the URL
+		$url = parse_url($url);
+		$url = $url['host'];
+		$cont = mb_convert_encoding($this->curl_fetch('http://alexa.com/siteinfo/'.$url), "HTML-ENTITIES", "UTF-8");
 		
 		preg_match_all('#<\s*a href="/siteowners/[^>]*>([^<]*)<\s*\/\s*a\s*>#', $cont, $rank);
 		
@@ -179,9 +196,10 @@ more about Enhanced Site Listings
 )
 			
 		*/
+		
 		//Remove unnessary data
 		$rank[0] = "";
 		// This is the index of the rank
-		return $rank[1][0];
+		return str_replace(",", "", $rank[1][0]);
 	}
 }

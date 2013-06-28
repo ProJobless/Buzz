@@ -62,12 +62,20 @@
 						<?php foreach($blog_posts as $b) {?>
 						<div class="box">
 							<div class="box-header">
-								<div class="title"><a href=""><?php ?></a></div>
+								<div class="title"><a href="<?php echo $b->link; ?>"><?php echo $b->title; ?></a></div>
+								<div class="pull-right" style="margin-top:7px; margin-right:10px;">
+									<span class="label label-green">Alexa : <?php echo $b->alexa_rank;?></span>
+								</div>
 								
 							</div>
 
 							<div class="box-content padded">
 								<?php echo $b->text; ?>
+								<div class="clearfix"></div>
+								<div class="pull-right">
+									<a class="btn btn-green" href="<?php echo $b->link; ?>">Go to website</a>
+								</div>
+								<div class="clearfix"></div>
 							</div>
 						</div>
 						<?php } ?>
