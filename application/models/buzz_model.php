@@ -38,33 +38,6 @@ class Buzz_model extends CI_Model
 	{
 		$this->db->delete('users', array('id' => $this->uri->segment(4), 'user_id' => $this->session->userdata('user_id')));
 	}
-	//This will put the tweets in database
-	function parse_twitter($content, $keyword, $campaign_id)
-	{
-		foreach($content->statuses as $c)
-		{
-			$data = array(
-				'tweet'			=> $this->parse_links($c->text),
-				'timestamp'		=> strtotime($c->created_at),
-				'keyword'		=> $keyword,
-				'profile_image'	=> $c->user->profile_image_url,	
-				'tweeter_name'	=> $c->user->name,	
-				'tweet_id'		=> $c->id,
-				'tweet_url'		=> 'http://twitter.com/'.$c->user->screen_name."/"."status/".$c->id,
-				'tweeter_screen_name'	=> $c->user->screen_name,
-				'campaign_id'	=> $campaign_id,
-			);
-			$this->db->set($data);
-			$this->db->insert('tweets', $data);
-		}
-	}
-	/*
-		This function parses the links
-	*/
-	function parse_links($text)
-	{
-		return preg_replace('#(http://\S+)#i', '<a href="${1}" target="_blank">${1}</a>', $text);
-	}
 	/*
 		This will get the dafault twitter account for a particular campaign
 	*/

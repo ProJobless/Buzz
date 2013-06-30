@@ -1,10 +1,22 @@
-<?php
+<?php 
 
-class Scrapper extends CI_Controller
+class Refresh_model extends CI_Model
 {
-	function index()
+	/*
+ 		 ____  _               _   _ _       _       
+ 		|  _ \| |             | \ | (_)     (_)      
+ 		| |_) | | ___   __ _  |  \| |_ _ __  _  __ _ 
+ 		|  _ <| |/ _ \ / _` | | . ` | | '_ \| |/ _` |
+ 		| |_) | | (_) | (_| | | |\  | | | | | | (_| |
+ 		|____/|_|\___/ \__, | |_| \_|_|_| |_| |\__,_|
+ 		                __/ |              _/ |      
+ 		               |___/              |__/       
+	*/
+	function refresh_blog($campaign_id)
 	{
-		//Get the keyowrds first for a particular campaign
+		$query = $this->db->get_where('campaigns', array('id' => $this->uri->segment(4)));
+		
+		//Get the keywords first for a particular campaign
 		
 		/*
 			Temporary keyword atm
@@ -14,11 +26,17 @@ class Scrapper extends CI_Controller
 		
 		$query = $this->db->get_where('campaigns', array('id' => $this->uri->segment(4)));
 		
+		
+		
 		$this->grab_google($keywords, $campaign);
 		
 		//Now dispatch to get bing data!
 		
 	}
+	
+	/*
+		Grabs the list of updated blog from google
+	*/
 	
 	function grab_google($keyword, $campaign_id)
 	{
@@ -95,10 +113,12 @@ class Scrapper extends CI_Controller
 			return;
 		}
 		$this->insert_blog($text, $keyword, $campaign_id, $metadata);		
-	}	
+	}
+	
 	/*
 		Jordan's curl fetch function, just removed cookies from it!
 	*/
+	
 	function curl_fetch($url, $proxy='') 
 	{
 		/*
@@ -141,6 +161,7 @@ class Scrapper extends CI_Controller
 	/*
 		Inserts the data into the database
 	*/
+	
 	function insert_blog($text, $keyword,  $campaign_id, $metadata)
 	{
 		$data = array(
@@ -156,6 +177,11 @@ class Scrapper extends CI_Controller
 		$this->db->set($data);
 		$this->db->insert('blog_search');
 	}
+	
+	/*
+		Simple function which parses the keywords before entering the database
+	*/
+	
 	function parse_keywords($text, $keyword)
 	{
 		//Replace the keyword with the keyword with a <b> tag around it
@@ -164,6 +190,7 @@ class Scrapper extends CI_Controller
 	/*
 		Function gets the google PR
 	*/
+	
 	function get_pr($url)
 	{
 		$url = parse_url($url);
@@ -217,6 +244,11 @@ more about Enhanced Site Listings
 		// Removing the useless data
 		return str_replace(",", "", str_replace('</strong>', '',str_replace('<strong class="font-big2 valign">', "",$r[0][0])));
 	}
+	
+	/*
+		Part of the Google PR Checker
+	*/
+	
 	function createHash($string) {
 	    $check1 = $this->stringToNumber($string, 0x1505, 0x21);
 	    $check2 = $this->stringToNumber($string, 0, 0x1003F);
@@ -278,5 +310,105 @@ more about Enhanced Site Listings
 				}
 			}
 		return '7'.$CheckByte.$HashStr;
+	}
+	
+	/*
+		Part of google PR checker
+	*/
+	
+	
+	/*
+		  _______       _ _   _              _   _ _       _       
+		 |__   __|     (_) | | |            | \ | (_)     (_)      
+		    | |_      ___| |_| |_ ___ _ __  |  \| |_ _ __  _  __ _ 
+		    | \ \ /\ / / | __| __/ _ \ '__| | . ` | | '_ \| |/ _` |
+		    | |\ V  V /| | |_| ||  __/ |    | |\  | | | | | | (_| |
+		    |_| \_/\_/ |_|\__|\__\___|_|    |_| \_|_|_| |_| |\__,_|
+		                                                 _/ |      
+		                                                |__/       
+	*/
+	/*
+		Refreshes twitter
+	*/
+	function refresh_twitter($campaign_id)
+	{
+		//We'll now get the keywords related to the campaign
+		$query = $this->db->get_where('campaigns', array('id' => $campaign_id, 'user_id' => $this->session->userdata('user_id')));
+		$keywords = "";
+		
+		foreach($query->result() as $r)
+		{
+			$keywords = $r->keywords;
+		}
+		$keywords = explode(", ", $keywords);
+		
+		//Now we get the searches from twitter
+		
+		// We will now load the library and configs
+		
+		$this->load->library('twitteroauth');
+		$this->config->load('twitter');
+		
+		//Now we get the user deatils from the database
+		$query = $this->db->get_where('twitter_accounts', array('id' => 1));
+		$r = array();
+		if($query->num_rows() > 0)
+		{
+			//We found a match and we do yay!
+			foreach($query->result() as $c)
+			{
+				$r['oauth_secret'] = $c->oauth_secret;
+				$r['oauth_token'] = $c->oauth_token;
+			}
+		}
+		else
+		{
+			echo "Please add twitter to your profile!";
+		}
+		
+		//First connect to twitter
+		$connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $r['oauth_token'], $r['oauth_secret']);
+		
+		for($i = 0; $i<count($keywords); $i++)
+		{
+			//This will pick out the essentials and fill in the DB
+			$this->parse_twitter($connection->get('search/tweets', array('q' => $keywords[$i], 'result_type'	=> 'recent', 'count' => 50, 'lang' => 'en')), $keywords[$i],$campaign_id);
+			
+		}
+	}
+	
+	//This will put the tweets in database
+	
+	function parse_twitter($content, $keyword, $campaign_id)
+	{
+		foreach($content->statuses as $c)
+		{
+			$query = $this->db->get_where('tweets', array('tweet_url' => 'http://twitter.com/'.$c->user->screen_name."/"."status/".$c->id, 'campaign_id' => $campaign_id));
+			if($query->num_rows > 0)
+			{
+				continue;
+			}
+			$data = array(
+				'tweet'			=> $this->parse_links($c->text),
+				'timestamp'		=> strtotime($c->created_at),
+				'keyword'		=> $keyword,
+				'profile_image'	=> $c->user->profile_image_url,	
+				'tweeter_name'	=> $c->user->name,	
+				'tweet_id'		=> $c->id,
+				'tweet_url'		=> 'http://twitter.com/'.$c->user->screen_name."/"."status/".$c->id,
+				'tweeter_screen_name'	=> $c->user->screen_name,
+				'campaign_id'	=> $campaign_id,
+			);
+			$this->db->set($data);
+			$this->db->insert('tweets', $data);
+		}
+	}
+	
+	/*
+		This function parses the links
+	*/
+	function parse_links($text)
+	{
+		return preg_replace('#(http://\S+)#i', '<a href="${1}" target="_blank">${1}</a>', $text);
 	}
 }

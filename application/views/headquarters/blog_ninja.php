@@ -65,6 +65,7 @@
 								<div class="title"><a href="<?php echo $b->link; ?>"><?php echo $b->title; ?></a></div>
 								<div class="pull-right" style="margin-top:7px; margin-right:10px;">
 									<span class="label label-green">Alexa : <?php echo $b->alexa_rank;?></span>
+									<span class="label label-blue">Google PR : <?php echo $b->google_pr;?></span>
 								</div>
 								
 							</div>
@@ -73,7 +74,7 @@
 								<?php echo $b->text; ?>
 								<div class="clearfix"></div>
 								<div class="pull-right">
-									<a class="btn btn-green" href="<?php echo $b->link; ?>">Go to website</a>
+									<a class="btn btn-green" target="_blank" href="<?php echo $b->link; ?>">Go to website</a>
 								</div>
 								<div class="clearfix"></div>
 							</div>
