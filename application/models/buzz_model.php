@@ -187,7 +187,8 @@ class Buzz_model extends CI_Model
 			'twitter_id' => json_encode($q),
 		);
 		$this->db->set($data);
-		$this->db->update('campaigns', array('id' => $this->input->post('id'), 'user_id' => $this->session->userdata('user_id')));
+		$this->db->where( array('id' => $this->input->post('id'), 'user_id' => $this->session->userdata('user_id')));
+		$this->db->update('campaigns');
 	}
 	/* 
 		This will parse the tweets and makes the keyword bold

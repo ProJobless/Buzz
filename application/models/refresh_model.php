@@ -25,13 +25,29 @@ class Refresh_model extends CI_Model
 // 		$campaign = 1;
 		
 		$query = $this->db->get_where('campaigns', array('id' => $this->uri->segment(4)));
+		if($query->num_rows != 1)
+		{
+			return 0;
+		}
+		$d = array();
+		foreach($query->result() as $q)
+		{
+			$d = $q;
+		}
 		
+		//Set the campaign
+		$campaign = $d->id;
+		//Get the keywords
+		$keywords = $d->keywords;
+		//Explode in an array
+		$keywords = explode(', ', $keywords);
 		
-		
-		$this->grab_google($keywords, $campaign);
-		
+		foreach($keywords as $k)
+		{
+			$this->grab_google($k, $campaign);
+		}
 		//Now dispatch to get bing data!
-		
+		return 1;
 	}
 	
 	/*
@@ -42,7 +58,7 @@ class Refresh_model extends CI_Model
 	{
 		$metadata = array();
 		//Now dispatch to search google first and insert it into database from there.
-		$google_url	= 'http://www.google.com/search?lr=&hl=en&tbm=blg&output=rss&num=20&q=' . $keyword;
+		$google_url	= 'http://www.google.com/search?lr=&hl=en&tbm=blg&output=rss&num=50&q=' . $keyword;
 		$google_url .= '';
 
 		//Get the URL's and data!
@@ -206,7 +222,7 @@ class Refresh_model extends CI_Model
 	/*
 		Function gets the alexa rank from by curl and returns it!
 	*/
-	function get_alexa($url = "http://liquidserve.com")
+	function get_alexa($url)
 	{
 		//Fix the URL
 		$url = parse_url($url);
@@ -336,6 +352,10 @@ more about Enhanced Site Listings
 		$query = $this->db->get_where('campaigns', array('id' => $campaign_id, 'user_id' => $this->session->userdata('user_id')));
 		$keywords = "";
 		
+		if($query->num_rows != 1)
+		{
+			return 0;
+		}
 		foreach($query->result() as $r)
 		{
 			$keywords = $r->keywords;
@@ -350,7 +370,7 @@ more about Enhanced Site Listings
 		$this->config->load('twitter');
 		
 		//Now we get the user deatils from the database
-		$query = $this->db->get_where('twitter_accounts', array('id' => 1));
+		$query = $this->db->get_where('twitter_accounts', array('user_id' => $this->session->userdata('user_id')));
 		$r = array();
 		if($query->num_rows() > 0)
 		{

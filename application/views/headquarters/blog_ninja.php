@@ -23,14 +23,14 @@
 							text: "Finding blogs all over the internet might take some time. Meanwhile you might wanna check out some other ninjas!"
 						});
 						$.ajax({
-							url: '<?php echo site_url('campaign/refresh_twitter')."/blog"."/".$this->uri->segment(4); ?>',
+							url: '<?php echo site_url('campaign/refresh')."/blog"."/".$this->uri->segment(4); ?>',
 							success: function(msg)
 							{
 								if(msg == "refreshed")
 								{
 									Growl.success({
-										title: "New tweets found!",
-										text: "Please refresh the page to load new tweets."
+										title: "New Blog Posts found!",
+										text: "Please refresh the page to load new posts."
 									});
 									$(".refresh_button").html('<i class="icon-repeat"> </i> Refresh Blog Post');
 								}
@@ -38,7 +38,7 @@
 								{
 									Growl.error({
 										title: "Oops!",
-										text: "There was an error in refreshing the tweets"
+										text: "There was an error in refreshing the posts"
 									});
 									$(".refresh_button").html('<i class="icon-repeat"> </i> Refresh Blog Post');
 								}
