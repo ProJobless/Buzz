@@ -14,6 +14,13 @@
 			</a>
 		</li>
 		
+		<li class="<?php if($sidebar == 'billing'){ echo 'active'; } ?>">
+			<span class="glow"></span>
+			<a href="<?php echo site_url('headquarters/billing'); ?>">
+				<span>Billing</span>
+			</a>
+		</li>
+		
 		<li class="<?php if($sidebar == 'support'){ echo 'active'; } ?>">
 			<span class="glow"></span>
 			<a href="<?php echo site_url('headquarters/support'); ?>">

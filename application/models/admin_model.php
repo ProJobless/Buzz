@@ -51,7 +51,7 @@ class Admin_model extends CI_Model
 	function get_stats()
 	{
 		$this->db->order_by('id', 'desc');
-		$query = $this->db->get('admin_stats', 5);
+		$query = $this->db->get('admin_stats', 7);
 		$data = array();
 		
 		foreach($query->result() as $q)

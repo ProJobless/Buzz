@@ -16,5 +16,12 @@ class Cron extends CI_Controller
 	{
 		
 	}
+	/*
+		Function will generate invoice for clients to pay 10 days in advance
+	*/
+	function generate_invoices()
+	{
+		
+	}
 }
 ?>
