@@ -14,6 +14,9 @@
 				<div class="box">
 					<div class="box-header">
 						<div class="title">Campaigns</div>
+						<ul class="box-toolbar">
+							<li rel="tooltip" data-placement="left" data-original-title="Active/Allowed Campaigns"><span class="label label-green"><?php echo $this->process_model->get_campaigns_count_of_user(); ?></span></li>
+						</ul>
 					</div>
 					<table class="table table-normal">
 						<thead>

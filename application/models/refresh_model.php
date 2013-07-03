@@ -395,6 +395,7 @@ more about Enhanced Site Listings
 			$this->parse_twitter($connection->get('search/tweets', array('q' => $keywords[$i], 'result_type'	=> 'recent', 'count' => 50, 'lang' => 'en')), $keywords[$i],$campaign_id);
 			
 		}
+		return 1;
 	}
 	
 	//This will put the tweets in database

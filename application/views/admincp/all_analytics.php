@@ -81,7 +81,7 @@
 													{
 														echo '<i class="icon-arrow-down icon-large" style="color:red;">'.number_format ((($tweets_refreshed[$i]->tweets_fetched - $t->tweets_fetched) / $t->tweets_fetched * 100), 2 ).'</i>';
 													} }?></li>
-												</ul>
+										</ul>
 									</div>
 									<?php
 									$i++; }
@@ -97,13 +97,13 @@
 			<div class="span12">
 				<div class="box">
 					<div class="box-header">
-						<div class="title">Tweets Fetched</div>
+						<div class="title">Tweets Posted</div>
 					</div>
 
 					<div class="box-content padded">
 						<div class="row-fluid">
 							<div class="span9">
-								<div class="tweets_refreshed" style="height: 350px" id="tweets_refreshed"></div>
+								<div class="tweets_posted" style="height: 350px" id="tweets_posted"></div>
 								<script>
 								var tt = document.createElement('div'),
 								leftOffset = -(~~$('html').css('padding-left').replace('px', '') + ~~$('body').css('margin-left').replace('px', '')),
@@ -122,7 +122,7 @@
 											echo "{";
 									  
 												echo '"x":"'.date("Y-m-d", $t->timestamp).'",';
-												echo '"y":'.$t->tweets_fetched;
+												echo '"y":'.$t->tweets_count;
 
 												echo "},";
 											}
@@ -144,7 +144,7 @@
 												$(tt).hide();
 											}
 										};
-										var myChart = new xChart('line-dotted', data, '#tweets_refreshed', opts);
+										var myChart = new xChart('line-dotted', data, '#tweets_posted', opts);
 								</script>
 							</div>
 								
@@ -156,24 +156,24 @@
 										<div class="stats-label"><?php echo date("l", $t->timestamp); ?></div>
 										<ul class="inline">
 											<li class="glyph"><i class="icon-twitter icon-2x"></i></li>
-											<li class="count"> <?php echo $t->tweets_fetched;
-												if($i <= 5){if($t->tweets_fetched >= $tweets_refreshed[$i]->tweets_fetched)
+											<li class="count"> <?php echo $t->tweets_count;
+												if($i <= 5){if($t->tweets_count >= $tweets_refreshed[$i]->tweets_count)
 													{
-														echo '<i class="icon-arrow-up icon-large" style="color:green;">'.number_format ((($t->tweets_fetched - $tweets_refreshed[$i]->tweets_fetched) / $tweets_refreshed[$i]->tweets_fetched * 100), 2 ).'</i>';
+														echo '<i class="icon-arrow-up icon-large" style="color:green;">'.number_format ((($t->tweets_count - $tweets_refreshed[$i]->tweets_count) / $tweets_refreshed[$i]->tweets_count * 100), 2 ).'</i>';
 													}
 													else
 													{
-														echo '<i class="icon-arrow-down icon-large" style="color:red;">'.number_format ((($tweets_refreshed[$i]->tweets_fetched - $t->tweets_fetched) / $t->tweets_fetched * 100), 2 ).'</i>';
+														echo '<i class="icon-arrow-down icon-large" style="color:red;">'.number_format ((($tweets_refreshed[$i]->tweets_count - $t->tweets_count) / $t->tweets_fetched * 100), 2 ).'</i>';
 													} }?></li>
-												</ul>
+										</ul>
 									</div>
 									<?php
 									$i++; }
 									?>
-								</div>
 							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>

@@ -17,7 +17,7 @@ class Refresh extends CI_Controller
 		$this->load->model('refresh_model', 'refresh');
 		
 		//Call the refresh tweets fuction in the model to update the list of tweets
-		if($this->refresh->refresh_twitter($this->uri->segment(4)))
+		if($this->refresh->refresh_twitter($this->uri->segment(4)) == 1)
 		echo "refreshed";
 	}
 	/*

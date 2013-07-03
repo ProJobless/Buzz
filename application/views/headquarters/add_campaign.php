@@ -14,15 +14,16 @@
 				<div class="box">
 					<div class="box-header">
 						<div class="title">Add Campaign</div>
-						
+						<?php $can_add = $this->process_model->can_add_campaign(); if($can_add == 1) {?>
 	        			<ul class="nav nav-tabs nav-tabs-right">
 							<li class="active"><a data-toggle="tab" href="#general"><span>General</span></a></li>
 							<li class=""><a data-toggle="tab" href="#twitter"><span>Twitter</span></a></li>
 						</ul>
+						<?php } ?>
 					</div>
 
 					<div class="box-content padded">
-						<?php echo form_open('campaign/manager/create_campaign', array('class' => 'fill-up form-horizontal')); ?>
+						<?php if($can_add == 1) { echo form_open('campaign/manager/create_campaign', array('class' => 'fill-up form-horizontal')); ?>
 							<div class="tab-content">
 								<div id="general" class="tab-pane active">
 									<div class="padded">
@@ -62,7 +63,9 @@
 									</div>
 								</div>
 							</div>
-						<?php echo form_close(); ?>
+						<?php echo form_close(); } else {
+							echo "Please upgrade your plan to add more campaigns!";
+						}?>
 					</div>
 				</div>
 			</div>

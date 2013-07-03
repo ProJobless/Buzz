@@ -254,6 +254,145 @@ class Process_model extends CI_Model
 		return $data;
 	}
 	/*
+		Fetches the invoice of the person in desc order
+	*/
+	function get_invoices()
+	{
+		$this->db->order_by('time_generated', 'desc');
+		
+		$query = $this->db->get_where('invoices', array('user_id' => $this->session->userdata('user_id')));
+		
+		$data = array();
+		
+		foreach($query->result() as $q)
+		{
+			$data[] = $q;
+		}
+		return $data;
+	}
+	/*
+		This functio ngets the name of the plan by ID
+	*/
+	function get_plan_by_id($id)
+	{
+		$query = $this->db->get_where('packs', array('id' => $id));
+		$data = "";
+		foreach($query->result() as $q)
+		{
+			$data = $q->name; 
+		}
+		return $data;
+	}
+	/*
+		Checks if there is an invoice which is due
+		Returns 1 : There is an invoice to be paid
+		Returns 0 : No invoice to be paid
+	*/
+	function is_invoice_due()
+	{
+		$query = $this->db->get_where('invoices', array('user_id' => $this->session->userdata('user_id'), 'paid' => 0));
+		
+		if($query->num_rows > 0)
+		{
+			return 1;
+		}
+		return 0;
+	}
+	/*
+		Function gets the invoice from the table checking the user_id and uri->segment in the table
+	*/
+	function get_invoice_by_id()
+	{
+		$query = $this->db->get_where('invoices', array('user_id' => $this->session->userdata('user_id'), 'id' => $this->uri->segment(4)));
+		
+		if($query->num_rows > 0)
+		{
+			$data = array();
+		
+			foreach($query->result() as $q)
+			{
+				$data[] = $q;
+			}
+			return $data;
+		}
+		return 0;
+	}
+	/*
+		Function gets the invoices which are due
+	*/
+	function get_due_invoices()
+	{
+		$query = $this->db->get_where('invoices', array('user_id' => $this->session->userdata('user_id'), 'paid' => 0));
+		
+		$data = array();
+		
+		foreach($query->result() as $q)
+		{
+			$data[] = $q;
+		}
+		return $data;		
+	}
+	/*
+		Gets the counts of campaigns a user has for his plan 
+	*/
+	function get_campaigns_count_of_user()
+	{
+		$query = $this->db->get_where('users', array('id' => $this->session->userdata('user_id')));
+		
+		$data = array();
+		
+		foreach($query->result() as $q)
+		{
+			$data = $q;
+		}
+		//Now use the record we just got of the users table and query to get the number of active campaigns
+		$quer = $this->db->get_where('packs', array('id' => $data->plan_id));
+		
+		$data2 = array();
+		
+		foreach($quer->result() as $q)
+		{
+			$data2 = $q;
+		}
+		$allowed_number = $data2->num_campaigns;
+		
+		$quer = $this->db->get_where('campaigns', array('user_id' => $this->session->userdata('user_id')));
+		$active = $quer->num_rows;
+		return $active."/".$allowed_number;
+	}
+	/*
+		Checks if the user can add new campaigns
+	*/
+	function can_add_campaign()
+	{
+		$query = $this->db->get_where('users', array('id' => $this->session->userdata('user_id')));
+		
+		$data = array();
+		
+		foreach($query->result() as $q)
+		{
+			$data = $q;
+		}
+		//Now use the record we just got of the users table and query to get the number of active campaigns
+		$quer = $this->db->get_where('packs', array('id' => $data->plan_id));
+		
+		$data2 = array();
+		
+		foreach($quer->result() as $q)
+		{
+			$data2 = $q;
+		}
+		$allowed_number = $data2->num_campaigns;
+		
+		$quer = $this->db->get_where('campaigns', array('user_id' => $this->session->userdata('user_id')));
+		$active = $quer->num_rows;
+		if($active/$allowed_number < 1)
+		{
+			return 1;
+		}
+		return 0;
+	}
+	/*
 		Fixes the time for support tickets
 	*/
 	function fix_time($timestamp)
