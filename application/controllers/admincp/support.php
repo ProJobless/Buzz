@@ -71,6 +71,7 @@ class Support extends CI_Controller
 			//User has logged in
 			redirect('login/login');
 		}
+		$this->load->model('admin_model');
 		$this->admin_model->add_reply_to_ticket();
 		
 		redirect('admincp/support/view_ticket/'.$this->uri->segment(4));

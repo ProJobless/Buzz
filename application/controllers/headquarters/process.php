@@ -214,6 +214,57 @@ class Process extends CI_Controller
 		
 	}
 	/*
-		
+		Functio nprocess the IPN request of the paypal
 	*/
+	function ipn()
+	{
+		 $this->load->library('PayPal_IPN');
+         if ($this->paypal_ipn->validateIPN())
+         {
+             // Succeeded, now let's extract the order
+             $this->paypal_ipn->extractOrder();
+
+             $this->paypal_ipn->saveOrder();
+
+             if ($this->paypal_ipn->orderStatus == PayPal_IPN::PAID)
+             {
+				 //Now we will check if the user has paid the same amount as promised or detect some injection in the prices ;)
+				 $gross = 0;
+				 foreach($this->paypal_ipn->orderItems as $o)
+				 {
+					 $gross += $o['mc_gross'];
+				 }
+				 //Get the json from the user
+				 $user_id = $this->paypal_ipn->order['custom'];
+
+				 //match the pack and the pricing
+				 foreach($this->db->get('packs')->result() as $r)
+				 {
+					 if($gross == $r->price)
+					 {
+						 //We found our guy!
+						 //Now create the user
+						 $data = array(
+							 'plan_id'	=> $r->id,
+						 );
+						 $this->db->where('id', $user_id);
+						 $this->db->update('users', $data);
+						 
+						 //Now create a paid invoice for the same guy!
+						 
+						 //Also mail the user!
+						 
+					 }
+				 }
+             }
+			 else
+			 {
+				 echo "Not paid";
+			 }
+         }
+		 else
+		 {
+			 echo "Not validated";
+		 }
+	}
 }

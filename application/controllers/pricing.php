@@ -6,7 +6,7 @@ class Pricing extends CI_Controller
 	{
 		
 		$this->load->view('main/header');
-		$this->load->view('main/pricing');
+		$this->load->view('main/signup');
 		$this->load->view('main/footer');
 		
 	}

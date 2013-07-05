@@ -25,7 +25,6 @@
 									<td>ID</td>
 									<td>Username</td>
 									<td>Email</td>
-									<td>Campaigns (Number)</td>
 									<td style="width: 40px">Tweets</td>
 									<td style="width: 100px">Edit User</td>
 									<td style="width: 100px">Ban User</td>
@@ -38,7 +37,6 @@
 										<td class="icon"><?php echo $u->id; ?></td>
 										<td><?php echo $u->username; ?></td>
 										<td><?php echo $u->email; ?></td>
-										<td><?php echo $u->num_campaigns; ?></td>
 										<td><?php echo $u->tweet_count; ?></td>
 										<td><?php echo anchor('admincp/users/edit_user/'.$u->id, 'Edit Details', 'class="btn btn-green"');?></td>
 										<td><?php if($u->banned == 0){echo anchor('admincp/users/ban_user/'.$u->id, 'Ban User', 'class="btn btn-red"');} 

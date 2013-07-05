@@ -229,31 +229,13 @@ class Refresh_model extends CI_Model
 		$url = $url['host'];
 		$cont = mb_convert_encoding($this->curl_fetch('http://alexa.com/siteinfo/'.$url), "HTML-ENTITIES", "UTF-8");
 		
-		preg_match_all('/<div class=\"rank-row\">[^\B]+?<span class=\"no-wrap\">/', $cont, $rank);
+		preg_match_all('/<div class=\"rank-row\" [^.]+?[^\B]+?<span class=\"no-wrap\">/', $cont, $rank);
 		
 		preg_match_all('/<strong class="font-big2 valign">[0-9,]*<\/strong>/', $rank[0][0], $r);
-	
+		
 		/*
 			Returned data
-Array
-(
-    [0] => Array
-        (
-            [0] => 741,522
-            [1] => Learn
-more about Enhanced Site Listings
-            [2] => Edit your site listing
-        )
 
-    [1] => Array
-        (
-            [0] => 741,522
-            [1] => Learn
-more about Enhanced Site Listings
-            [2] => Edit your site listing
-        )
-
-)
 			
 		*/
 		
