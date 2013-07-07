@@ -234,9 +234,15 @@ class Process extends CI_Controller
 				 {
 					 $gross += $o['mc_gross'];
 				 }
-				 //Get the json from the user
-				 $user_id = $this->paypal_ipn->order['custom'];
-
+				 //Get the json from the custom IPN thingy
+				 $custom = json_decode($this->paypal_ipn->order['custom']);
+				 
+				 //get the user id
+				 $user_id = $custom->u;
+				 
+				 //Get the invoice ID
+				 $invoice = $custom->i;
+				 
 				 //match the pack and the pricing
 				 foreach($this->db->get('packs')->result() as $r)
 				 {
@@ -251,7 +257,12 @@ class Process extends CI_Controller
 						 $this->db->update('users', $data);
 						 
 						 //Now create a paid invoice for the same guy!
-						 
+						 if($invoice == 0)
+						 {
+							 //User is a new guy!
+							 //Create a new invioce for him
+							 $this->process_model->create_invoice($user_id, $r->id, $gross, 1);
+						 }
 						 //Also mail the user!
 						 
 					 }

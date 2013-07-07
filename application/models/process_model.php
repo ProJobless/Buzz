@@ -271,7 +271,22 @@ class Process_model extends CI_Model
 		return $data;
 	}
 	/*
-		This functio ngets the name of the plan by ID
+		Get pack by ID
+	*/
+	function get_pack_by_id($id)
+	{
+		$query = $this->db->get_where('packs', array('id' => $id));
+		
+		$data = array();
+		foreach($query->result() as $q)
+		{
+			$data = $q; 
+		}
+		return $data;
+	}
+	/*
+		This function gets the name of the plan by ID
+		Returns only the name
 	*/
 	function get_plan_by_id($id)
 	{
@@ -391,6 +406,30 @@ class Process_model extends CI_Model
 			return 1;
 		}
 		return 0;
+	}
+	/*
+		Creates an invoice with for the user given
+		@params : user_id = User ID of the user
+				pack_id = Pack ID which the user has purchased
+				price = Price of the package the user has bought
+				has_purchased = 0 or 1 depending upon whether the user has purchased the package
+	*/
+	function create_invoice($user_id, $pack_id, $price,$has_purchased = 0)
+	{
+		$data = array(
+			'user_id'	=> $user_id,
+			'amount' 	=> $price,
+			'plan'		=> $pack_id,
+			'time_generated'	=> time(),
+			'paid'		=> $has_purchased,
+		);
+		if($has_purchased == 1)
+		{
+			$data['time_paid']	= time();
+		}
+		
+		$this->db->set($data);
+		$this->db->insert('invoices');
 	}
 	/*
 		Fixes the time for support tickets
