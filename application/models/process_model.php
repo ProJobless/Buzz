@@ -432,6 +432,47 @@ class Process_model extends CI_Model
 		$this->db->insert('invoices');
 	}
 	/*
+		Save the member from the registration page
+	*/
+	function save_member()
+	{
+		//Get the user details to save in the database from input
+		$email = $this->input->post('email');
+		$first_name = $this->input->post('first_name');
+		$last_name = $this->input->post('last_name');
+		$password = md5($this->input->post('password'));
+		$company = $this->input->post('company');
+		
+		$data = array(
+			'email' => $this->input->post('email'),
+			'first_name' => $this->input->post('first_name'),
+			'last_name' => $this->input->post('last_name'),
+			'password' => md5($this->input->post('password')),
+			'company' => $this->input->post('company'),
+			'signup_time'	=> date('Y-m-d H:i:s', time()),
+			'username' => $this->input->post('email'),
+			'tweet_count'	=> 0,
+			'plan_id'	=> 0,
+		);
+		
+		$this->db->set($data);
+		$this->db->insert('users');
+		
+		return 1; //True
+	}
+	/*
+		Gets the user ID by email
+	*/
+	function get_user_id_by_email($email)
+	{
+		$query = $this->db->get_where('users', array('email' => $email));
+		$r;
+		foreach($query->result() as $q)
+		{
+			return $q->id;
+		}
+	}
+	/*
 		Fixes the time for support tickets
 	*/
 	function fix_time($timestamp)
