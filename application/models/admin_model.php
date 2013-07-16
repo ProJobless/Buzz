@@ -239,4 +239,18 @@ class Admin_model extends CI_Model
 		
 		$this->db->update('tickets', $data);
 	}
+	/*
+		Gets all the email templates from the emails table
+	*/
+	function get_email_templates()
+	{
+		$query = $this->db->get('emails');
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data[] = $r;
+		}
+		return $data;
+	}
 }

@@ -40,6 +40,12 @@
 				<span>Analytics</span>
 			</a>
 		</li>
+		<li class="<?php if($sidebar_active == 'email') {echo "active";}?>">
+			<span class="glow"></span>
+			<a href="<?php echo site_url('admincp/email'); ?>">
+				<span>Email</span>
+			</a>
+		</li>
 		<li class="">
 			<span class="glow"></span>
 			<a href="<?php echo site_url('admincp/'); ?>">
