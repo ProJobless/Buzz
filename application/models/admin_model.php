@@ -236,7 +236,7 @@ class Admin_model extends CI_Model
 			'last_update_time' => date('Y-m-d H:i:s', time()),
 			'status'		=> 1,
 		);
-		
+		$this->db->where('id', $this->uri->segment(4));
 		$this->db->update('tickets', $data);
 	}
 	/*
@@ -252,5 +252,44 @@ class Admin_model extends CI_Model
 			$data[] = $r;
 		}
 		return $data;
+	}
+	/*
+		Creates an Email template
+	*/	
+	function create_email_template()
+	{
+		$data = array(
+			'name'	=> $this->input->post('name'),
+			'subject'	=> $this->input->post('subject'),
+			'body'		=> $this->input->post('body'),
+		);
+		$this->db->set($data);
+		$this->db->insert('emails');
+	}
+	/*
+		Get's the email_template by ID
+	*/
+	function get_email_by_id($id)
+	{
+		$query = $this->db->get_where('emails', array('id' => $id));
+		
+		foreach($query->result() as $r)
+		{
+			return $r;
+		}
+	}
+	/*
+		Saves the edited email template by ID
+	*/
+	function save_email_by_id($id)
+	{
+		$data = array(
+			'name'	=> $this->input->post('name'),
+			'subject'	=> $this->input->post('subject'),
+			'body'		=> $this->input->post('body'),
+		);
+		
+		$this->db->where('id', $id);
+		$this->db->update('emails', $data);
 	}
 }

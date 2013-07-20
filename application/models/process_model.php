@@ -502,4 +502,85 @@ class Process_model extends CI_Model
 			return date('M j, Y H:i:s', $timestamp);
 		}
 	}
+	/*
+		Function gets the email of the user
+	*/
+	function email_by_id($id)
+	{
+		$query = $this->db->get_where('users', array('id' => $id));
+		
+		foreach($query->result() as $r)
+		{
+			return $r->email;
+		}
+	}
+	/*
+		Function gets the email template by ID
+	*/
+	function get_email_template_by_id($id)
+	{
+		$query = $this->db->get_where('emails', array('id' => $id));
+		$data = array();
+		foreach($query->result() as $q)
+		{
+			return $q;
+		}
+	}
+	/*
+		Gets the tweets for tweet ninja with specific count
+	*/
+	function get_tweet_ninja($count)
+	{
+		//first get the campaign and user_id list 
+		$query = $this->db->get_where('campaigns', array('user_id' => $this->session->userdata('user_id')));
+		$where_in = array();
+		foreach($query->result() as $r)
+		{
+			$where_in[] = $r->id;
+		}
+		$query1 =$this->db->select('*')->from('tweets')->where_in('campaign_id', $where_in)->limit($count);		
+		$query1 = $this->db->get();
+		
+		$data = array();
+		foreach($query1->result() as $q)
+		{
+			$data[] = $q;
+		}
+		
+		return $data;
+	}
+	/*
+	
+	*/
+	function get_blog_ninja($count)
+	{
+		//first get the campaign and user_id list 
+		$query = $this->db->get_where('campaigns', array('user_id' => $this->session->userdata('user_id')));
+		$where_in = array();
+		foreach($query->result() as $r)
+		{
+			$where_in[] = $r->id;
+		}
+		$query1 =$this->db->select('*')->from('blog_search')->where_in('campaign_id', $where_in)->limit($count);		
+		$query1 = $this->db->get();
+		
+		$data = array();
+		foreach($query1->result() as $q)
+		{
+			$data[] = $q;
+		}
+		
+		return $data;
+	}
+	/*
+		Queue the mail
+		@params 
+		$template_id -> ID of the Email template
+		$user_id -> User ID
+		$priority -> 1 to 10 depending on urgency
+	*/
+	function queue_mail($template_id, $user_id, $priority)
+	{
+		
+	}
 }

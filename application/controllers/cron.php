@@ -23,5 +23,12 @@ class Cron extends CI_Controller
 	{
 		
 	}
+	/*
+		Function will send emails depending upon priority
+	*/
+	function send_emails()
+	{
+		
+	}
 }
 ?>

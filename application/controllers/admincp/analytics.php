@@ -12,7 +12,7 @@ class Analytics extends CI_Controller
 		}
 		
 		$this->load->model('admin_model', 'admin');
-		$tweets_refreshed = $this->admin->get_stats();
+		$stats = $this->admin->get_stats();
 		
 		$data = array(
 			'title' 	=> 'Analytics - Hype Ninja',
@@ -22,7 +22,7 @@ class Analytics extends CI_Controller
 			'active'	=> 'analytics',
 			'sidebar_active' => 'analytics',
 			'side_sub'		=> '',
-			'tweets_refreshed' => $tweets_refreshed
+			'stats' => $stats
 		);
 		
 		$this->load->view('admincp/header', $data);
