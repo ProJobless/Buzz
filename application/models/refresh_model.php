@@ -229,18 +229,9 @@ class Refresh_model extends CI_Model
 		$url = $url['host'];
 		$cont = mb_convert_encoding($this->curl_fetch('http://alexa.com/siteinfo/'.$url), "HTML-ENTITIES", "UTF-8");
 		
-		preg_match_all('/<div class=\"rank-row\" [^.]+?[^\B]+?<span class=\"no-wrap\">/', $cont, $rank);
-		
-		preg_match_all('/<strong class="font-big2 valign">[0-9,]*<\/strong>/', $rank[0][0], $r);
-		
-		/*
-			Returned data
-
-			
-		*/
-		
+		preg_match_all('/<strong class="metricsUrl[^.]+?<a[^>]*?>([0-9,]*)<\/a>/', $cont, $rank);
 		// Removing the useless data
-		return str_replace(",", "", str_replace('</strong>', '',str_replace('<strong class="font-big2 valign">', "",$r[0][0])));
+		return $rank[1][0];	
 	}
 	
 	/*
