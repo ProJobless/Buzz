@@ -62,7 +62,7 @@
 								<?php $this->load->model('buzz_model', 'buzz'); 
 								if(empty($tweets))
 								{
-									echo 'Sorry, no tweets weere found! Please hit the refresh button on the right! <a href="#" class="btn btn-black refresh_button" onclick="refresh_twitter();return false;"><i class="icon-repeat"></i> Refresh Tweets</a>';
+									echo 'Sorry, no tweets were found! Please hit the refresh button on the right! <a href="#" class="btn btn-black refresh_button" onclick="refresh_twitter();return false;"><i class="icon-repeat"></i> Refresh Tweets</a>';
 								}
 								foreach($tweets as $t) { ?>
 								<ul class="chat-box timeline">

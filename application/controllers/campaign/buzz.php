@@ -74,4 +74,33 @@ class Buzz extends CI_Controller
 		$this->load->view('headquarters/sidebar');
 		$this->load->view('headquarters/blog_ninja');
 	}
+	function facebook()
+	{
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
+		parse_str($_SERVER['QUERY_STRING'], $_REQUEST);
+		
+		$this->load->library('facebook');		
+		
+		$user = $this->facebook->getUser();
+				
+		if ($user) {
+			try {
+				$data['user_profile'] = $this->facebook->api('/me/statuses');
+			} catch (FacebookApiException $e) {
+				$user = null;
+			}
+		}
+		
+		if ($user) {
+			$data['logout_url'] = $this->facebook->getLogoutUrl();
+		} else {
+			$data['login_url'] = $this->facebook->getLoginUrl();
+		}		
+		
+		$this->load->view('face',$data);
+	}
 }

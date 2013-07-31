@@ -200,6 +200,11 @@ class Process_model extends CI_Model
 		//First the most IMPORTANT STEP to check the ticket id and user_id match
 		$query = $this->db->get_where('tickets', array('id' => $this->uri->segment(4), 'user_id' => $this->session->userdata('user_id')));
 		
+		if($this->input->post('ticket_reply') == '')
+		{
+			$this->session->set_flashdata('error', 'Gosh! How are we supposed to know what\'s wrong when you send us an empty ticket.');
+			return 0;
+		}
 		if($query->num_rows() == 1)
 		{
 			$data = array(
@@ -571,6 +576,53 @@ class Process_model extends CI_Model
 		}
 		
 		return $data;
+	}
+	/*
+		Process the Variables used in email
+	
+		Variables Allowed List
+		1. 	{$username} 			= Username of the user
+		2. 	{$email}				= Email of the user
+		3. 	{$first_name}			= First name of user
+		4. 	{$last_name}			= Last name of the user
+		5. 	{$plan_id} 				= Plan ID
+		6. 	{$company}				= Company of the user
+		7. 	{$invoice_id}			= Invoice ID
+		8. 	{$ticket_id} 			= Ticket ID
+		9. 	{$ticket_reply_id} 		= Reply ID
+		
+	*/
+	function process_email_variables($body, $var)
+	{
+		//Replace the vars available in the vars with the ones in the template
+		foreach($var as $key => $value)
+		{
+			str_replace('{$'.$key.'}', $value, $body);
+		}
+	}
+	/*
+		Uploads and processes the profile picture
+	*/
+	function upload_profile_pic()
+	{
+		//Upload the picture
+		$this->upload->do_upload('profile_pic');
+		//UPdate the database
+		$a = $this->upload->data();
+		$query = $this->db->get_where('users', array('id'=> $this->session->userdata('id')));
+		foreach($query->result() as $r)
+		{
+			if($r->profile_pic == 'default.jpg')
+			{
+				break;
+			}
+			@unlink('./images/p/'.$r->profile_pic);
+		}
+		$data = array(
+			'profile_pic'	=> $a['file_name'],
+		);
+		$this->db->where('id', $this->session->userdata('id'));
+		$this->db->update('users', $data);
 	}
 	/*
 		Queue the mail

@@ -4,7 +4,7 @@
 	Sends the email immediately
 */
 
-function send_now($template_id, $user_id)
+function send_now($template_id, $user_id, $vars)
 {
 	$ci =& get_instance();
 	$email_template = $ci->process_model->get_email_template_by_id($template_id);
@@ -16,13 +16,13 @@ function send_now($template_id, $user_id)
 	$ci->email->from('aayushranaut96@gmail.com', 'Hype Ninja');
 	$ci->email->to($ci->process_model->email_by_id($user_id));		
 	$ci->email->subject($email_template->subject);		
-	$ci->email->message($email_template->body);
+	$ci->email->message($ci->process_model->process_email_variables($email_template->body, $vars));
 	if($ci->email->send())
 	{
 		//Success
-		
 	}
 }
+
 /*
 	Queues the mail in the database so we can send it later depending on priority
 	@params 

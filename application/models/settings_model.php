@@ -7,7 +7,7 @@ class Settings_Model extends CI_Model
 	*/
 	function get_settings()
 	{
-		$query = $this->db->get_where('settings', array('id' => $this->session->userdata('user_id')));
+		$query = $this->db->get_where('users', array('id' => $this->session->userdata('user_id')));
 		$data = array();
 		foreach($query->result() as $r)
 		{

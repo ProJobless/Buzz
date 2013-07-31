@@ -70,5 +70,30 @@ class Settings extends CI_Controller
 			$this->load->view('headquarters/twitter_settings');
 		}
 	}
+	/*
+		Uploads a picture
+	*/
+	function upload_pic()
+	{
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
+		
+		//Load the Upload library
+		$config['upload_path'] = './images/p/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = '1024';
+		$config['max_width'] = '1024';
+		$config['max_height'] = '768';
+		$config['encrypt_name'] = TRUE;
+
+		$this->load->library('upload', $config);
+		
+		$this->process_model->upload_profile_pic();
+		
+		redirect('headquarters/settings');
+	}
 }
 ?>

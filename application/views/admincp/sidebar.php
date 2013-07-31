@@ -46,9 +46,9 @@
 				<span>Email</span>
 			</a>
 		</li>
-		<li class="">
+		<li class="<?php if($sidebar_active == 'settings') {echo "active";}?>">
 			<span class="glow"></span>
-			<a href="<?php echo site_url('admincp/'); ?>">
+			<a href="<?php echo site_url('admincp/settings'); ?>">
 				<span>Settings</span>
 			</a>
 		</li>

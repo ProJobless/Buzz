@@ -231,7 +231,7 @@ class Refresh_model extends CI_Model
 		
 		preg_match_all('/<strong class="metricsUrl[^.]+?<a[^>]*?>([0-9,]*)<\/a>/', $cont, $rank);
 		// Removing the useless data
-		return $rank[1][0];	
+		return str_replace(',', '', $rank[1][0]);
 	}
 	
 	/*

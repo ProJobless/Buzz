@@ -36,7 +36,7 @@ class Buzz_model extends CI_Model
 	*/
 	function delete_campaign()
 	{
-		$this->db->delete('users', array('id' => $this->uri->segment(4), 'user_id' => $this->session->userdata('user_id')));
+		$this->db->delete('campaigns', array('id' => $this->uri->segment(4), 'user_id' => $this->session->userdata('user_id')));
 	}
 	/*
 		This will get the dafault twitter account for a particular campaign
@@ -137,9 +137,22 @@ class Buzz_model extends CI_Model
 	{
 		$q = array();
 		//I'll format the checkboxes data first
-		foreach($this->input->post('twitter') as $r)
+		if($this->input->post('twitter') != "")
 		{
-			$q[] = $r;
+			foreach($this->input->post('twitter') as $r)
+			{
+				$q[] = $r;
+			}
+		}
+		else
+		{
+			//Get all the user accounts and add it here
+			$query = $this->db->get_where('twitter_accounts', array('user_id' => $this->session->userdata('user_id')));
+			$q = array();
+			foreach($query->result() as $r)
+			{
+				$q[] = $r->id;
+			}
 		}
 		$data = array(
 			'name' => $this->input->post('name'),

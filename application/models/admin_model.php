@@ -220,6 +220,11 @@ class Admin_model extends CI_Model
 	*/
 	function add_reply_to_ticket()
 	{
+		if($this->input->post('ticket_reply') == '')
+		{
+			$this->session->set_flashdata('error', 'Duh! Admins aren\'t supposed to send empty tickets.');
+			return 0;
+		}
 		//Set the data for the replying to the ticket
 		$data = array(
 			'body'		=> $this->input->post('ticket_reply'),
@@ -292,4 +297,47 @@ class Admin_model extends CI_Model
 		$this->db->where('id', $id);
 		$this->db->update('emails', $data);
 	}
+	/*
+		Loads the settings for an admin with the giver user ID
+		Params:-
+		1. admin_id
+	*/
+	function load_settings($admin_id)
+	{
+		$query = $this->db->get_where('administrators', array('id' => $admin_id));
+		
+		$data = array();
+		
+		foreach($query->result() as $r)
+		{
+			$data[] = $r;
+		}
+		
+		return $r;
+	}
+	/*
+		Uploads and processes the profile picture
+	*/
+	function upload_profile_pic()
+	{
+		//Upload the picture
+		$this->upload->do_upload('profile_pic');
+		//UPdate the database
+		$a = $this->upload->data();
+		$query = $this->db->get_where('administrators', array('id'=> $this->session->userdata('id')));
+		foreach($query->result() as $r)
+		{
+			if($r->profile_pic == 'default.jpg')
+			{
+				break;
+			}
+			@unlink('./images/p/'.$r->profile_pic);
+		}
+		$data = array(
+			'profile_pic'	=> $a['file_name'],
+		);
+		$this->db->where('id', $this->session->userdata('id'));
+		$this->db->update('administrators', $data);
+	}
+	
 }
