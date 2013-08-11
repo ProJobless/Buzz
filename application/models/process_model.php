@@ -577,29 +577,7 @@ class Process_model extends CI_Model
 		
 		return $data;
 	}
-	/*
-		Process the Variables used in email
-	
-		Variables Allowed List
-		1. 	{$username} 			= Username of the user
-		2. 	{$email}				= Email of the user
-		3. 	{$first_name}			= First name of user
-		4. 	{$last_name}			= Last name of the user
-		5. 	{$plan_id} 				= Plan ID
-		6. 	{$company}				= Company of the user
-		7. 	{$invoice_id}			= Invoice ID
-		8. 	{$ticket_id} 			= Ticket ID
-		9. 	{$ticket_reply_id} 		= Reply ID
-		
-	*/
-	function process_email_variables($body, $var)
-	{
-		//Replace the vars available in the vars with the ones in the template
-		foreach($var as $key => $value)
-		{
-			str_replace('{$'.$key.'}', $value, $body);
-		}
-	}
+
 	/*
 		Uploads and processes the profile picture
 	*/
@@ -634,5 +612,26 @@ class Process_model extends CI_Model
 	function queue_mail($template_id, $user_id, $priority)
 	{
 		
+	}
+	
+	/*
+		Adds facebook access_token into database for the specific user
+	*/
+	function insert_facebook_access_token($access_token)
+	{
+		if($access_token == 0)
+		{
+			return 0;
+		}
+		//data from facebook and hypeninja
+		$data = array(
+			'user_id'	=> $this->user->session('user_id'),
+			'access_token'	=> $access_token,
+			'enabled'	=> 1
+		);
+		
+		$this->db->set($data);
+		$this->db->insert('facebook_accounts', $data);
+		echo "Done";
 	}
 }

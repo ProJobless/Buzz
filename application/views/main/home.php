@@ -4,8 +4,10 @@
 			<iframe width="520" height="315" src="http://www.youtube.com/embed/_k6j9gK8bmk" frameborder="0" allowfullscreen></iframe>
 		</div>
 		<div class="ls_text pull-right">
-			<h1>You've never seen something this simple....</h1>
-			<p>Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversation?'</p>
+			<h1>It's like steroids <span>for Social Media Managers!</span></h1>
+			<p>Hype Ninja let's you boost your Social presence from just one place.</p>
+			<a class="ls-btn ls-btn-green" href="#">Try it free for 30 days</a>
+			<a class="ls-btn ls-btn-blue" href="#">See Pricing</a>
 		</div>
 	</div>
 </div>

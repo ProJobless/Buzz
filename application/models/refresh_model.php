@@ -403,6 +403,8 @@ class Refresh_model extends CI_Model
 	*/
 	function parse_links($text)
 	{
-		return preg_replace('#(http://\S+)#i', '<a href="${1}" target="_blank">${1}</a>', $text);
+		return preg_replace('#(http:\/\/\S+)#i', '<a href="${1}" target="_blank">${1}</a>', $text);
 	}
+	
+	
 }

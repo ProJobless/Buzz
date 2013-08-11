@@ -51,7 +51,7 @@
 						<div class="title"><?php echo $campaign_data[0]->name; ?></div>
 						<ul class="nav nav-tabs nav-tabs-right">
 							<li class="active"><a data-toggle="tab" href="#twitter">Twitter Ninja</a></li>
-							<li><a data-toggle="tab" href="#facebook">Facebook Ninja</a></li>
+							<li><a href="<?php echo base_url('campaign/buzz/facebook')."/".$this->uri->segment(4); ?>">Facebook Ninja</a></li>
 							<li><a href="<?php echo base_url('campaign/buzz/blog')."/".$this->uri->segment(4); ?>">Blog Ninja</a></li>
 						</ul>
 					</div>

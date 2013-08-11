@@ -10,13 +10,13 @@ function send_now($template_id, $user_id, $vars)
 	$email_template = $ci->process_model->get_email_template_by_id($template_id);
 	
 	$ci->load->library('email');
-	
+	$ci->load->model('email_model');
 	$ci->email->set_newline("\r\n");
 	
 	$ci->email->from('aayushranaut96@gmail.com', 'Hype Ninja');
 	$ci->email->to($ci->process_model->email_by_id($user_id));		
 	$ci->email->subject($email_template->subject);		
-	$ci->email->message($ci->process_model->process_email_variables($email_template->body, $vars));
+	$ci->email->message($ci->email_model->process_email_variables($email_template->body, $vars));
 	if($ci->email->send())
 	{
 		//Success

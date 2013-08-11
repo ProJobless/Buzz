@@ -278,4 +278,30 @@ class Process extends CI_Controller
 			 echo "Not validated";
 		 }
 	}
+	
+	/*
+		The first function to be called to login a person into facebook
+	*/
+	
+	function login_facebook()
+	{
+		$this->load->library('facebook');
+		$params = array(
+			'scope' => 'publish_stream, manage_pages',
+			'redirect_uri'	=> base_url()."/headquarters/process/get_token",
+		);
+		redirect($this->facebook->getLoginUrl($params), 'location');
+	}	
+	/*
+		Function Gets a token and calls a function which inserts it into the database
+	*/
+	function get_token()
+	{
+		parse_str($_SERVER['QUERY_STRING'], $_REQUEST);
+		$this->load->library('facebook');
+		$this->facebook->setExtendedAccessToken();
+		$token = $this->facebook->getAccessToken();
+		
+		$this->process_model->insert_facebook_access_token($token);
+	}
 }

@@ -7,7 +7,7 @@ class Buzz_model extends CI_Model
 	{
 		//Id of the campaign
 		$id = $this->uri->segment(4);
-		$query = $this->db->get_where('campaigns', array('user_id' => 1, 'id' => $id));
+		$query = $this->db->get_where('campaigns', array('user_id' => $this->session->userdata('user_id'), 'id' => $id));
 		
 		//Now we parse the data
 		$data = array();

@@ -42,4 +42,26 @@ class Refresh extends CI_Controller
 			echo "refreshed";
 		}
 	}
+	/*
+		Refreshes the facebook posts
+	*/
+	function facebook()
+	{
+		//First check if the user has logged in
+		if($this->session->userdata('l') != 1)
+		{
+			//User has logged in
+			redirect('login/login');
+		}
+		$this->load->model('refresh_model', 'refresh');
+		
+		if($this->refresh->refresh_facebook($this->uri->segment(4)) == 0)
+		{
+			echo "failed";
+		}
+		else
+		{
+			echo "refreshed";
+		}
+	}
 }

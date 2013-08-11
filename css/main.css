@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
 
 body
 {
@@ -42,6 +42,52 @@ a
 	width:1060px;
 	margin:0 auto;
 	padding:20px 0;
+}
+.ls-btn
+{
+	background:#f7f7f7;
+	border:1px solid #bababa;
+	color:#444;
+	padding:10px 25px;
+	border-radius:2px;
+	box-shadow:0 1px 0 #fff inset;
+}
+.ls-btn-green
+{
+	border:1px solid #389c2a;
+	color:#fff;
+	box-shadow:0 1px 0 #bbf7be inset;
+	background: #35f03e;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#35f03e), color-stop(100%,#1ec826));
+	background-image: -webkit-linear-gradient(top, #35f03e 0%,#1ec826 100%);
+	background-image: -moz-linear-gradient(top, #35f03e 0%, #1ec826 100%);
+	background-image: -o-linear-gradient(top, #35f03e 0%,#1ec826 100%);
+	background-image: -ms-linear-gradient(top, #35f03e 0%,#1ec826 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#35f03e', endColorstr='#1ec826',GradientType=0 );
+	background-image: linear-gradient(top, #35f03e 0%,#1ec826 100%);
+	text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+	margin-top:40px;
+	display:inline-block;
+	width:auto;
+}
+.ls-btn-blue 
+{
+	border:1px solid #065576;
+	color:#fff;
+	box-shadow:0 1px 0 #6db3ef inset;
+	background: #2595f5;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2595f5), color-stop(100%,#277cc5));
+	background-image: -webkit-linear-gradient(top, #2595f5 0%,#277cc5 100%);
+	background-image: -moz-linear-gradient(top, #2595f5 0%, #277cc5 100%);
+	background-image: -o-linear-gradient(top, #2595f5 0%,#277cc5 100%);
+	background-image: -ms-linear-gradient(top, #2595f5 0%,#277cc5 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2595f5', endColorstr='#277cc5',GradientType=0 );
+	background-image: linear-gradient(top, #2595f5 0%,#277cc5 100%);
+	text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+	margin-top:40px;
+	display:inline-block;
+	width:auto;
+	margin-left:50px;
 }
 /*
 	Header
@@ -89,7 +135,7 @@ nav ul li a:hover
 .ls_hero .ls_text
 {
 	width:450px;
-	font-size:13px;
+	font-size:16px;
 }
 .ls_hero .ls_text p
 {
@@ -102,6 +148,12 @@ nav ul li a:hover
 	margin:0;
 	color:#fff;
 	text-shadow:0 1px 1px rgba(0,0,0,0.4);
+	font-weight:600;
+	font-size:42px;
+}
+.ls_hero h1 span
+{
+	font-weight:300;
 }
 /*
 	Ls_sections
