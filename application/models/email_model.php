@@ -131,7 +131,9 @@ class Email_model extends CI_Model
 	*/	
 	function get_plan_by_id($plan_id)
 	{
-		
+		$plan_id = intval($plan_id);
+		$query = $this->db->get_where('plans', array('id' => $plan_id));
+		return $this->parse_db_into_array($query->result());
 	}
 	/*
 		A helper function which parses the CI active record returned data into an array and then returns it
