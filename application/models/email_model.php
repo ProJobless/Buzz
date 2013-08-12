@@ -121,6 +121,7 @@ class Email_model extends CI_Model
 	{
 		$reply_id = intval($reply_id);
 		$query = $this->db->get_where('ticket_replies', array('id' => $reply_id));
+		return $this->parse_db_into_array($query->result());
 	}
 	
 	/*
