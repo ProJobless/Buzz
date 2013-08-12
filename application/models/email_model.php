@@ -125,6 +125,15 @@ class Email_model extends CI_Model
 	}
 	
 	/*
+		Gets the plaan details by ID
+		@params:
+			$plan_id : ID of the plan
+	*/	
+	function get_plan_by_id($plan_id)
+	{
+		
+	}
+	/*
 		A helper function which parses the CI active record returned data into an array and then returns it
 		@params:
 			$result => A query result usually sent by doing $query->result();
