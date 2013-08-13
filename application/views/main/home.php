@@ -49,7 +49,50 @@
 <div class="ls_features">
 	<div class="ls_container">
 		<h1 class="text-center">Super Awesome <span>Features!</span></h1>
-		<section class="ls_features">
+		
+		<section class="ls_features ls_descriptions">
+			<img class="pull-left" src="<?php echo base_url()."images/icon-1.png" ?>">
+			<article class="pull-right">
+				<h1>So Intuitive! You would hate everything else!</h1>
+				<p class="ls_text">
+					Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversation?'
+				</p>
+			</article>
+			<div class="clearfix"></div>
+		</section>
+		<section class="ls_features ls_descriptions">
+			<article class="pull-left">
+				<h1>So Intuitive! You would hate everything else!</h1>
+				<p class="ls_text">
+					Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversation?'
+				</p>
+			</article>
+			<img class="pull-right" src="<?php echo base_url()."images/icon-1.png" ?>">
+			<div class="clearfix"></div>
+		</section>
+	
+		<section class="ls_features ls_descriptions border-none">
+			<img class="pull-left" src="<?php echo base_url()."images/icon-1.png" ?>">
+			<article class="pull-right">
+				<h1>So Intuitive! You would hate everything else!</h1>
+				<p class="ls_text">
+					Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversation?'
+				</p>
+			</article>
+			<div class="clearfix"></div>
+		</section>
+	</div>
+</div>
+
+<div class="ls_pricing">
+	<div class="ls_container">
+		<h1 class="text-center">Pricing</h1>
+		<section class="ls_pricing_features">
+			<div>Number of campaigns</div>
+			<div>Twitter Accounts</div>
+			<div></div>
+			<div></div>
+			<div></div>
 		</section>
 	</div>
 </div>
