@@ -142,7 +142,7 @@ class Email_model extends CI_Model
 	*/
 	function replace_vars($value, $var)
 	{
-		
+		str_replace('{$'.$var."}", $value, $);
 	}
 	
 	/*
