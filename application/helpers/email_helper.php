@@ -14,12 +14,19 @@ function send_now($template_id, $user_id, $vars)
 	$ci->email->set_newline("\r\n");
 	
 	$ci->email->from('aayushranaut96@gmail.com', 'Hype Ninja');
-	$ci->email->to($ci->process_model->email_by_id($user_id));		
+	$ci->email->to($ci->process_model->email_by_id($vars['user_id']));		
 	$ci->email->subject($email_template->subject);		
 	$ci->email->message($ci->email_model->process_email_variables($email_template->body, $vars));
+	
 	if($ci->email->send())
 	{
 		//Success
+		echo "Sent";
+	}
+	else
+	{
+		echo "Failed";
+		//Lof the error
 	}
 }
 

@@ -33,5 +33,5 @@ class Dashboard extends CI_Controller
 		$this->load->view('headquarters/header', $data);
 		$this->load->view('headquarters/sidebar');
 		$this->load->view('headquarters/dashboard');
-	}		
+	}
 }

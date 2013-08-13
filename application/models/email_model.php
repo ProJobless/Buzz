@@ -21,12 +21,13 @@ class Email_model extends CI_Model
 	*/
 	function process_email_variables($body, $var)
 	{
-		preg_match_all('/{\$([^}]*)}/', $body, $q);
+		preg_match_all('#{\$([^}]*)}#', $body, $q);
 		
 		//Filter duplicated items in the array
 		$q = array_unique($q[1]);
 		$user_details = array();$ticket_details = array();$ticket_reply_details = array();$plan_details = array();
 		//Loop through the vars provided and get the related data
+		
 		foreach($var as $k=>$v)
 		{
 			switch($k)
@@ -54,37 +55,37 @@ class Email_model extends CI_Model
 			switch($r)
 			{
 				case 'username':
-				$this->replace_var($user_details->username, 'username');
+				$body = $this->replace_vars($user_details[0]->username, 'username', $body);
 				break;
 				
 				case 'email':
-				$this->replace_var($user_details->email, 'email');
+				$body = $this->replace_vars($user_details[0]->email, 'email', $body);
 				break;
 				
 				case "first_name":
-				$this->replace_var($user_details->first_name, 'first_name');
+				$body = $this->replace_vars($user_details[0]->first_name, 'first_name', $body);
 				break;
 				
 				case "last_name":
-				$this->replace_var($user_details->last_name, 'last_name');
+				$body = $this->replace_vars($user_details[0]->last_name, 'last_name', $body);
 				break;
 				
 				case "plan_id":
-					//Get the plan Details
-					$this->get_plan_by_id($var['plan_id']);
+				break;
 				
 				case "company":
-				$this->replace_var($user_details->company, 'company');
+				$this->replace_vars($user_details[0]->company, 'company', $body);
 				break;
 				
 				case "invoice_id":
-				
+				break;
 				case "ticket_id":
-				
+				break;
 				case "ticket_reply_id":
-				
+				break;
 			}
 		}
+		return $body;
 	}
 	
 	/*
@@ -108,7 +109,7 @@ class Email_model extends CI_Model
 	function get_ticket_details_by_id($ticket_id)
 	{
 		$ticket_id = intval($ticket_id);
-		$query = $this->db->get_where('tickets', array('id' => $ticket_id);
+		$query = $this->db->get_where('tickets', array('id' => $ticket_id));
 		return $this->parse_db_from_array($query->result());
 	}
 	
@@ -140,9 +141,11 @@ class Email_model extends CI_Model
 		@param : 
 				$value => Value which will get 
 	*/
-	function replace_vars($value, $var)
+	function replace_vars($value, $var, $body)
 	{
-		str_replace('{$'.$var."}", $value, $);
+		$d = str_replace('{$'.$var."}", $value, $body);
+
+		return $d;
 	}
 	
 	/*
