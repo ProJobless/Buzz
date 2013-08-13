@@ -136,6 +136,16 @@ class Email_model extends CI_Model
 		return $this->parse_db_into_array($query->result());
 	}
 	/*
+		This function replaces a var in the email with the information provided by the callin method
+		@param : 
+				$value => Value which will get 
+	*/
+	function replace_vars($value, $var)
+	{
+		
+	}
+	
+	/*
 		A helper function which parses the CI active record returned data into an array and then returns it
 		@params:
 			$result => A query result usually sent by doing $query->result();
