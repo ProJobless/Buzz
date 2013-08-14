@@ -215,7 +215,7 @@ footer
 */
 .ls_pricing
 {
-	margin-bottom:150px;
+	margin-bottom:100px;
 }
 .ls_pricing .ls_container
 {
@@ -225,6 +225,7 @@ footer
 .ls_pricing .ls_container h1
 {
 	font-weight:100;
+	margin-bottom:60px;
 }
 .ls_pricing section
 {
@@ -255,7 +256,7 @@ footer
 }
 .ls_pricing_features div:first-child
 {
-	margin-top:54px;
+	margin-top:62px;
 	border-top:1px solid #bababa;
 }
 .ls_pricing_prices
@@ -300,7 +301,8 @@ footer
 }
 .ls_plan_names
 {
-	color:#2222ff;
+	color:#1475a7;
+	font-size:22px;
 }
 .ls_signup
 {
@@ -308,19 +310,34 @@ footer
 }
 .ls_signup div
 {
-	background: none repeat scroll 0 0 green;
+	background: #ffffff;
 	color: #333333;
 	display: inline-table;
 	float: left;
 	margin: 0;
-	padding: 11px 80px;
+	padding: 11px 53px;
 	position: relative;
 	text-align: center;
-	width: 52px;
-	border:1px solid #333;
+	width: 53px;
+	border:1px solid #bababa;
 	border-left:none;
+	border-top:none;
 }
 .ls_signup div:first-child
 {
-	border-left:1px solid #333;
+	border-left:1px solid #bababa;
+}
+.ls_signup div:last-child
+{
+	margin-right:1px;
+}
+.ls_signup div a
+{
+	background:#27a5e7;
+	display:block;
+	padding:10px 22px;
+	border:1px solid #197db1;
+	border-radius:2px;
+	box-shadow:0 1px 0 #5bb8e8 inset;
+	font-size:19px;
 }

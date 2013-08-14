@@ -119,9 +119,9 @@
 			<div class="ls_price">$4.99<span>/mo</span></div>
 		</section>
 		<div class="ls_signup">
-			<div class="ls_signup_button"><a href="" class="">Signup 1</a></div>
-			<div class="ls_signup_button"><a href="" class="">Signup 2</a></div>
-			<div class="ls_signup_button"><a href="" class="">Signup 3</a></div>
+			<div class="ls_signup_button"><a href="" class="">Signup</a></div>
+			<div class="ls_signup_button"><a href="" class="">Signup</a></div>
+			<div class="ls_signup_button"><a href="" class="">Signup</a></div>
 		</div>
 	</div>
 	<div class="clearfix"></div>
