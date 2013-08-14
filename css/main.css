@@ -213,13 +213,14 @@ footer
 /*
 	Pricing
 */
-.pricing
+.ls_pricing
 {
-	height:50px;
+	margin-bottom:150px;
 }
-.pricing .ls_container
+.ls_pricing .ls_container
 {
 	padding:0;
+	width:860px;
 }
 .ls_pricing .ls_container h1
 {
@@ -228,5 +229,98 @@ footer
 .ls_pricing section
 {
 	float:left;
-	
+}
+.ls_pricing_features
+{
+	background:#f9f9f9;
+	border:1px solid #bababa;
+	border-top:none;
+	border-left:none;
+}
+.ls_pricing_features div
+{
+	border-bottom:1px solid #bababa;
+	border-left:1px solid #bababa;
+	padding:15px 25px;
+	box-shadow:0 1px 0 #ffffff inset;
+	color:#333333;
+}
+.ls_pricing_features div:last-child
+{
+	border-bottom:none;
+}
+.ls_pricing_features div:nth-child(2n)
+{
+	background:#f1f1f1;
+}
+.ls_pricing_features div:first-child
+{
+	margin-top:54px;
+	border-top:1px solid #bababa;
+}
+.ls_pricing_prices
+{
+	border:1px solid #bababa;
+}
+.ls_pricing_prices
+{
+	border-left:0px solid #bababa;
+}
+.ls_pricing_prices div
+{
+	padding:15px 80px;
+	background:#f1f1f1;
+	box-shadow:0 1px 0 #ffffff inset;
+	border-bottom:1px solid #bababa;
+	text-align:center;
+}
+.ls_pricing_prices div span
+{
+	font-size:18px;
+	font-weight:100;
+}
+.ls_pricing_prices:nth-child(2n+1) div:nth-child(2n+1)
+{
+	background:#fff;
+}
+.ls_pricing_prices:nth-child(2n) div:nth-child(2n)
+{
+	background:#fff;
+}
+.ls_pricing_prices div:last-child
+{
+	padding:11px 62px;
+	border-bottom:none;
+}
+.ls_pricing .ls_price
+{
+	color:#ee2233;
+	font-weight:600;
+	font-size:22px;
+}
+.ls_plan_names
+{
+	color:#2222ff;
+}
+.ls_signup
+{
+	float:right;
+}
+.ls_signup div
+{
+	background: none repeat scroll 0 0 green;
+	color: #333333;
+	display: inline-table;
+	float: left;
+	margin: 0;
+	padding: 11px 80px;
+	position: relative;
+	text-align: center;
+	width: 52px;
+	border:1px solid #333;
+	border-left:none;
+}
+.ls_signup div:first-child
+{
+	border-left:1px solid #333;
 }

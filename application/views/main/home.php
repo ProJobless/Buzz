@@ -95,12 +95,34 @@
 			<div>Price</div>
 		</section>
 		<section class="ls_pricing_prices">
+			<div class="ls_plan_names">Base</div>
 			<div>10</div>
 			<div>5</div>
 			<div>47</div>
 			<div>24</div>
-			<div>4.99</div>
+			<div class="ls_price">$4.99<span>/mo</span></div>
 		</section>
+		<section class="ls_pricing_prices">
+			<div class="ls_plan_names">Pro</div>
+			<div>10</div>
+			<div>5</div>
+			<div>47</div>
+			<div>24</div>
+			<div class="ls_price">$4.99<span>/mo</span></div>
+		</section>
+		<section class="ls_pricing_prices">
+			<div class="ls_plan_names">Ninja</div>
+			<div>10</div>
+			<div>5</div>
+			<div>47</div>
+			<div>24</div>
+			<div class="ls_price">$4.99<span>/mo</span></div>
+		</section>
+		<div class="ls_signup">
+			<div class="ls_signup_button"><a href="" class="">Signup 1</a></div>
+			<div class="ls_signup_button"><a href="" class="">Signup 2</a></div>
+			<div class="ls_signup_button"><a href="" class="">Signup 3</a></div>
+		</div>
 	</div>
 	<div class="clearfix"></div>
 </div>
