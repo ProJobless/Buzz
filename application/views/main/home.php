@@ -90,9 +90,17 @@
 		<section class="ls_pricing_features">
 			<div>Number of campaigns</div>
 			<div>Twitter Accounts</div>
-			<div></div>
-			<div></div>
-			<div></div>
+			<div>Keywords</div>
+			<div>Campaigns</div>
+			<div>Price</div>
+		</section>
+		<section class="ls_pricing_prices">
+			<div>10</div>
+			<div>5</div>
+			<div>47</div>
+			<div>24</div>
+			<div>4.99</div>
 		</section>
 	</div>
+	<div class="clearfix"></div>
 </div>
