@@ -9,10 +9,10 @@
 			<a href="#" class="pull-left"><img src="<?php echo base_url()."images/logo.png" ?>" alt="Hype Ninja Logo"></a>
 			<nav>
 				<ul class="pull-right">
-					<li><a href="<?php echo base_url('pricing'); ?>">Pricing</a></li>
-					<li><a href="">Features</a></li>
-					<li><a href="">Forum</a></li>
-					<li><a href="">Blog</a></li>
+					<li><a href="#">Pricing</a></li>
+					<li><a href="#">Features</a></li>
+					<li><a href="#">Forum</a></li>
+					<li><a href="#">Blog</a></li>
 					<li><a href="<?php echo base_url('login'); ?>">Log in</a></li>
 				</ul>
 				<div class="clearfix"></div>

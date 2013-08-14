@@ -6,8 +6,8 @@
 			<div class="span9">
 				<div class="breadcrumb">
 					<ul>
-						<li><a href="#">Register</a></li>
-						<li class="active"><a href="#">Payment</a></li>
+						<li><a>Register</a></li>
+						<li class="active"><a>Payment</a></li>
 					</ul>
 				</div>
 				<h1>Payment</h1>
