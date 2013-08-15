@@ -126,3 +126,41 @@
 	</div>
 	<div class="clearfix"></div>
 </div>
+<div class="ls_testimonials">
+	<div class="ls_container">
+		<h1 class="text-center">What People are sayin!</h1>
+		<div class="ls_box">
+			<div class="ls_image">
+				<img src="http://lorempixel.com/75/75">
+			</div>
+			<div class="ls_text">
+				Blah Blah
+			</div>
+		</div>
+		<div class="ls_box">
+			<div class="ls_image">
+				<img src="http://lorempixel.com/75/75">
+			</div>
+			<div class="ls_text">
+				Blah Blah
+			</div>
+		</div>
+		<div class="ls_box">
+			<div class="ls_image">
+				<img src="http://lorempixel.com/75/75">
+			</div>
+			<div class="ls_text">
+				Blah Blah
+			</div>
+		</div>
+		<div class="ls_box">
+			<div class="ls_image">
+				<img src="http://lorempixel.com/75/75">
+			</div>
+			<div class="ls_text">
+				Blah Blah
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>

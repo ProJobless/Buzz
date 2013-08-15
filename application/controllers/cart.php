@@ -66,7 +66,7 @@ class Cart extends CI_Controller
 		if($this->form_validation->run() == FALSE)
 		{
 			// Form validation failed :/
-			$this->session->set_flashdata('key', "Hi");
+			$this->session->set_flashdata('errors', validation_errors('<div class="ls_errors">', '</div>'));
 			redirect('cart/r'."/".$this->uri->segment(3));
 		}
 		else

@@ -11,7 +11,7 @@
 					</ul>
 				</div>
 				<h1>Register</h1>
-				<?php echo $this->session->flashdata('key'); echo form_open('cart/r2/'.$this->uri->segment(3)); ?>
+				<?php echo $this->session->flashdata('errors'); echo form_open('cart/r2/'.$this->uri->segment(3)); ?>
 				<div class="control-box">
 					<label>First Name</label>
 					<input type="text" name="first_name" placeholder="First Name">

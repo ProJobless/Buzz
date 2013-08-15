@@ -341,3 +341,34 @@ footer
 	box-shadow:0 1px 0 #5bb8e8 inset;
 	font-size:19px;
 }
+/*
+	Testimonials
+*/
+.ls_testimonials
+{
+	background:#2ebc17;
+	color:#fff;
+}
+.ls_testimonials h1
+{
+	font-weight:100;
+}
+.ls_testimonials .ls_box
+{
+	width:50%;
+	float:left;
+	margin:10px 0 30px;
+}
+.ls_testimonials .ls_box img
+{
+	border-radius:50%;
+}
+.ls_testimonials .ls_box .ls_image
+{
+	float:left;
+}
+.ls_testimonials .ls_box .ls_text
+{
+	float:left;
+	margin-left:30px;
+}

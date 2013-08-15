@@ -26,6 +26,12 @@
 								</div>
 							</div>
 							<div class="control-group">
+								<label class="control-label">Slug</label>
+								<div class="controls">
+									<input type="text" name="slug" placeholder="Short name of Email(Without Space)" value="<?php echo $email_data->slug; ?>"/>
+								</div>
+							</div>
+							<div class="control-group">
 								<label class="control-label">Subject</label>
 								<div class="controls">
 									<input type="text" name="subject" placeholder="Subject of the Email" value="<?php echo $email_data->subject; ?>"/>

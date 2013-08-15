@@ -15,6 +15,7 @@ body
 {
 	border:1px solid #aaa;
 	margin-top:50px;
+	margin-bottom:20px;
 	-webkit-border-top-left-radius:3px;
 	-webkit-border-top-right-radius:3px;
 	-webkit-border-bottom-right-radius:0px;
@@ -302,4 +303,15 @@ body
 {
 	text-align:center;
 	padding:0 10px 30px;
+}
+.ls_errors
+{
+	background:#f94141;
+	padding:5px 50px;
+	color:#f8f8f8;
+	font-size:14px;
+}
+.ls_errors:first-child
+{
+	padding-top:20px;
 }
