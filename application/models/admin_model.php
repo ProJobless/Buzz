@@ -289,9 +289,10 @@ class Admin_model extends CI_Model
 	function save_email_by_id($id)
 	{
 		$data = array(
-			'name'	=> $this->input->post('name'),
+			'name'		=> $this->input->post('name'),
 			'subject'	=> $this->input->post('subject'),
 			'body'		=> $this->input->post('body'),
+			'slug'		=> $this->input->post('slug'),
 		);
 		
 		$this->db->where('id', $id);
