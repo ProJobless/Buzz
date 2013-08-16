@@ -288,7 +288,8 @@ class Process extends CI_Controller
 		$this->load->library('facebook');
 		$params = array(
 			'scope' => 'publish_stream, manage_pages',
-			'redirect_uri'	=> base_url()."/headquarters/process/get_token",
+			'redirect_uri'	=> base_url()."headquarters/process/get_token",
+			'response_type' => 'code'
 		);
 		redirect($this->facebook->getLoginUrl($params), 'location');
 	}	
@@ -297,11 +298,20 @@ class Process extends CI_Controller
 	*/
 	function get_token()
 	{
-		parse_str($_SERVER['QUERY_STRING'], $_REQUEST);
-		$this->load->library('facebook');
-		$this->facebook->setExtendedAccessToken();
-		$token = $this->facebook->getAccessToken();
 		
-		$this->process_model->insert_facebook_access_token($token);
+		$this->load->library('facebook');
+		
+		$token_url = "https://graph.facebook.com/oauth/access_token?client_id=486874411404149&redirect_uri=".urlencode(base_url()."headquarters/process/get_token")."&client_secret=962a4c9ba88c839658fad286adce5acb&code=".$_GET['code'];
+ 
+	  	$response = file_get_contents($token_url);
+    	$params = null;
+    	parse_str($response, $params); //parse name value pair
+ 
+    	print_r($params);
+	}
+	function get_token2()
+	{
+		parse_str($_SERVER['QUERY_STRING'], $_REQUEST);
+		$this->process_model->insert_facebook_access_token($_GET['access_token']);
 	}
 }
