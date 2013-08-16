@@ -311,7 +311,13 @@ class Process extends CI_Controller
 	}
 	function get_token2()
 	{
-		parse_str($_SERVER['QUERY_STRING'], $_REQUEST);
-		$this->process_model->insert_facebook_access_token($_GET['access_token']);
+		$this->load->library('facebook');
+		$array = array(
+			'access_token' 	=> 'CAAG6z0hXi3UBAJBPw1YZBv6jsZCICm0I1vV0s5XbhjZCBhlSW4Vgq9VuZC6fp73ArWTxXAfFDyscYkWzxq3iSSePZApB9vkk6t0tm098TuVqnEkCee9t03YJqcibF1E0lZCZBdJO3dHUmvZCDFBNakQJ',
+			'message'		=> 'Testing this cool new app I am coding!',
+			
+		);
+		$this->facebook->api('me/feed', 'POST', $array);
+		//$this->process_model->insert_facebook_access_token($_GET['access_token']);
 	}
 }
